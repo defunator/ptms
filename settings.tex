@@ -1,0 +1,59 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath}
+\usepackage{tcolorbox}
+\usepackage{indentfirst}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{accents}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\pagestyle{fancy}
+\setlength{\headheight}{40pt}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\everymath{\displaystyle}
+\usepackage{cancel}
+\geometry{verbose,a4paper,tmargin=2cm,bmargin=2cm,lmargin=1cm,rmargin=1.5cm}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\newenvironment{solution}
+  {\renewcommand\qedsymbol{$\blacksquare$}
+  \begin{proof}[Solution]}
+  {\end{proof}}
+\renewcommand\qedsymbol{$\blacksquare$}
+
+\newtheorem{theorem}{Теорема}
+\newtheorem{lemma}{Лемма}
+\newtheorem{statement}{Утверждение}
+\newtheorem{corollary}{Следствие}
+\newtheorem{advice}{Предложение}
+
+\theoremstyle{definition}
+\newtheorem{example}{Пример}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Замечание}
+
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+

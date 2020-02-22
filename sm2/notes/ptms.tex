@@ -1,0 +1,1077 @@
+\input{../../settings}
+
+
+\title{Теория вероятности и математическая статистика, 2 курс, 2 семестр}
+
+\begin{document}
+
+\lhead{Иванов Семен X Сафиуллин Зуфар} 
+\rhead{БПМИ-183} 
+\cfoot{\thepage\ of \pageref{LastPage}}
+\maketitle
+
+
+\tableofcontents
+
+\clearpage
+
+\section{Сходимости случайных величин}
+
+\begin{definition}
+Последовательность случайных величин $\xi_{n}$ сходится к случайной величине $\xi$:
+\begin{enumerate}
+\item \textit{Почти наверное}($\xi_{n} \xrightarrow{\text{п.н.}} \xi$), если 
+\[
+    P\left(\lim_{n \to \infty} \xi_{n} = \xi\right) = 1
+\]
+\item \textit{По вероятности}($\xi_{n} \xrightarrow{\text{p}} \xi$), если
+\[
+    \forall \varepsilon > 0 \ \lim_{n \to \infty} P\left(|\xi_{n} - \xi| \geq \varepsilon\right) = 0
+\]
+\item \textit{По распределению}($\xi_{n} \xrightarrow{\text{d}} \xi$), если 
+\[
+    \lim_{n \to \infty} F_{\xi_{n}}\left(x\right) = F_{\xi}\left(x\right)
+\]
+для любых $x$, в которых непрерывна $F_{\xi}$
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}(Эквивалетное определение сходимости по распределению)
+$\xi_{n} \xrightarrow{d} \xi$  $\Leftrightarrow$ $\forall g \ -$ непрерывна и ограничена на $\mathbb{R}$ верно
+$\lim_{n \to \infty}  \mathbb{E}  g\left(\xi_{n}\right) =  \mathbb{E}  g\left(\xi\right)$
+
+\end{theorem}
+\begin{proof}
+$\Rightarrow$ \\
+
+Пусть $t \ -$ точка непрерывности $F_{\xi}\left(t\right)$. Заметим, что $F_{\xi}\left(t\right) = P\left(\xi_{x} \in (-\infty, t]\right)=$\\$ = \mathbb{E}  \text{Ind}_{(-\infty, t]}\left(\xi\right)$. \\
+В силу:\\
+(1) $\mathbb{E} \text{Ind}_{(a_i, b_i]}(\xi_n) = F_{\xi_n}(b_i) - F_{\xi_n}(a_i) \xrightarrow{n \xrightarrow{} \infty} F_{\xi}(b_i) - F_{\xi}(a_i) =\mathbb{E} \text{Ind}_{(a_i, b_i]}(\xi)$\\
+(2) Линейность предела (с какими-то коэффициентами $c_i$)\\
+Верна следующая сходимость:
+\[
+    \mathbb{E}\sum\limits_{i = 1}^{N} c_i \cdot \text{Ind}_{(a_i, b_i]}(\xi_n) \xrightarrow{} \mathbb{E}\sum\limits_{i = 1}^{N} c_i \cdot \text{Ind}_{(a_i, b_i]}(\xi)
+\]
+Теперь нам бы хотелось от непрерывной ограниченной функции на прямой перейти к функции на отрезке, а там мы уже сможем ее приблизить ступенчатой и воспользоваться предыдудщим утверждением и все доказать. Мы знаем, что \\ $\forall \varepsilon > 0 \ \exists A$: $P\left(-A < \xi \leq A\right) > 1 - \varepsilon$ (потому что $P\left(\xi \in \mathbb{R}\right) = 1$). Тогда получаем: 
+$$F_{\xi_{n}}\left(A\right) - F_{\xi_{n}}\left(-A\right) \xrightarrow{n \to \infty} F_{\xi}\left(A\right) - F_{\xi}\left(-A\right) = P\left(-A < \xi \leq A\right) > 1 - \varepsilon$$ То есть для $\forall \varepsilon > 0 \ \exists N \ \forall n > N$ верно:
+$$\abs{\left(F_{\xi_{n}}\left(A\right) - F_{\xi_{n}}\left(-A\right)\right) - \left(F_{\xi}\left(A\right) - F_{\xi}\left(-A\right)\right)} < \varepsilon$$ 
+Комбинируя последние два утверждения, получаем для $\forall \varepsilon > 0\ \exists A \ \exists N \ \forall n > N$: $$F_{\xi_n}\left(A\right) - F_{\xi_n}\left(-A\right) > F_{\xi}\left(A\right) - F_{\xi}\left(-A\right) - \varepsilon > 1 - 2 \varepsilon$$ 
+Из чего следует $\forall \varepsilon > 0  \ \exists A \ \exists N\ \forall n > N$: 
+\[
+    P\left(-A \leq \xi_{n} \leq A\right) \geq F_{\xi_{n}}\left(A\right) - F_{\xi_{n}}\left(-A\right) > 1 - \varepsilon
+\]
+Теперь возьмем любую непрерывную ограниченную функцию $g$, приблизим ее на отрезке $\left[-A, A\right]$ ступенчатой функцией $g_{\varepsilon}$, что $\abs{g\left(x\right) - g_{\varepsilon}\left(x\right)} < \varepsilon$, а вне отрезка положим $g_{\varepsilon} = 0$. Имеем $\forall \varepsilon > 0 \ \exists A \ \forall n$: 
+\[
+\abs{ \mathbb{E}  g\left(\xi_{n}\right) -  \mathbb{E}  g\left(\xi\right)} \leq \abs{ \mathbb{E}  \left(1 - \text{Ind}_{\left[-A, A\right]}\left(\xi_{n}\right)\right) \cdot g\left(\xi_{n}\right) -  \mathbb{E}  \left(1 - \text{Ind}_{\left[-A, A\right]}\left(\xi\right)\right)g\left(\xi\right)} + 
+\]
+\[
+    + \abs{ \mathbb{E}  \text{Ind}_{\left[-A, A\right]}\left(\xi_{n}\right) \cdot g\left(\xi_{n}\right) -  \mathbb{E}  \text{Ind}_{\left[-A, A\right]}\left(\xi\right) \cdot g\left(\xi\right)}
+\]
+Ясно, что первый модуль $< C \cdot 2\varepsilon$ (из ограниченности $g$ $\forall x_1, \ x_2$: $\abs{g\left(x_1\right) - g\left(x_2\right)} < C$ и так как $P\left(\abs{\xi} > A\right), \ P\left(\abs{\xi_{n}} > A\right) < \varepsilon$). А во втором модуле $g$ заменим на $g_{\varepsilon}$ с погрешностью $\varepsilon$, то есть он 
+$< 2\varepsilon + \abs{ \mathbb{E}  \text{Ind}_{\left[-A, A\right]}\left(\xi_{n}\right) \cdot g_{\varepsilon}\left(\xi_{n}\right) -  \mathbb{E}  \text{Ind}_{\left[-A, A\right]}\left(\xi\right) \cdot g_{\varepsilon}\left(\xi\right)}$. А про оставшийся модуль мы уже знаем, что он сходится к 0, так как ступенчатая функция(то есть $< \varepsilon$ для $\forall n > N$). В итоге имеем:
+$\abs{ \mathbb{E}  g\left(\xi_{n}\right) -  \mathbb{E}  g\left(\xi\right)} < \varepsilon$.
+То есть $\lim_{n \to \infty}  \mathbb{E}  g\left(\xi_{n}\right) =  \mathbb{E}  g\left(\xi\right)$ \\
+$\Leftarrow$ \\
+Пусть $t \ -$ точка непрерывности $F_{\xi}\left(t\right)$. Мы знаем, что $F_{\xi}\left(t\right) =  \mathbb{E}  \text{Ind}_{(-\infty, t]}\left(\xi\right)$.
+Для $\forall \delta > 0$ определим функции: 
+\[
+    g_{- \delta}\left(x\right) = 
+    \begin{cases}
+        1 & x < t - \delta \\
+        \frac{1}{\delta} \cdot \left(t - x\right) & t - \delta \leq x \leq t \\
+        0 & t < x
+    \end{cases}
+\]
+\[
+    g_{+ \delta}\left(x\right) = 
+    \begin{cases}
+        1 & x < t \\
+        \frac{1}{\delta} \cdot \left(t - x\right) & t \leq x \leq t + \delta \\
+        0 & t + \delta < x
+    \end{cases}
+\]
+Заметим, что $\forall x$: $$
+\text{Ind}_{(- \infty, t - \delta]}\left(x\right) \leq g_{-\delta}\left(x\right) \leq \text{Ind}_{(-\infty, t]}\left(x\right) \leq g_{+\delta}\left(x\right) \leq \text{Ind}_{(\infty, t + \delta]}\left(x\right)$$
+Взяв матожидания ($x = \xi_{n}$) от второго и третьего неравенств, получим: $$ \mathbb{E}  g_{-\delta}\left(\xi_{n}\right) \leq F_{\xi_{n}}\left(t\right) \leq  \mathbb{E}  g_{+ \delta}\left(\xi_{n}\right)$$
+Теперь устремим $n \to \infty$: 
+\[
+     \mathbb{E}  g_{-\delta}\left(\xi\right) \leq \inf \lim_{n \to \infty} F_{\xi_{n}}\left(x\right) \leq \sup \lim_{n \to \infty} F_{\xi_{n}}\left(x\right) \leq  \mathbb{E}  g_{+ \delta}\left(x\right)
+\]
+Рассмотрим первое и последнее неравенство той цепочки($x = \xi$ и возьмем то него матожидание), получим: 
+\[
+    F_{\xi}\left(t - \delta\right) \leq  \mathbb{E}  g_{- \delta}\left(\xi\right) \leq  \mathbb{E}  g_{+ \delta}\left(\xi\right) \leq F_{\xi}\left(t + \delta\right)
+\]
+Теперь $\delta \to 0$: 
+\[
+    F_{\xi}\left(t\right) =  \mathbb{E}  g_{- \delta}\left(\xi\right) = inf \lim_{n \to \infty} F_{\xi_{n}}\left(t\right) = sup \lim_{n \to \infty} F_{\xi_{n}}\left(t\right) =  \mathbb{E}  g_{+ \delta}\left(\xi\right)
+\]
+Получаем: $F_{\xi}\left(t\right) = \lim_{n \to \infty} F_{\xi_{n}}\left(t\right)$
+
+\end{proof}
+
+\begin{theorem}
+$
+    \xi_{n} \xrightarrow{\text{п.н.}} \xi \Rightarrow \xi_{n} \xrightarrow{\text{p}} \xi
+$
+\end{theorem}
+\begin{proof}
+Знаем $P\left(\lim_{n \to \infty} \xi_{n} = \xi\right) =1 $. Заметим вложенность следующих событий для $\forall \varepsilon > 0$: $\left\{\lim_{n \to \infty} \xi_{n} = \xi\right\} \Rightarrow \bigcup_{N = 1}^{\infty} \bigcap_{n = N}^{\infty} \left\{\abs{\xi_{n} - \xi} < \varepsilon\right\}$ (это по сути и есть определение предела, что для $\forall \varepsilon$, начиная с некоторого $N$ выполнятется условие). То есть: 
+$$1 = P\left(\lim_{n \to \infty} \xi_{n} = \xi\right) \leq P\left(\bigcup_{N = 1}^{\infty} \bigcap_{n = N}^{\infty} \left\{\abs{\xi_{n} - \xi} < \varepsilon\right\}\right) = 1$$ 
+Так как последовательность множеств $A_{N} = \bigcap_{n = N}^{\infty} \left\{\abs{\xi_{n} - \xi} < \varepsilon\right\}$ расширяющаяся ($A_{N} \subseteq A_{N + 1}$), в объединении они дают событие вероятности 1, значит по теореме непрерывности $\lim_{N \to \infty} P\left(A_{N}\right) = 1$. 
+Теперь заметим: $P\left(A_{N}\right) \leq P\left(\abs{\xi_{N} - \xi} < \varepsilon\right)$.
+То есть: $\lim_{N \to \infty} P\left(\abs{\xi_{N} - \xi} < \varepsilon\right) = 1$.
+Или что то же самое: $\lim_{N \to \infty} \left(1-P\left(\abs{\xi_{N} - \xi} < \varepsilon\right)\right) = \lim_{N \to \infty} P\left(\abs{\xi_{N} - \xi} \geq \varepsilon\right) = 0 \ -$ определение сходимости по вероятности.
+\end{proof}
+\begin{theorem}(Теорема Лебега о мажорируемой сходимости) 
+$\xi_{n} \xrightarrow{\text{p}} \xi$ и $\abs{\xi_{n}}, \abs{\xi} \leq \eta$ п. н. (где $\eta \ -$ случайная величина, что $ \mathbb{E}  \eta < \infty$), то $ \mathbb{E}  \xi_{n} \to  \mathbb{E}  \xi$
+\end{theorem}
+\begin{proof}
+Докажем теорему в частном случае, когда $\eta \equiv C$.
+$\forall \varepsilon > 0 \forall n $ $\abs{ \mathbb{E}  \xi_{n} -  \mathbb{E}  \xi} \leq  \mathbb{E}  \abs{\xi_{n} - \xi} =  \mathbb{E}  \abs{\xi_{n} - \xi} \cdot \text{Ind}_{\abs{\xi_{n} - \xi} \geq \varepsilon} +  \mathbb{E}  \abs{\xi_{n} - \xi} \cdot \text{Ind}_{\abs{\xi_{n} - \xi} < \varepsilon} \leq 2C \cdot P\left(\abs{\xi_{n} - \xi} \geq \varepsilon\right) + \varepsilon \cdot 1$.
+Так как $\xi_{n} \xrightarrow{\text{p}} \xi$, то $\exists N \forall n > N$: $P\left(\abs{\xi_n - \xi} \geq \varepsilon\right) < \varepsilon$.
+Тогда получаем: $\abs{ \mathbb{E}  \xi_{n} -  \mathbb{E}  \xi} < 2C \cdot \varepsilon + \varepsilon$. То есть $ \mathbb{E}  \xi_n \to  \mathbb{E}  \xi$.
+
+\end{proof}
+
+\begin{advice}
+$\xi_{n} \xrightarrow{\text{p}} \xi $ $\Rightarrow$ для $\forall g \ -$ непрерывная, $g\left(\xi_{n}\right) \xrightarrow{\text{p}} g\left(\xi\right)$
+\end{advice}
+\begin{proof}
+Знаем для любой случайной величины $\forall \varepsilon > 0 \exists A$: $P\left(\abs{\xi} > \frac{A}{2}\right) < \varepsilon$.
+$\exists N \forall n > N$: $P\left(\abs{\xi_{n}} > A\right) \leq P\left(\abs{\xi - \xi_{n}} + \abs{\xi} > A\right) \leq P\left(\abs{\xi - \xi_{n}} > \frac{A}{2}\right) + P\left(\abs{\xi} > \frac{A}{2}\right) < \varepsilon$.
+Теперь возьмем $g$, она равномерно непрерывна на $\left[-A, A\right]$:
+\[
+    \forall \varepsilon > 0 \exists \delta > 0: \ \abs{x - y} < \delta \Rightarrow \abs{g\left(x\right) - g\left(y\right)} < \varepsilon \ \forall x, y \in \left[-A, A\right]
+\]
+Докажем $g\left(\xi_{n}\right) \xrightarrow{\text{p}} g\left(\xi\right)$:
+\[
+    P\left(\abs{g\left(\xi_n\right) - g\left(\xi\right)} \geq \varepsilon\right) = P\left(\abs{g\left(\xi_n\right) - g\left(\xi\right)} \geq \varepsilon \ |\  \xi_n, \xi \in \left[-A, A\right]\right) \cdot P\left(\xi_n, \xi \in \left[-A, A\right]\right) +
+    \]
+    \[+ P\left(\abs{g\left(\xi_n\right) - g\left(\xi\right)} \geq \varepsilon \ |\  \xi_n, \xi \not \in \left[-A, A\right]\right) \cdot P\left(\xi_n, \xi \not \in \left[-A, A\right]\right)
+\]
+Посмотрев на определение равномерное непрерывности, заметим, что: 
+\[
+P\left(\abs{g\left(\xi_n\right) - g\left(\xi\right)} \geq \varepsilon \ |\  \xi_n, \xi \in \left[-A, A\right]\right) \leq P\left(\abs{\xi_n - \xi} \geq \delta\right)
+\]
+ А это уже, так как у нас есть сходимость по вероятности $\to 0$.
+ И заметим, что 
+ \[
+    P\left(\xi_n, \xi \not \in \left[-A, A\right]\right) \leq P\left(\abs{\xi_n} > A\right) + P\left(\abs{\xi} > A\right) < 2 \varepsilon
+ \]
+ То есть $\to 0$ при $n, A \to \infty$
+Все, получили, что $P\left(\abs{g\left(\xi_n\right) - g\left(\xi\right)} \geq \varepsilon\right) \to 0$ при  \\ $n, A \to \infty$.
+\end{proof}
+
+\begin{corollary}
+$\xi_{n} \xrightarrow{\text{p}} \xi \Rightarrow \xi_{n} \xrightarrow{\text{d}} \xi$
+\end{corollary}
+\begin{proof}
+Берем предыдущее предложение. Потом используем теорему Лебега для произвольной непрерывной ограниченной $g$ и вспоминаем эквивалентное опеределение сходимости по распределению.
+\end{proof}
+
+\begin{theorem} (Эквивалетное опеределение сходимости почти наверное) \\
+$$\xi_n \xrightarrow{\text{п.н.}} \xi \Leftrightarrow \forall \varepsilon > 0 : \ \lim_{n \to \infty} P\left(\sup_{k \geq n} \abs{\xi_k - \xi} > \varepsilon\right) = 0$$
+\end{theorem}
+\begin{proof}
+Рассмотрим следующие события:
+$$A_{k}^{\varepsilon} = \left\{\abs{\xi_k - \xi} > \varepsilon \right \}$$
+$$A^{\varepsilon} = \bigcap_{n = 1}^{\infty} \bigcup_{k \geq n} A_{k}^{\varepsilon}$$
+Заметим, что:
+$$\left\{\sup_{k \geq n} \abs{\xi_{k} - \xi} > \varepsilon\right\} = \left\{\exists k \geq n: \ \abs{\xi_k - \xi} >\varepsilon\right\} = \bigcup_{k \geq n} A_{k}^{\varepsilon}$$
+$$\left\{\lim_{n \to \infty} \xi_{n} \neq \xi\right\} = \left\{\exists \varepsilon > 0 \forall n \exists k \geq n : \ \abs{\xi_{k} - \xi} \geq \varepsilon\right\} = \bigcup_{m = 1}^{\infty} \bigcap_{n}^{\infty} \bigcup_{k \geq n} A_{k}^{\varepsilon = \frac1m} = \bigcup_{m = 1}^{\infty} A^{\frac1m}$$
+Тогда имеем:
+$$\xi_n \xrightarrow{\text{п.н.}} \xi \Leftrightarrow P\left(\lim_{n \to \infty} \xi_{n} \neq \xi\right) = 0 \Leftrightarrow
+P\left(\bigcup_{m = 1}^{\infty} A^{\frac1m}\right) = 0 \Leftrightarrow \forall m \ P\left(A^{\frac1m}\right) = 0 \Leftrightarrow
+\forall \varepsilon > 0 \ P\left(A^{\varepsilon}\right) = 0 \Leftrightarrow$$
+Теперь заметим вложенность последовательности событий $B_{n}^{\varepsilon} = \bigcup_{k \geq n} A_{k}^{\varepsilon}$ и, взглянув на определение $A^{\varepsilon}$, по теореме о непрерывности вероятностной меры продолжаем цепочку:
+$$\Leftrightarrow \lim_{n \to \infty} P\left(\bigcup_{k \geq n} A_{k}^{\varepsilon}\right) = 0 \Leftrightarrow
+\lim_{n \to \infty} P\left(\sup_{k \geq n} \abs{\xi_{k} - \xi} > \varepsilon\right) = 0$$
+\end{proof}
+
+Теперь приведем некоторые примеры, опровергающие остальные следствия сходимостей
+\begin{example}
+$$\xi_{n} \xrightarrow{\text{d}} \xi \not\Rightarrow \xi_n \xrightarrow{\text{P}} \xi$$
+Пусть $\Omega = \left\{\omega_{1}, \omega_2\right\}$, $P\left(\left\{\omega_i\right\}\right) = \frac12$. Определим $\forall n$ $\xi_n\left(\omega_i\right) = \left(-1\right) ^ i$. Положим $\xi = -\xi_n$. Тогда $\forall f$ непрерыной и ограниченной:
+$$ \mathbb{E}  f\left(\xi_n\right) = \frac{f\left(1\right) + f\left(-1\right)}{2} =  \mathbb{E}  f\left(\xi\right)$$
+То есть $\xi_{n} \xrightarrow{\text{d}} \xi$. Однако $\forall n \ \abs{\xi_n - \xi} = 2$, то есть $\xi_n \not\xrightarrow{\text{P}} \xi$
+\end{example}
+\begin{example}
+$$\xi_{n} \xrightarrow{\text{P}} \xi \not\Rightarrow \xi_n \xrightarrow{\text{п.н.}} \xi$$
+Возьмем $\Omega = \left[0, 1\right]$, $\xi_{2 ^ n + p} = \text{Ind}_{\left[\frac{p}{2 ^ n}, \frac{p + 1}{2 ^ n}\right]}$, $0 \leq p < 2^ n$. Ясно, что $\xi_{n} \xrightarrow{\text{P}} \xi$, так как 
+$$\lim_{n \to \infty} P\left(\xi_{n} > 0\right) = \lim_{n \to \infty} \frac{1}{2 ^ {\lfloor \log n \rfloor}} = 0$$, но 
+$\xi_n \not\xrightarrow{\text{п.н.}} 0$, так как для любого исхода $\omega$ существует бесконечно много $n$, что $\xi_{n}\left(\omega\right) = 1$. Теперь осталось посмотреть на теорему 4 и все станет ясно.
+\end{example}
+\begin{example}
+$$\xi_{n} \xrightarrow{\text{d}} \xi \not\Rightarrow \xi_n \xrightarrow{\text{п.н.}} \xi$$
+Если бы следствие имело место, то отсюда вытекало бы, что:
+$$\xi_{n} \xrightarrow{\text{d}} \xi \not\Rightarrow \xi_n \xrightarrow{\text{P}} \xi$$
+противоречие
+
+\end{example}
+\clearpage
+
+
+
+
+
+\section{Характеристические функции}
+
+\begin{definition}
+\textit{Характеристической функцией} случайной величины $\xi$ называется функция:
+$$\varphi_{\xi}\left(t\right) =  \mathbb{E}  e ^ {it \xi} =  \mathbb{E}  \left(\cos\left(t \xi\right) + i \sin\left(t \xi\right)\right)$$
+\end{definition}
+
+\begin{advice}
+(Свойства характеристических функций)
+\begin{enumerate}
+\item $\varphi_\xi\left(0\right) = 1$, $\abs{\varphi_\xi\left(t\right)} \leq 1$ $\forall t \in \mathbb{R}$
+\item $\varphi_{a\xi+b}\left(t\right) = e ^ {itb} \varphi_\xi\left(at\right)$
+\item если $\xi_1, \cdots \xi_n \ - $ независимые случайные величины и $S = \xi_1 + \cdots + \xi_n$, то 
+\[
+    \varphi_S\left(t\right) = \varphi_{\xi_1}\left(t\right) \cdots \varphi_{\xi_n}\left(t\right)
+\]
+\end{enumerate}
+\end{advice}
+\begin{proof}
+.
+\begin{enumerate}
+\item Понятно, так как в матожидании могут быть только комплексные числа с модулем $\leq 1$.
+\item $\varphi_{a\xi+b}\left(t\right) =  \mathbb{E}  e ^ {it \left(a\xi + b\right)} = e ^ {itb}  \mathbb{E}  e ^ {i \left(at\right) \xi} = e ^ {itb} \varphi_{\xi}\left(at\right)$
+\item $\varphi_{S}\left(t\right) =  \mathbb{E}  \left(e ^ {it \xi_1} \cdots e ^ {it \xi_n}\right) =  \mathbb{E}  e ^ {it\xi_1} \cdots  \mathbb{E}  e ^ {it \xi_n} = \varphi_{\xi_1}\left(t\right) \cdots \varphi_{\xi_n}\left(t\right)$
+\end{enumerate}
+\end{proof}
+
+\begin{example}
+Вычислим $\varphi_{\xi}\left(t\right)$, где $\xi \sim N\left(0, 1\right)$:
+\[
+    \varphi_{\xi}\left(t\right) =  \mathbb{E}  e ^ {it\xi} = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{+\infty} \cos\left(tx\right) e ^ {-\frac{x ^2}{2}} dx + \frac{i}{\sqrt{2 \pi}} \int_{-\infty}^{+\infty} \sin\left(tx\right) e ^ {-\frac{x ^2}{2}} dx
+\]
+Заметим, что $\int_{-\infty}^{+\infty} \sin\left(tx\right) e ^ {-\frac{x ^2}{2}} dx = 0$, так как это интеграл от нечетной функции по симметричному промежутку. Тогда имеем:
+\[
+    \varphi_{\xi}\left(t\right) = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{+\infty} \cos\left(tx\right) e ^ {-\frac{x ^2}{2}} dx
+\]
+Возьмем производную по $t$:
+\[
+    \varphi_{\xi}'\left(t\right) = -\frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{+\infty} x\sin\left(tx\right) e ^ {-\frac{x ^ 2}{2}} dx
+     = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{+\infty} \sin\left(tx\right) d\left(e ^ {-\frac{x ^ 2}{2}}\right)=\]
+\[
+    = \frac{1}{\sqrt{2 \pi}} \sin\left(tx\right) e ^ {-\frac{x ^ 2}{2}} |_{-\infty}^{+\infty} - \frac{t}{\sqrt{2 \pi}} \int_{-\infty}^{+\infty} \cos\left(tx\right) e ^ {-\frac{x ^ 2}{2}} dx = 0 -\frac{t}{\sqrt{2 \pi}} \int_{-\infty}^{+\infty} \cos\left(tx\right) e ^ {-\frac{x ^ 2}{2}} dx = - t \varphi_{\xi}\left(t\right)
+\]
+Теперь надо решить дифференциальное уравнение: 
+$$ \varphi_\xi'\left(t\right) = - t \varphi_{\xi}\left(t\right)$$
+$$\frac{\varphi_\xi'\left(t\right)}{\varphi_\xi\left(t\right)} = -t$$
+Интегрируем обе части:
+$$ \int \frac{\varphi_\xi\left(t\right)}{\varphi_\xi\left(t\right)} = \ln \abs{\varphi_\xi\left(t\right)} + C = \int -t dt = -\frac{t ^ 2}{2}$$
+$$\varphi_\xi\left(t\right) = C' e ^ {-\frac{t ^ 2}{2}}$$
+$$\varphi_\xi\left(0\right) = 1 = C' \Rightarrow C' = 1$$
+(Ответ никак нулевым быть не может, поэтому, когда мы поделили на хар функцию ничего плохого не произошло)
+\end{example}
+\begin{advice}
+Пусть случайная величина $\xi$ обладает конечным $k$-тым моментом, то есть $ \mathbb{E}  \abs{\xi} ^ k < \infty$. Тогда $\varphi$ имеет непрерывную $k$-тую производную и
+$
+    \varphi^{(k)}\left(t\right) = i ^ k  \mathbb{E}  \xi ^ k
+$
+\end{advice}
+\begin{proof}
+Заметим, что:
+\[
+    \abs{\frac{e ^ {i \Delta t \xi} - 1}{\Delta t}} \leq \frac{\sqrt{\left(\cos\left(\Delta t\xi\right) - 1\right) ^ 2 + \sin ^ 2\left(\Delta t\xi\right)}}{\abs{\Delta t}} = \frac{\sqrt{2 - 2 \cos\left(\Delta t\xi\right)}}{\abs{\Delta t}} = \frac{2 \abs{\sin\left(\frac{\Delta t\xi}{2}\right)}}{\Delta t} \leq \frac{2 \cdot \frac{\abs{\Delta t\xi}}{2}}{\abs{\Delta t}} = \abs{\xi}
+\]
+Возьмем вместо $\Delta t$ последовательность $a_n \to 0$, Получим, что последовательность случайных величин, сходящихся почти наверное и ее предел ($i \xi$) ограничены случайной величиной ($\xi$)с конечным ожиданием, получаем по теорема Лебега: \[
+    \mathbb{E}  \frac{e ^ {i a_n\xi} - 1}{a_n} \to  \mathbb{E}  i \xi
+\]
+Теперь посчитаем производную хар фукнции:
+\[
+    \varphi'\left(t\right) = \lim_{\Delta t \to 0} \frac{\varphi\left(t + \Delta t\right) - \varphi\left(t\right)}{\Delta t} = \lim_{\Delta t\to 0}  \mathbb{E}  e ^ {i t \xi} \cdot \frac{e ^ {i \Delta t \xi} - 1}{\Delta t} = i  \mathbb{E}  e ^ {it \xi} \xi
+\]
+Теперь очевидна непрерывность первой производной и $\varphi'\left(t\right) = i  \mathbb{E}  \xi$, для производных высших порядков аналогично
+
+\end{proof}
+
+
+\begin{theorem}
+\[
+    \xi_n \xrightarrow{\textit{d}} \xi \Leftrightarrow \forall t \lim_{n \to \infty} \varphi_{\xi_n}\left(t\right) = \varphi_{\xi}\left(t\right)
+\]
+\end{theorem}
+
+\begin{proof}
+$\Rightarrow$ \\
+Очевидно по Теореме 1 \\
+$\Leftarrow$ \\
+Докажем при условиии $\sup_{n}  \mathbb{E}  \xi_n^2 \leq C < \infty$. По неравенству Чебышева:
+\[
+    P\left(\abs{\xi_n\geq A}\right) \leq \frac{ \mathbb{E}  \xi ^ 2}{A} \leq \frac{C}{A}
+\]
+Пусть $f \ -$ ограниченная непрерывная функция и $M = \sup \abs{f}$. Из записанного неравенства Чебышева следует, что $\forall \varepsilon > 0 \exists A$: 
+\[
+    P\left(\abs{\xi_n} \geq A\right) \leq \varepsilon, \ P\left(\abs{\xi} \geq A\right)  \leq \varepsilon
+\]
+Пусть непрерывная ограниченная $f_\varepsilon$ совпадает с $f$ на $[-A, A]$, потом от $-A-1$ до $-A$ и от $A + 1$ до $A$ она будет прямой из 0 в $f\left(-A\right)$ и $f\left(A\right)$ соответственно, а дальше будет повторять этот шаблон (периодическая).
+Заметим, что:
+\[
+    \abs{ \mathbb{E}  f_{\varepsilon}\left(\xi_n\right) -  \mathbb{E}  f\left(\xi_n\right)} < 2M\varepsilon, \ \abs{ \mathbb{E}  f_{\varepsilon}\left(\xi\right) -  \mathbb{E}  f\left(\xi\right)} < 2M\varepsilon
+\]
+Теперь равномерно приблизим $f_{\varepsilon}$ комбинацией $\sin$, $\cos$ (знаем с матана, что периодическую можно так приблизить). А из сходимости хар функции мы знаем, что:
+\[
+   \lim_{n \to \infty}  \mathbb{E}  \sin\left(\xi_n\right) =  \mathbb{E}  \sin\left(\xi\right)\]\[
+   \lim_{n \to \infty}  \mathbb{E}  \cos\left(\xi_n\right) =  \mathbb{E}  \cos\left(\xi\right)
+\]
+То есть получаем $\lim_{n \to \infty}  \mathbb{E}  f_{\varepsilon}\left(\xi_n\right) =  \mathbb{E}  f_{\varepsilon}\left(\xi\right)$. В итоге, вспоминая те неравенства с $2M \varepsilon$ и устремляя $n \to \infty$:
+\[
+     \mathbb{E}  f\left(\xi\right) - 4M \varepsilon \leq \inf \lim_{n \to \infty}  \mathbb{E}  f\left(\xi_n\right) \leq \sup \lim_{n \to \infty}  \mathbb{E}  f\left(\xi_n\right) \leq  \mathbb{E}  f\left(\xi\right) + 4M \varepsilon
+\]
+Устремляя $\varepsilon \to 0$, получаем $\lim_{n \to \infty}  \mathbb{E}  f\left(\xi_n\right) =  \mathbb{E}  f\left(\xi\right)$, что доказывает сходимость по распределению.
+\end{proof}
+
+\begin{corollary}
+$\varphi_{\xi} \equiv \varphi_{\eta} \Rightarrow F_{\xi} \equiv F_\eta$
+\end{corollary}
+\begin{proof}
+Предыдущая теорема + Теорема 1.
+\end{proof}
+
+\begin{theorem}(Центральная предельная теорема) \\
+Пусть $\xi_n \ -$ последовательность независимых одинаково распределенных случайных величин, причем $ \mathbb{E}  \xi_1 = \mu$, $ \mathbb{D} \xi_1 = \sigma ^ 2$. Тогда $\forall x$:
+\[
+    \lim_{n \to \infty} P\left(\frac{\xi_1 + \cdots +\xi_n - n \mu}{\sigma \sqrt{n}} \leq t\right) = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{t} e ^ {-\frac{x ^ 2}{2}}dx
+\]
+(справа записана $F\left(t\right) \ - $ функция распределения случайной величины с распределением $N\left(0, 1\right)$)
+
+\end{theorem}
+\begin{proof}
+Переходя к случайным величинам $\xi_{i} = \frac{\xi_{i} - \mu}{\sigma}$ дальше будем считать, что $ \mathbb{E}  \xi_{i} = 0$ и $ \mathbb{D} \xi_{i} = 1$. Пусть $\varphi \ - $ хар функция случаной величины $\xi_1$. Тогда хар функция случаной величины 
+\[
+    \frac{\xi_1 + \cdots + \xi_n}{\sqrt{n}}
+\]
+равна 
+\[
+    \varphi_{n}\left(t\right) = \left(\varphi\left(\frac{t}{\sqrt{n}}\right)\right) ^ n
+\]
+Разложим $\varphi\left(\frac{t}{\sqrt{n}}\right)$ в ряд Тейлора в 0 (при $n \to \infty$), помним предложение 3:
+\[
+    \varphi\left(\frac{t}{\sqrt{n}}\right) = \varphi\left(0\right) + x\varphi'\left(0\right) + \cdots = 1 + 0 -\frac{t ^ 2}{2n} + o\left(\frac{1}{n}\right)
+\]
+Следовательно получаем:
+\[
+    \varphi_{n}\left(t\right) = \left(1 -\frac{t ^ 2}{2n} + o\left(\frac{1}{n}\right)\right) ^ n = \left(1 -\frac{t ^ 2}{2n} + o\left(\frac{1}{n}\right)\right) ^ {-\frac{2n}{t ^ 2} \cdot \left(-\frac{t ^ 2}{2}\right)} \xrightarrow{n \to \infty} e ^ {-\frac{t ^ 2}{2}}
+\]
+Получили характеристическую функцию нормального распределения, то есть и функции распределения должны совпадать.
+\end{proof}
+
+
+\clearpage
+
+\section{Неравенство типа Хефдинга-Чернова}
+
+\begin{theorem} (Неравенство Хефдинга-Чернова) \\
+Пусть случайные величины $\xi_1, \cdots \xi_n$ независимы и $a_i \leq \xi_i \leq b_i$. Тогда для случайной величины $S_n = \xi_1 + \cdots + \xi_n$ и для каждого $t > 0$ выполнено
+$$P\left(\abs{S_n -  \mathbb{E}  S_n} \geq t\right) \leq 2 \exp \left(-\frac{t ^ 2}{4 \sum_{i=1}^n \left(b_i - a_i\right) ^ 2}\right)$$
+\end{theorem}
+\begin{proof}
+Пусть $\eta_i = \xi_i -  \mathbb{E}  \xi_i$, тогда $\abs{\eta_i} \leq b_i - a_i$. Заметим, что для каждого $\lambda > 0$ (просто домножили и взяли экспоненту):
+$$P\left({S_n -  \mathbb{E}  S_n} \geq t\right) = P\left(\sum_{i = 1}^{n} \eta_i \geq t\right) = P\left(e ^ {\lambda \sum \eta_i} \geq e ^ {\lambda t}\right)$$
+Теперь применим неравенство Маркова:
+$$P\left(e ^ {\lambda \sum \eta_i} \geq e ^ {\lambda t}\right) \leq e ^ {-\lambda t}  \mathbb{E}  e ^ {\lambda \sum \eta_i}$$
+Вспомним, что $\eta_1, \cdots \eta_n$ независимы:
+$$ e ^ {-\lambda t}  \mathbb{E}  e ^ {\lambda \sum \eta_i} = e ^ {-\lambda t} \prod  \mathbb{E}  e ^ {\lambda \eta_i}$$
+Оценим каждый множитель $ \mathbb{E}  e ^ {\lambda \eta_i}$ отдельно. Разложим его в ряд Тейлора:
+$$ \mathbb{E}  e ^ {\lambda \eta_i} = 1 + \lambda  \mathbb{E}  \eta_i + \lambda ^ 2  \mathbb{E}  \eta_i ^ 2 + \sum_{k = 3}^{\infty} \frac{1}{k!}\lambda ^ k \eta ^ k \leq 1 + \lambda ^ 2 \left(b_i - a_i\right) ^ 2 + \sum_{k =3}^{\infty}\frac{1}{k!}\lambda ^ k \left(b_i - a_i\right) ^ k$$
+Докажем, что при $R > 0$:
+$$1 + \frac12 R ^ 2 + \sum_{k =3}^{\infty}\frac{1}{k!} R ^ k \leq e ^ {R ^ 2}$$
+Если $R > 1$:
+$$1 + \frac12 R ^ 2 + \sum_{k =3}^{\infty}\frac{1}{k!} R ^ k = 1 + \frac12 R ^ 2 + \sum_{k=2}^{\infty} \frac1{k!} R^{2k} \left(\frac{k!}{\left(2k-1\right)!} R ^ {-1} + \frac{n!}{\left(2n\right)!}\right) \leq 1 + \frac12 R ^ 2 + \sum_{k=2}^{\infty} \frac1{k!}R ^ {2k} = e ^ {R ^ 2}$$
+Если же $R \leq 1$:
+$$1 + \frac12 R ^ 2 + \sum_{k =3}^{\infty}\frac{1}{k!} R ^ k \leq 1 + \frac12 R ^2 + \sum_{k=3}^{\infty} \frac{1}{2 ^ {k - 1}} R ^ 2 = 1 + R ^ 2 \leq e ^ {R ^ 2}$$
+Таким образом:
+$$P\left({S_n -  \mathbb{E}  S_n} \geq t\right) \leq \exp \left(-\lambda t + \lambda ^2 \sum_{i=1}^{n}\left(b_i - a_i\right) ^ 2\right)$$
+Взяв $\lambda = \frac{t}{2 \sum \left(a_i - b_i\right) ^ 2}$ получим желаемое неравенство. Для $P\left({S_n -  \mathbb{E}  S_n} \geq t\right)$ получим такую же оценку, и, объединяя их, получим оценку на модуль, только придется домножить оценку на 2.
+\end{proof}
+
+\begin{corollary}
+Пусть $\xi_i \sim Bern\left(p\right) \ -$ набор $n$ независимых случайных величин, \\ $S_n = \xi_1 + \cdots + \xi_n$, тогда 
+$$P\left(\abs{\frac{S_n}{n} - p} \geq t\right) \leq 2 e ^ {-\frac{n t ^ 2}{4}}$$ 
+\end{corollary}
+\begin{proof}
+Разделим каждую случайную величину на $n$, тогда $ \mathbb{E}  \frac{S_n}{n} = p$, а $\sum_{i = 1}^{n} \left(a_i - b_i\right) ^ 2 = n \cdot \frac1{n ^ 2} = \frac1n$. Подставляем и получаем, нужное неравенство
+\end{proof}
+
+\begin{example}
+Пусть в ящике какое-то количество черных и белых шаров. Каким должен быть размер выборки, чтобы оценить долю белых шаров с малой погрешностью? Пусть $\xi_i \ -$ бернуллевская случайная величина, равная 1, если шар белого цвета и 0, если цвет черный. Мы хотим оценить вероятность успеха $p$. По неравенству выше:
+$$P\left(\abs{\frac{S_n}{n} - p} \geq t\right) \leq 2e^{-\frac{nt^ 2}{4}} \leq \varepsilon$$
+Тогда при размере выборки $n = O\left(\frac{\ln \frac1\varepsilon}{t ^ 2}\right)$ выборочное среднее приближает реальную долю белых шаров с точностью $t$ с вероятностью более $1 - \varepsilon$(то есть вероятность, что наша оценка верна $ \geq 1 - \varepsilon$)
+\end{example}
+
+\clearpage
+
+\section{Теоремы непрерывности}
+Для применения ЦПТ на практике важную роль играют так называемые теоремы о непрерывности.
+
+\begin{advice}
+Если последовательность случайных величин $\xi_n \xrightarrow{\text{d}} \xi$, то для всякой непрерывной $g$ $g\left(\xi_n\right) \xrightarrow{\text{d}} g\left(\xi\right)$
+\end{advice}
+\begin{proof}
+Следует из Теоремы 1(эквивалентное определение сходимости по распределению).
+\end{proof}
+
+\begin{lemma}
+Пусть $X, Y, Z \ - $ случайные величины. Тогда 
+$$P\left(X + Y \leq t\right) \leq P\left(X + Z \leq t + \varepsilon\right) + P\left(\abs{Y - Z} \geq \varepsilon \right), \ \forall t \in \mathbb{R}, \forall \varepsilon > 0$$
+\end{lemma}
+\begin{proof}
+Заметим, что
+$$P\left(X + Y \leq t\right) \leq  P\left(X + Y \leq t, \ \abs{Y - Z} \leq \varepsilon\right) + P\left(X + Y \leq t, \ \abs{Y - Z} \geq \varepsilon \right) \leq$$
+$$ \leq  P\left(X + Z - \varepsilon \leq t \right) + P\left(\abs{Y - Z} \geq \varepsilon\right)$$
+\end{proof}
+
+\begin{advice}
+Если $\xi_{n} \xrightarrow{\text{P}} a = const$ и $\eta_n \xrightarrow{\text{d}} \eta$, то $\xi_n \eta_n \xrightarrow{\text{d}} a \eta$,  $\xi_n + \eta_n \xrightarrow{\text{d}} a + \eta$
+\end{advice}
+\begin{proof}
+Докажем утверждение для суммы. Пусть $\varepsilon > 0$, тогда по лемме имеем:
+$$P\left(\xi_n + \eta_n \leq t\right) \leq F_{\eta_n}\left(t - a + \varepsilon\right) + P\left(\abs{\xi_n- a} \geq \varepsilon\right)$$
+и
+$$P\left(\xi_n + \eta_n \leq t\right) \geq F_{\eta_n}\left(t - a - \varepsilon\right) - P\left(\abs{\xi_n- a} \geq \varepsilon\right)$$
+Устремляя сначала $n \to \infty$, а затем $\varepsilon \to 0$. Из сходимости по вероятности получаем, что $P\left( \abs{\xi_n - a} \geq \varepsilon\right) \to 0$. Тогда в итоге имеем:
+    $$\lim \left(F_{\eta_n}\left(t - a - \varepsilon\right) - P\left(\abs{\xi_n- a} \geq \varepsilon\right)\right) \leq \lim F_{\xi_n + \eta_n}\left(t\right) \leq \lim \left(F_{\eta_n}\left(t - a + \varepsilon\right) + P\left(\abs{\xi_n- a} \geq \varepsilon\right)\right)$$
+    $$\lim F_{\xi_n + \eta_n}\left(t\right) = F_{\eta}\left(t - a\right) = F_{a + \eta}\left(t\right)$$
+Теперь докажем утверждение для произведения. Пусть $a = 0$ (случай, когда $a \neq 0$ выводится из суммы 
+$\left(\xi_n - a\right)\eta_n$ и $a \eta_n$). Теперь заметим, что $\forall \varepsilon > 0 \forall C > 0$
+верно включение:
+ $$\left\{\abs{\xi_n \eta_n} > \varepsilon\right\} \subseteq \left\{\abs{\eta_n} > C\right\} \bigcup \left\{\abs{\xi_n} > \frac{\varepsilon}{C}\right\}$$
+ (Пояснение: это верно, так как пересечение отрицания обоих событий точно приводит к противоречию). Тогда, переходя к вероятностям, получаем:
+ $$P\left(\abs{\xi_n \eta_n} > \varepsilon\right) \leq 1 - F_{\eta_n}\left(C\right) + F_{\eta_n}\left(-C\right) + P\left(\abs{\xi_n}> \frac\varepsilon C\right)$$
+Устремляя сначала $n \to 0$, а затем $C \to \infty$, получаем, что $\xi_n \eta_n \xrightarrow{\text{P}} 0$ $\Rightarrow$ $\xi_n \eta_n \xrightarrow{\text{d}} 0$. 
+\end{proof}
+
+\begin{example}(Выборочная дисперсия)\\
+Пусть задана последовательность независимых и одинаково распределенных случайных величин $\xi_i$, причем $ \mathbb{E}  \xi_i = \mu$ и $ \mathbb{D} \xi_i = \sigma^ 2$. Тогда последовательность случайных величин
+$$s_n ^ 2 = \frac1{n-1} \sum_{i = 1}^{\infty} \left(\xi_i - \overline{\xi_n}\right) ^ 2 \xrightarrow{\text{P}} \sigma ^ 2$$
+где $\overline{\xi_n} = \frac{\xi_1 + \cdots+ \xi_n}{n}$ (умножаем на $\frac1{n-1}$, а не на $\frac1n$, чтобы $ \mathbb{E}  s_n ^ 2 = \sigma ^ 2$, то есть таким образом посчитанная диспресия по вероятности сходится к именно тому, чему и надо, в другом случае будет небольшое смещение в $\frac{n - 1}{n}$ раз, но с увеличение $n$ разница в любом случае будет стрираться). Действительно:
+$$s_n ^ 2 = \frac1{n - 1} \left(\sum_{i = 1}^{\infty} \xi_i ^ 2 - 2 n\overline{\xi_n} \cdot \frac1n \sum_{i = 1}^{\infty} + n \overline{\xi_n} ^ 2\right) = \frac1{n - 1} \left(\sum_{i = 1}^{\infty} \xi_i ^ 2 - n \overline{\xi_n} ^ 2\right) = \frac{n}{n - 1} \cdot \frac1n \sum_{i = 1}^{\infty} \xi_i ^ 2 - \frac{n}{n - 1} \overline{\xi_n} ^ 2$$
+Теперь заметим, что по ЗБЧ:
+$$\frac1n \sum_{i = 1}^{\infty} \xi_i ^ 2 \xrightarrow{\text{P}} \sigma ^ 2 + \mu, \ \overline{\xi_{n}} \xrightarrow{\text{P}} \mu$$
+Получили искомую сходимость
+\end{example}
+
+\begin{example}
+Пусть задана последовательность независимых и одинаково распределенных случайных величин $\xi_i$, причем $ \mathbb{E}  \xi_i = \mu$ и $ \mathbb{D} \xi_i = \sigma ^ 2 > 0$. Тогда из ЦПТ следует, что:
+$$\frac{\xi_1 + \cdots + \xi_n- n \mu}{\sigma \sqrt{n}} = \frac{\sqrt{n}\left(\overline{\xi_n} - \mu\right)}{\sigma} \xrightarrow{\text{d}} \xi \sim N\left(0, 1\right)$$
+Более того, так как $s_n ^ 2 \xrightarrow{\text{P}} \sigma ^ 2 > 0$, то имеет место сходимость по распределению величин:
+$$\frac{\sqrt{n}\left(\overline{\xi_n} - \mu\right)}{s_n ^ 2} \xrightarrow{\text{d}} \xi \sim N\left(0, 1\right)$$
+
+\end{example}
+
+\begin{advice}
+Пусть $a, h_n \in \mathbb{R}$, $\lim_{n \to \infty} h_n = 0$ и $f \ -$ непрерывно дифференцируемая функция на $\mathbb{R}$.
+Если последовательность случайных величин $\xi_n$ сходится по распределению к $\xi$, то:
+\[
+    \frac{f\left(a + h_n \xi_n\right) - f\left(a\right)}{h_n} \xrightarrow{d} f'\left(a\right) \xi
+\]
+\end{advice}
+
+\begin{proof}
+Имеет место равенство:
+\[
+    \frac{f\left(a + h_n \xi_n\right) - f\left(a\right)}{h_n} =
+    \frac{f\left(a + 1\cdot h_n \xi_n\right) - f\left(a + 0 \cdot h_n \xi_n\right)}{h_n} = 
+    \frac1{h_n} \int_{0}^{1} f\left(a + t h_n \xi_n\right) d\left(a + t h_n \xi_n\right) =
+    \]
+    \[
+    = \xi_n \int_0^1 f\left(a + t h_n \xi_n\right) dt
+\]
+Из предложения 5(самый конец) получаем, что $h_n \xi_n \xrightarrow{P} 0$.
+Также заметим, что функция
+\[
+    g\left(y\right) = \int_0^1 f(a + ty) dt
+\]
+непрерывна. Следовательно по предложению 4:
+\[
+    g\left(h_n \xi_n\right) = \int_0^1 f\left(a + t h_n \xi_n\right) dt \xrightarrow{P} g(0) = f'\left(a\right)
+\]
+Теперь снова используя предложение 5, получаем нужную сходимость.
+\end{proof}
+
+\begin{example}
+Пусть задана последоватеность независисмых и одинаково распределенных случайных величин $\xi_i$, причем 
+$ \mathbb{E}  \xi_i = \mu$ и $ \mathbb{D} \xi_i = \sigma ^ 2 > 0$. Если $h \ - $ непрерывно дифференцируемая функция, то
+\[
+    \sqrt{n}  \left(h\left(\overline{\xi_n}\right) - h\left(\mu\right)\right) \xrightarrow{d} \xi \sim N\left(0, q ^ 2\right), \ q = \sigma h'\left(\mu\right)
+\]
+Действительно, имеем равенство
+\[
+    \sqrt{n} \frac{\left(h\left(\overline{\xi_n}\right) - h\left(\mu\right)\right)}{\sigma} = 
+    \frac1{\sigma} \cdot \frac{h\left(\mu + n ^ {-\frac12} \sigma \zeta_n\right) - h\left(\mu\right)}{n ^ {-\frac12}}
+\]
+где(сходимость по ЦПТ)
+\[
+    \zeta_n = \frac{\sqrt{n} \left(\overline{\xi_n}- \mu\right)}{\sigma} \xrightarrow{d} \xi \sim N\left(0, 1\right)
+\]
+Используем предложение 6 и получаем требуемое.
+\end{example}
+
+\begin{example}
+Пусть $\xi_1, \cdots \xi_n$ положительные независимые одинаково распределенные случайные величины, 
+$ \mathbb{E}  \xi_1 = \mu$, $0 <  \mathbb{D} \xi_1 = \sigma ^ 2 < \infty$.
+Рассмотрим случайную величину $S_n = \xi_1 + \cdots + \xi_n$ и найдем предел в смысле сходимости по распределению у последовательности случайных величин
+$\sqrt{n} \left(\frac{n}{S_n} - \frac1\mu\right)$.\\
+Первый способ:
+\[
+    \sqrt{n} \left(\frac{n}{S_n} - \frac1\mu\right) = -\frac1\mu \frac{n}{S_n} \sqrt{n} \left(\frac{S_n}{n} - \mu\right)
+\]
+По ЦПТ
+\[
+    \sqrt{n} \left(\frac{S_n}{n} - \mu\right) \xrightarrow{d} \xi \sim N\left(0, \sigma ^ 2\right)
+\]
+По ЗБЧ
+\[
+    \frac{n}{S_n} \xrightarrow{P} \frac1\mu
+\]
+Таким образом имеем:
+\[
+    \sqrt{n} \left(\frac{n}{S_n} - \frac1\mu\right) \xrightarrow{d} -\frac1\mu ^2  \xi \sim N\left(0, \frac{\sigma ^ 2}{\mu ^ 4}\right)
+\]
+Второй способ: \\
+Пусть $h\left(x\right) = \frac1x$, тогда 
+\[
+    \sqrt{n} \left(\frac{n}{S_n} - \frac1\mu\right) = \sqrt{n} \left(h\left(\frac{S_n}{n}\right) - h\left(m\right)\right)
+    \xrightarrow{d} \xi \sim N\left(0, \sigma ^2 \left(h'\left(\mu\right)\right) ^ 2\right) = N\left(0, \frac{\sigma ^ 2}{\mu ^ 4}\right)
+\]
+
+\end{example}
+
+\clearpage
+
+\section{Многомерная характеристическая функция и ЦПТ}
+
+\begin{definition}
+$\textit{Характеристическая функция случайного вектора}$ $\xi = \left(\xi_1, \cdots, \xi_m\right) ^ T$ определяется равенством
+\[
+    \varphi_{\xi}\left(x\right) =  \mathbb{E}  e ^ {i  x \xi } = \mathbb{E} e ^ {i \sum_{i = 1}^{m} x_i \xi_i}
+\]
+
+\end{definition}
+
+\begin{advice}
+$\varphi_{\xi} \equiv \varphi_\eta$ $\Leftrightarrow$ $\xi$ и $\eta$ имеют одинаковые распределения
+\end{advice}
+\begin{proof}
+Заметим, что
+\[
+    F_{\xi}\left(x_1, \cdots, x_m\right) =  \mathbb{E}  I_{\leq x_1}\left(\xi_1\right) \cdots I_{\leq x_m}\left(\xi_m\right)
+\]
+По аналогии с одномерным случаем, нам достаточно доказать, что 
+\[
+     \mathbb{E}  g_1 \left(\xi_1\right) \cdots g_m\left(\xi_m\right) =  \mathbb{E}  g_1 \left(\eta_1\right) \cdots g_m \left(\eta_m\right)
+\]
+для непрерывных периодических функций $g_k\left(u\right)$. Такие функции приближаются линейными комбинациями функций вида $e ^ {i \mu_k u}$. Значит, достаточно проверять совпадение выражений вида
+\[
+     \mathbb{E}  \exp \left(i \mu_1 \xi_1 + \cdots + i \mu_m \xi_m\right) =  \mathbb{E}  \exp \left(i \mu_1 \eta_1 + \cdots + i \mu_m \eta_m\right)
+\]
+А это у нас есть(это хар функции).
+\end{proof}
+
+\begin{corollary}
+Случайные величины $\xi_1, \cdots, \xi_m$ независимы тогда и только тогда, когда
+\[
+    \varphi_{\xi}\left(y_1, \cdots , y_m\right) = \varphi_{\xi_1}\left(y_1\right) \cdots \varphi_{\xi_m}\left(y_m\right)
+\]
+\end{corollary}
+\begin{proof}
+$\Rightarrow$
+\[
+    \varphi_{\xi}(y_1,\cdots,y_m) = \mathbb{E}e^{i(\xi_1 y_1+\cdots+\xi_m y_m)} = \mathbb{E}e^{i
+    \xi_1 y_1} \cdots e^{i\xi_m y_m} =
+\]
+В силу независимости $\xi_i$
+\[
+    = \mathbb{E}e^{i
+    \xi_1 y_1} \cdots \mathbb{E}e^{i\xi_m y_m} =  \varphi_{\xi_1}\left(y_1\right) \cdots \varphi_{\xi_m}\left(y_m\right)
+\]
+$\Leftarrow$\\
+    Сделаем новый вектор $(\eta_1, \cdots , \eta_m)$, так что:\\
+    \begin{enumerate}
+        \item Распр $\eta_i$ = распр $\xi_i$ \text{ }$\forall i \in \{1, \cdots , m\}$
+        \item $\eta_1, \cdots, \eta_m$  независимы
+    \end{enumerate}
+    Определим
+    $F(y) = F_{\eta_1}(y_1) \cdots F_{\eta_m}(y_m)$. Тогда мы знаем, что существует вектор, у которого такая функция распределения, из чего непременно следует независимость $\eta_1, \cdots, \eta_m$\\
+    Посчитаем хар. функцию $\eta = (\eta_1, \cdots, \eta_m)$
+    \[
+        \varphi_{\eta}(y) = 
+        \left[\begin{array}{ll}
+        \text{в силу}\\
+        \text{нез - сти $\eta_i$}\\
+        \end{array}
+        \right] = \varphi_{\eta_1}(y_1) \cdots \varphi_{\eta_m}(y_m) = \varphi_{\xi_1}(y_1) \cdots \varphi_{\xi_m}(y_m) = \varphi_{\xi}(y)
+    \]
+    По предыдущему предложению и независимости $\eta_1, \cdots, \eta_m$ $\Rightarrow$ $\xi_1, \cdots, \xi_m$ независимы. 
+\end{proof}
+
+\begin{theorem}
+Пусть последовательность независимых одинаково распределенных случайных векторов $\xi^n = \left(\xi^n_1, \cdots, \xi^n_m\right) \in \mathbb{E}$ имеют конечные
+\[
+    \mathbb{E} \xi_i^1 = \mu_i, \ r_{ij} = \text{cov} \left(\xi_i^1, \xi_j^1\right)
+\]
+Тогда величины
+\[
+    \eta_i^n = \frac{\xi_i^1+ \cdots + \xi_i^n - n \mu_i}{\sqrt{n}}
+\]
+таковы, что последовательность векторов $\eta^n = \left(\eta_1^n, \cdots,  \eta_m^n\right) \xrightarrow{d} \eta$, характеристическая функция которого имеет вид
+\[
+    \varphi_{\eta}\left(y\right) = \exp \left(-\frac{ \left<yR, y \right>}{2}\right), \ R = \left(r_{ij}\right)
+\]
+\end{theorem}
+
+\begin{proof}
+В векторной форме:
+\[  
+    \eta^{n} = \dfrac{\sum\limits_{s=1}^{n}\xi^{s} - \mu n}{\sqrt{n}}
+\]
+Запишем хар. функцию:
+\[
+    \varphi_{\eta^{n}}(t) = \varphi_{(\xi^{1} - \mu + \cdots + \xi^{n} - \mu)/\sqrt{n}}(t) = \varphi_{\xi^{1} - \mu + \cdots + \xi^{n} - \mu}\left(\frac{t}{\sqrt{n}}\right) = 
+    \]
+    В силу независимости $\xi_i$ и их одинаковой распределенности
+    \[
+        = \left(\varphi_{\xi^{1} - \mu}\left(\frac{t}{\sqrt{n}}\right)\right)^n
+    \]
+Разложим в ряд тейлора:
+\[
+    \left(\varphi_{\xi^{1} - \mu}\left(\frac{t}{\sqrt{n}}\right)\right)^n = \left(1 + \bigtriangledown \varphi_{\xi^{1} - \mu}(0) \cdot \frac{t}{\sqrt{n}} + \frac{1}{2}\cdot D^2\varphi_{\xi^{1} - \mu}(0) \left<\frac{t}{\sqrt{n}}, \frac{t}{\sqrt{n}}\right>  + o\left(\frac1n\right)\right)^n
+\]
+Рассмотрим на 2-мерном случае (на других аналогично):
+\[
+    \varphi_{\xi}(t_1, t_2) = \mathbb{E}e^{it_1\xi_1 + it_2 \xi_2}
+\]
+Первая производная:
+\[
+    \frac{d}{d t_{j}} \varphi_{\xi}(t) = i\mathbb{E}\xi_{j} e^{it_1\xi_1 + it_2 \xi_2}; \text{ } \frac{d}{d t_{j}} \varphi_{\xi}(0) = i\mathbb{E}\xi_{j}
+\]
+В нашем случае нетрудно понять, что $\bigtriangledown \varphi_{\xi^{1} - \mu}(0) = 0$, так как у нас $\xi$ это $\xi^{1} - \mu$, а $i\mathbb{E}(\xi_{i}^{1} - \mu_{i}) = 0$\\
+Вторая производная:
+\[
+    \dfrac{d^2}{d t_{j} t_{s}} \varphi_{\xi}(t) = -\mathbb{E}\xi_{j} \xi_{s} e^{it_1\xi_1 + it_2 \xi_2}; \text{ } \frac{d^2}{d t_{j} t_{s}} \varphi_{\xi}(0) = -\mathbb{E}\xi_{j}\xi_{s}
+\]
+В нашем случае $-\mathbb{E}(\xi_{j}^{1} - \mu_{j})(\xi_{s}^{1} - \mu_{s}) = -r_{js}$\\
+Получаем:
+\[
+    \left(1 - \dfrac{1}{2}\langle Rt, t \rangle \frac{1}{n} + o\left(\frac1n\right)\right)^n \xrightarrow{n \to \infty} e^{-\frac{1}{2}\langle Rt, t \rangle}
+\]
+\end{proof}
+
+\clearpage
+
+\section{Многомерное нормальное распределение}  
+
+\begin{definition} Случайный вектор $\xi \in \text{Mat}_{m \times 1}$ имеет $\textit{нормальное распределение}$ или является $\textit{гауссовским}$, если $\forall x \in \mathbb{R} ^ m$
+\[
+    \varphi_{\xi}\left(x\right) = \mathbb{E}  e ^ {i  x \xi} = e ^ {i x\mu - \frac12 x R x ^ T}
+\]
+где $\mu = \left(\mu_1, \cdots , \mu_m\right)^T$, $R \in \text{Mat}_{m \times m}\ - $ симметричная неотрицательно определенная. Далее кратко пишем
+\[
+    \xi \sim N\left(\mu, R\right)
+\]
+\end{definition}
+
+\begin{definition}
+Пусть $\xi \in \text{Mat}_{m \times 1}$ случайный вектор. Матрица $R \in \text{Mat}_{m \times m}$ с компонентами $r_{ij} = \text{cov} \left(\xi_i, \xi_j\right)$
+называется $\textit{ковариационной матрицей}$ вектора $\xi$. Можно еще написать, что 
+\[
+    R = \text{cov} \left(\xi, \xi\right) = \mathbb{E} \left(\xi - \mathbb{E} \xi\right) \left(\xi - \mathbb{E} \xi\right)^T
+\]
+\end{definition}
+\begin{lemma}
+Симметричная неотрицательно определенная матрица $R \in \text{Mat}_{m \times m}$ является ковариционной матрицей случайного вектора-столбца $\xi \in \text{Mat}_{m \times 1}$ тогда и только тогда, когда $\forall x, y \in \mathbb{R} ^ m$
+\[
+    \text{cov} \left(x\xi, y \xi\right) = x \text{cov} \left(\xi, \xi\right) y ^ T = x R y ^ T
+\]
+\end{lemma}
+
+\begin{proof}
+$\Rightarrow$ \\
+Распишем по определению ковариации двух случайных величин (у нас именно они):
+\[
+    \text{cov} \left(x\xi, y \xi\right) = \mathbb{E} \left[\left(x \xi - \mathbb{E} x \xi\right) \left(y \xi - \mathbb{E} y \xi \right)\right] = \mathbb{E} \left[x \left(\xi - \mathbb{E} \xi\right) y \left(\xi - \mathbb{E} \xi\right)\right]
+     = 
+\]
+Транспонируя скаляр, получаем тот же скаляр:
+\[
+    = \mathbb{E} \left[x \left(\xi - \mathbb{E} \xi\right) \left(y \left(\xi - \mathbb{E} \xi\right)\right) ^ T\right] 
+    = \mathbb{E} \left[x \left(\xi - \mathbb{E} \xi\right)\left(\xi - \mathbb{E} \xi\right) ^ T y ^ T\right] 
+    = x \mathbb{E} \left[\left(\xi - \mathbb{E} \xi\right)\left(\xi - \mathbb{E} \xi\right) ^ T\right] y ^ T
+    = x \text{cov} \left(\xi, \xi\right) y ^ T
+\]
+
+$\Leftarrow$ \\
+Возьмем $x = e_i$, $y = e_j$ (базисные единичные вектора). Тогда из данного равенства получим:
+\[
+    \text{cov} \left(e_i \xi, e_j \xi\right) = \text{cov} \left(\xi_i, \xi_j\right) = e_i R e_j = r_{ij}
+\]
+Следовательно $R = \text{cov} \left(\xi, \xi\right)$ по определению.
+
+\end{proof}
+
+\begin{advice}
+$\forall A \in \text{Mat}_{m \times m}$ $\forall b \in \text{Mat}_{m \times 1}$ и $\xi \in \text{Mat}_{m \times 1} \ - $  случайного вектора, верно:
+\[
+    \text{cov} \left(A\xi + b, A \xi + b\right) = A R_\xi A ^ T
+\]
+
+\end{advice}
+\begin{proof}
+Распишем по определению: 
+\[
+    \text{cov} \left(A\xi + b, A \xi + b\right) = \mathbb{E} \left[\left(A \xi + b - \mathbb{E} \left(A\xi + b\right)\right) \left(A \xi + b - \mathbb{E} \left(A\xi +b\right)\right) ^ T\right] = 
+\]
+\[
+    = \mathbb{E} \left[\left(A \xi + b - b - \mathbb{E} A\xi\right) \left(A \xi + b -b -  \mathbb{E} A\xi\right) ^ T\right] = \mathbb{E} \left[\left(A \xi  - \mathbb{E} A\xi\right) \left(A \xi  -  \mathbb{E} A\xi\right) ^ T\right] = 
+    \]\[
+    = A \mathbb{E} \left[\left(\xi  - \mathbb{E}\xi\right) \left(\xi  -  \mathbb{E}\xi\right) ^ T\right] A ^ T
+    = A R_\xi A ^ T
+\]
+\end{proof}
+\begin{corollary}
+Если вектор $\xi \sim N\left(\mu, R\right)$, то вектор $A\xi + b \sim N\left(A\mu + b, A R_\xi A ^ T\right)$
+\end{corollary}
+
+\begin{theorem}
+Вектор $\xi \in \text{Mat}_{m \times 1}$ имеет нормальное распределение тогда и только тогда, когда $\forall x \in \mathbb{R} ^ m$ случайная величина $ x\xi$ имеет нормальное распределение
+\end{theorem}
+\begin{proof}
+$\Rightarrow$ \\
+Если $\xi$ нормальный вектор, то 
+\[
+    \varphi_{x \xi} \left(t\right) = \mathbb{E} e ^ {it  x \xi } 
+     = \varphi_{\xi}\left(tx\right) = \exp\left(-\frac12  txR \left(tx\right) ^ T + i  tx\mu\right) = 
+\]
+\[
+    = \exp\left(-\frac12 t ^ 2 xR x^ T + it x \mu\right)
+\]
+Получили хар функцию нормального распределения $ x \xi \sim N\left(x \mu,  xR x^ T\right)$.\\
+$\Leftarrow$ \\
+В обратную сторону:
+\[
+    \varphi_{\xi}\left(x\right) = \mathbb{E} e ^ {i  x \xi } = \varphi_{ x \xi }\left(1\right) = \exp\left(-\frac12 \mathbb{D}  x \xi  + i\mathbb{E}  x \xi \right) = \exp\left(-\frac12  \text{cov} \left( x \xi ,  x \xi \right) + i  x \mu \right) = 
+    \]\[
+    = \exp\left(-\frac12   xR x^ T + i  x \mu \right)
+\]
+, где $R = \text{cov} \left(\xi, \xi\right)$, $\mu = \mathbb{E} \xi$. Последний переход вытекает из леммы2.
+\end{proof}
+
+\begin{corollary}
+Если $\xi \sim N\left(\mu, R\right)$, то $R = \text{cov}\left(\xi, \xi\right)$, $\mu = \mathbb{E} \xi$.
+\end{corollary}
+
+\begin{corollary}
+Если вектор $\xi = \left(\xi_1, \xi_2\right)$ имеет нормальное распределение и $\text{cov}\left(\xi_1, \xi_2\right) = 0$, то случайные величины $\xi_1$ и $\xi_2$ независимы.
+\end{corollary}
+
+\begin{proof}
+Пусть 
+\[
+    \mu = \mathbb{E} \xi = \left(\mu_1, \mu_2\right)
+\]
+Заметим, что 
+\[R = 
+    \text{cov} \left(\xi, \xi\right)   = 
+    \begin{pmatrix}
+    \text{cov}\left(\xi_1, \xi_1\right) & 0\\
+    0 & \text{cov}\left(\xi_2, \xi_2\right)
+    \end{pmatrix}
+\]
+Теперь запишем харфункцию $\xi$:
+\[
+    \varphi_{\xi}\left(x_1, x_2\right) = \exp\left(-\frac 1 2 \left(x_1 ^ 2 \mathbb{D} \xi_1 + x_2 ^ 2 \mathbb{D} \xi_2 \right) + i \left(x_1 \mu_1 + x_2 \mu_2\right)\right) =
+\]
+\[
+    = \exp\left(-\frac 1 2 x_1 ^ 2 \mathbb{D} \xi_1 + ix_1 \mu_1\right) \cdot \exp\left(-\frac 1 2 x_2 ^ 2 \mathbb{D} \xi_2 + ix_2 \mu_2\right)= \varphi_{\xi_1}\left(x_1\right) \varphi_{\xi_2}\left(x_2 \right)
+\]
+Теперь из следствия4 вытекает независимость $\xi_1$ и $\xi_2$
+\end{proof}
+
+\begin{corollary}
+Если $\xi \sim N\left(\mu, R\right)$($\in \text{Mat}_{m \times 1}$), то $\exists A \in \text{Mat}_{m \times k}$, что $\xi = A \eta + \mu$, где $\eta = \left(\eta_1, \cdots , \eta_k\right) ^ T$, $\eta_i \ -$ независимые $N\left(0, 1\right)$ случайные величины. Причем $A A ^ T = R$
+\end{corollary}
+\begin{proof}
+Пусть \[
+    \xi' = \xi - \mu = \left(\xi_1', \cdots, \xi_m'\right)^ T
+\]
+Свели задачу к задачи нахождения ортонормированного базиса $\eta = \left(\eta_1, \cdots, \eta_k\right) ^ T$ в подпространстве $\langle \xi_1', \cdots, \xi_m' \rangle$ со скалярным произведением $\left(X, Y\right) = \mathbb{E} XY$. Эта задача решается методом Грама-Шмидта. Получили матрицу перехода $A$, что 
+\[
+    \xi - \mu = \xi' = A \eta
+\]
+То есть 
+\[
+    \xi = A \eta + \mu
+\]
+Осталось пояснить $A A ^ T = R$:
+\[
+    R = \text{cov} \left(\xi, \xi\right) = \text{cov} \left(\xi - \mu, \xi - \mu\right) = \text{cov} \left(A \eta, A \eta\right) = A \text{cov}\left(\eta, \eta\right) A^ T= A E A ^ T = A A^T
+\]
+$\text{cov}\left(\eta, \eta\right) = E$, так как это ортонормированный базис.
+\end{proof}
+
+\begin{theorem}
+Если $\xi \sim N\left(\mu, R\right)$ (в этой теореме сделаем $\mu := \mu ^ T \in R ^ m$) и $\text{det}R \neq 0$, случайный вектор $\xi$ имеет плотность
+\[
+    \rho\left(x\right) = \frac1 {\left(2 \pi\right) ^ {\frac m 2} \sqrt{\text{det} R}}e ^ {-2 ^ {-1} \left(x - \mu\right) R ^ {-1} \left(x - \mu\right) ^ T}
+\]
+\end{theorem}
+
+\begin{proof}
+Так как $\xi = A \eta + \mu$, причем $\exists A ^ {-1}$, то
+\[
+    P\left(\xi \in B\right) = P\left(A \eta + \mu \in B\right) = \frac{1}{\left(\sqrt{2 \pi}\right) ^ m}
+    \int_{A \eta + \mu \in B} e ^ {-2 ^ {-1}x x ^ T} dx = 
+\]
+\[
+   =  \frac 1 {\left(2 \pi\right) ^ {\frac m 2}} \int_{B} e ^ {- 2 ^ {-1} \left(A ^ {-1}\left(x - \mu\right)\right)\left(A ^ {-1}\left(x - \mu\right)\right) ^ T} d\left(A ^ {-1} \left(x - \mu\right)\right)
+   = \frac 1 {\left(2 \pi\right) ^ {\frac m 2} \text{det} A} \int_{B} e ^ {- 2 ^ {-1} \left(A ^ {-1}\left(x - \mu\right)\right)\left(A ^ {-1}\left(x - \mu\right)\right) ^ T} dx
+\]
+
+Остается заметить, что 
+\[
+    \text{det} A A ^ T = \left(\text{det} A\right) ^ 2 = \text{det} R
+\]
+и что
+\[
+    A ^ {-1}\left(x - \mu\right)\left(A ^ {-1}\left(x - \mu\right)\right) ^ T = 
+    \left(x - \mu\right) A ^ {-1} \left(A ^ {-1}\right) ^ T \left(x - \mu\right) ^ T= 
+    \]\[
+    = \left(x - \mu\right) \left(A A ^ T\right) ^ {-1} \left(x - \mu\right) ^ T 
+    = \left(x - \mu\right) R ^ {-1} \left(x - \mu\right) ^ T
+\]
+
+\end{proof}
+
+
+\begin{example}
+Пусть $\xi = \left(\xi_1, \cdots, \xi_n\right) ^ T$, где $\xi_i \sim N\left(0, \sigma ^ 2\right)$ и независимы между собой (или, что то же самое $\xi \sim N\left(0, \sigma ^ 2 E\right) $). Положим
+\[
+    \overline{\xi} = \frac{\xi_1 + \cdots + \xi_n}{n}, \ \zeta = \left(\xi_1 - \overline{\xi}\right) ^ 2
+     + \cdots + \left(\xi_n - \overline{\xi}\right) ^ 2
+\]
+($\zeta \ - $ выборочная диспресия). Покажем, что $\overline{\xi}$ и $\zeta$ независимы. \\
+Пусть $U \in \text{Mat}_{n \times n} \ - $ ортогональная матрица ($U U ^ T = E$), первая строка которой имеет вид $\left(n ^ {-\frac 1 2}, \cdots, n ^ {-\frac 1 2}\right)$. Тогда координаты вектора $u = U \xi \sim N\left(0, U \sigma ^ 2 E U ^ T\right) = N\left(0, \sigma ^ 2 E\right)$ являются независимыми. Заметим, что $u_{n}= \overline{\xi}\sqrt{n}$ и что
+\[
+    u ^ T u = u_1 ^ 2 + \cdots + u_n ^ 2 = n \overline{\xi ^ 2} + u_2 ^ 2 + \cdots + u_n ^ 2= \xi ^ T U ^ T U \xi = \xi ^ T \xi = \xi_1 ^ 2 + \cdots + \xi_n ^ 2
+\]
+Иначе говоря
+\[
+    u_2 ^ 2 + \cdots + u_n ^ 2 = \xi_1 ^ 2 + \cdots + \xi_n ^ 2 - n \overline{\xi ^ 2} 
+\]
+Теперь заметим
+\[
+    \zeta = \xi_1 ^ 2 + \cdots + \xi_n ^ 2 - 2 \sum_{i = 1}^{n} \xi_i \overline{\xi} + n \overline{\xi ^ 2}
+    = \xi_1 ^ 2 + \cdots + \xi_n ^ 2 - n \overline{\xi ^ 2} = u_2 ^ 2 + \cdots + u_n ^ 2
+\]
+Так как $u_1, \cdots , u_n \ -$ независимы, то и $\frac{u_1}{\sqrt{n}} = \overline{\xi}$ и $u_2 ^ 2 + \cdots + u_n ^ 2 = \zeta$ тоже независимы. \\
+Распределение величины $\chi = \eta_1^2 + \cdots + \eta_n^2$, где $\eta_i$ независимые c распределением $N\left(0, 1\right)$, называют распределением хи-квадрат с $n$ степенями свободы и обозначают через $\chi_{n} ^ 2$. 
+Найдем плотсноть распределения $\chi_n ^ 2$:
+\[
+    P\left(\chi \leq t\right) = \left(2 \pi\right) ^ {-\frac{n}{2}} \int_{\eta_1 ^ 2 + \cdots + \eta_n ^ 2 \leq t} e ^ {-\frac{x_1 ^ 2 + \cdots + x_n ^ 2}{2}} dx = 
+ \]
+ Делаем сферическую замену ($w_n \ -$ площадь $n$-мерной единичной сферы):
+ \[
+     = \left(2 \pi\right) ^ {-\frac{n}{2}} w_n \int_{0}^{\sqrt{t}} r ^ {n - 1} e ^ {-\frac{ r ^ 2} 2} dr
+ \]
+ Тогда 
+ \[
+    \rho\left(t\right) = \left(2 \pi\right) ^ {-\frac{n}{2}} w_n \cdot \frac{1}{2} t ^ {-\frac{1}{2}} t ^ {\frac{n - 1}{2}} e ^ {-\frac{ t} 2} =  \frac{1}{2}  \left(2 \pi\right) ^ {-\frac{n}{2}} w_n  t ^ {\frac{n - 2}{2}} e ^ {-\frac{t ^ 2}{2}} \text{Ind}_{t > 0}
+ \]
+\end{example}
+
+\clearpage
+ \section{Условные математические ожидания: дискретный случай}
+
+Предположим, что задана дискретная случайная величина
+\[
+    \xi\left(w\right) = \sum_{i = 1}^{n} x_i \text{Ind}_{A_i}\left(w\right)
+\]
+Рассмотрим следующую задачу: найти математическое ожидание $\xi$, если достоверно известно, что произошло событие $B$, $P\left(B\right) > 0$. Поскольку мы знаем, что событие $B$ произошло, то надо пересчитать вероятности $A_k$ с учетом новой информации, а именно, заменить $P\left(A_k\right)$ на $P\left(A_k | B\right)$. Таким образом, надо вычислить математическое ожидание не относительно исходной вероятностной меры $P$, а относительно условной вероятности $P\left(\cdot | B\right)$. 
+\begin{definition}
+Имеем:
+\[
+    \mathbb{E}\left(\xi | B\right) = \sum_{i = 1}^{n} x_i P\left(A_i | B\right) =
+    \sum_{i = 1}^{n} x_i \frac{\mathbb{E} \left(\text{Ind}_{A_i} \text{Ind}_{B}\right)}{P\left(B\right)} = \frac{\mathbb{E}\left(\xi \text{Ind}_{B}\right)}{P\left(B\right)}
+\]
+Это выражение будем называть $\textit{условным математическим ожиданием относительно события B}$.
+
+\end{definition}
+
+Пусть теперь имеется разбиение 
+\[
+    \Omega = \bigcup_{k = 1}^{N} B_k, \ B_k \bigcap B_m = \emptyset, \ P\left(B_k\right) > 0
+\]
+Обозначим это разбиение $\{B_k\}$ через $\mathcal{B}$. Удобно собрать вместе значения условных математических ожиданий $\mathbb{E}\left(\xi | B_k\right)$.
+\begin{definition}
+Рассмотрим случайную величину: 
+\[
+    \Lambda\left(w\right) = \sum_{i = 1}^{N} \text{Ind}_{B_i}\left(w\right) \mathbb{E} \left(\xi | B_i\right)
+\]
+Если $w \in B_i$, то эта случайная величина выдает среднее значение $\xi$ при условии, что произошло событие $B_i$. Величину $\Lambda\left(w\right)$ называют $\textit{условным математическим ожиданием относительно разбиения} \mathcal{B}$ и обозначают через $\mathbb{E} \left(\xi | \mathcal{B}\right)$.
+\end{definition}
+Случайную величину
+\[
+    P\left(A | \mathcal{B}\right) = \mathbb{E}\left(\text{Ind}_A | \mathcal{B}\right)
+\]
+называют условной вероятностью события $A$ относительно разбиения $\mathcal{B}$. Ясно, что 
+\[
+    \mathbb{E}\left(\xi | \mathcal{B}\right) = \sum_{i = 1}^{N} \text{Ind}_{B_i}\left(w\right) \mathbb{E} \left(\xi | B_i\right) 
+    = \sum_{i = 1}^{N} \text{Ind}_{B_i}\left(w\right) \sum_{j = 1}^{n} x_j P\left(A_j | B_i\right)
+    = \sum_{j = 1}^{n} \sum_{i = 1}^{N} \text{Ind}_{B_i}\left(w\right) x_j P\left(A_j | B_i\right)
+    = 
+\]
+\[
+    = \sum_{j = 1}^{n} x_j \sum_{i = 1}^{N} \text{Ind}_{B_i}\left(w\right) P\left(A_j | B_i\right)
+    = \sum_{j = 1}^{n} x_j \sum_{i = 1}^{n} \text{Ind}_{B_i}\left(w\right) \mathbb{E}\left(\text{Ind}_{A_j} | B_i\right) = \sum_{j = 1}^{n} x_j \mathbb{E} \left(\text{Ind}_{A_j} | \mathcal{B}\right)= 
+\]
+\[
+    = \sum_{j = 1}^{n} x_j P\left(A_j | \mathcal{B}\right)
+\]
+
+\begin{example}
+Рассмотрим важный пример, когда $\mathcal{B} = \left\{ B, \overline{B}\right\}$. Тогда 
+\[
+    P\left(A | \mathcal{B}\right) = \text{Ind}_{B} P\left(A | B\right) + \text{Ind}_{\overline{B}}P\left(A | \overline{B}\right)
+\]
+Если $w \in B$, то $P\left(A | \mathcal{B}\right)\left(w\right) = P\left(A | B\right)$
+\end{example}
+
+\begin{theorem}
+Имеют место следующие свойства условного математического ожидания:
+\begin{enumerate}[label=(\arabic*)]
+\item (линейность) $\mathbb{E}\left(\alpha \xi + \beta \eta | \mathcal{B}\right) = \alpha \mathbb{E}\left(\xi | \mathcal{B}\right) + \beta \mathbb{E}\left(\eta | \mathcal{B}\right)$
+\item (монотонность) из $\xi \leq \eta$ следует $\mathbb{E}\left(\xi | \mathcal{B}\right) \leq \mathbb{E}\left(\eta | \mathcal{B}\right)$
+\item (аналог формулы полной вероятности) $\mathbb{E}\left(\mathbb{E}\left(\xi | \mathcal{B}\right)\right) = \mathbb{E}\xi$
+\item (независимость) если случаная величина $\xi$ не зависит от разбиения $\mathcal{B}$, т.е. случайные величины $\xi$ и $\text{Ind}_{B_k}$ независимы, то $\mathbb{E}\left(\xi | \mathcal{B}\right) = \mathbb{E} \xi$
+\item для всякой случайной величины $\eta = \sum_{k = 1}^{N} c_k \text{Ind}_{B_k}$ верно равенство
+$\mathbb{E}\left(\eta \xi | \mathcal{B}\right) = \eta \mathbb{E}\left(\xi | \mathcal{B}\right)$
+
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Свойства $(1)$ и $(2)$ следуют из того, что они верны отдельно для каждого  $B_k$. \\ 
+Свойство $(3)$ проверяется непосредственной подстановкой: 
+\[
+    \mathbb{E}\left(\mathbb{E}\left(\xi | \mathcal{B}\right)\right) = \mathbb{E} \left(\sum_{i = 1}^{N} \text{Ind}_{B_{i}} \mathbb{E}\left(\xi | B_i\right)\right)
+    = \mathbb{E} \left(\sum_{i = 1}^{N} \text{Ind}_{B_{i}} \frac{\mathbb{E}\left(\xi \text{Ind}_{B_i}\right)}{P\left(B\right)}\right) = \sum_{i = 1}^{N} \mathbb{E}\left(\text{Ind}_{B_i}\right) \frac{\mathbb{E}\left(\xi \text{Ind}_{B_i}\right)}{P\left(B_i\right)} = \]
+    \[
+    =\sum_{i = 1}^{N} \mathbb{E}\left(\xi \text{Ind}_{B_i}\right) = \mathbb{E} \xi
+\]
+Обоснуем пункт $(4)$. Так как $\xi$ и $\text{Ind}_{B_k}$ независимы, то 
+\[
+    \mathbb{E}\left(\xi | B_k\right) = \frac{\mathbb{E}\left(\xi \text{Ind}_{B_k}\right)}{P\left(B_k\right)} = \frac{\mathbb{E}\xi \mathbb{E} \text{Ind}_{B_k}}{P\left(B_k\right)} = \mathbb{E}\xi
+\]
+Следовательно,
+\[
+    \mathbb{E}\left(\xi | \mathcal{B}\right) = \sum_{k = 1}^{N} \text{Ind}_{B_k}\left(w\right) \mathbb{E} \left(\xi | B_k\right) = \sum_{k = 1}^{N} \text{Ind}_{B_k}\left(w\right) \mathbb{E} \xi = \mathbb{E} \xi
+\]
+Для обоснования $(5)$ достаточно заметить, что
+\[
+    \mathbb{E}\left(\eta \xi | B_k\right) = c_k \mathbb{E}\left(\xi | B_k\right)
+\]
+\end{proof}
+
+Наиболее типична ситуация, когда разбиение $\mathcal{B}$ появляется посредством некоторой случайной величины
+\[
+    \eta = \sum_{i = 1}^{N} y_i \text{Ind}_{B_i},
+\]
+где $y_i \ - $ разлиные числа и $P\left(B_i\right) > 0$.
+\begin{definition}
+В этом случае $B_i = \left\{w : \eta\left(w\right) = y_i\right\}$ и условное математическое ожидание $\mathbb{E}\left(\xi | \mathcal{B}\right)$ обозначают через $\mathbb{E}\left(\xi| \eta\right)$ и называют \textit{условным математическим ожиданием относительно} $\eta$.
+
+\end{definition}
+Несложно предъявить функцию $F$ (это можно сделать несколькими способами), что 
+\[
+    \mathbb{E}\left(\xi | \eta\right)\left(w\right) = F\left(\eta\left(w\right)\right)
+\]
+Легко видеть, что $F\left(y_i\right) = \mathbb{E}\left(\xi | B_i\right)$.
+\\
+Можно воспринимать $\mathbb{E}\left(\xi | \eta\right)$ как проекцию $\xi$ на $\eta$, а $\mathbb{E} \xi \eta$ как их скаляное произведение.
+\begin{lemma}
+Для условного математического ожидания выполнено
+\[
+    \mathbb{E}\left(\xi f\left(\eta\right)\right) = \mathbb{E}\left[f\left(\eta\right)\mathbb{E}\left(\xi | \eta\right)\right]
+\]
+для произвольной функции $f$. Кроме того, если для какой-то случайной величины $\zeta = g\left(\eta\right)$ выполнено 
+\[
+    \mathbb{E}\left(\xi f\left(\eta\right)\right) = \mathbb{E}\left(f\left(\eta\right) \zeta\right),
+\]
+то $\zeta = \mathbb{E}\left(\xi | \eta\right)$ п.н.
+\end{lemma}
+
+\begin{proof}
+По $(5)$ и $(4)$ из теоремы 11:
+\[
+    \mathbb{E}\left[f\left(\eta\right) \mathbb{E}\left(\xi | \eta\right)\right] =
+    \mathbb{E} \left[\mathbb{E}\left(f\left(\eta\right) \xi | \eta\right)\right] = \mathbb{E}\left(f\left(\eta\right) \xi\right)
+\]
+Докажем вторую часть: 
+\[
+    \mathbb{E} \left(f\left(\eta\right) \zeta\right) = \mathbb{E}\left(\xi f\left(\eta\right)\right) = \mathbb{E}\left[f\left(\eta\right)\mathbb{E}\left(\xi | \eta\right)\right]
+\]
+\[
+    \mathbb{E} \left[f\left(\eta\right) \left(\zeta - \mathbb{E}\left(\xi | \eta \right)\right)\right] = 0
+\]
+Так как $\zeta$ и $\mathbb{E}\left(\xi | \eta\right) \ -$ функции от $\eta$, то возьмем $f\left(\eta\right) = \zeta - \mathbb{E}\left(\xi | \eta \right)$ и получим:
+\[
+    \mathbb{E} \left(\zeta - \mathbb{E}\left(\xi | \eta \right)\right)^ 2 = 0,
+\]
+то есть $\zeta = \mathbb{E}\left(\xi | \eta\right)$ п.н.
+\end{proof}
+Теперь докажем, что $\mathbb{E}\left(\xi | \eta\right)$ и правда является проекцией $\xi$ на $\eta$.
+\begin{advice}
+
+Пусть $\mathbb{E} \xi ^ 2 < \infty$. Условное матетическое ожидание $\mathbb{E}\left(\xi | \eta\right)$ среди всех случайных величин вида $f\left(\eta\right)$ является лучшим среднеквадратическим приближением для $\xi$, т.е.
+\[
+    \min_{\zeta : \zeta = f\left(\eta\right)} \mathbb{E} \left(\xi - \zeta\right) ^ 2 = \mathbb{E} \left[\xi - \mathbb{E}\left(\xi | \eta\right)\right] ^ 2
+\]
+\end{advice}
+
+\begin{proof}
+Пусть $\zeta = f\left(\eta\right)$. Так как ($\mathbb{E} \left(\xi | \eta\right) - \zeta \ -$ функция от $\eta$) 
+\[
+    \mathbb{E} \left[\left(\xi - \mathbb{E}\left(\xi | \eta\right)\right)\left(\mathbb{E} \left(\xi | \eta\right) - \zeta\right)\right] = 0,
+\]
+то
+\[
+    \mathbb{E} \left(\xi - \zeta\right) ^2 = \mathbb{E} \left[\left(\xi - \mathbb{E}\left(\xi | \eta\right)\right) + \left(\mathbb{E}\left(\xi | \eta\right) - \zeta\right)\right] ^ 2
+    = \]
+    \[
+    \mathbb{E}\left[\xi - \mathbb{E}\left(\xi | \eta\right)\right] ^ 2 + 2 \mathbb{E} \left[\left(\xi - \mathbb{E}\left(\xi | \eta\right)\right)\left(\mathbb{E} \left(\xi | \eta\right) - \zeta\right)\right] + \mathbb{E} \left[\mathbb{E}\left(\xi | \eta\right) - \zeta\right] ^ 2 \geq \mathbb{E} \left[\xi - \mathbb{E}\left[\xi | \eta\right)\right] ^ 2
+\]
+Последнее неравенство достигается взятием $\zeta = \mathbb{E}\left(\xi | \eta\right)$
+\end{proof}
+
+\clearpage
+
+\section{Условные математические ожидания: общий случай}
+
+\begin{definition}
+$\xi, \eta \ -$ случаные величины. $\mathbb{E} \abs{\xi} < \infty$. Тогда случайная величина вида $F\left(\eta\right)$ называется $\textit{условным математическим ожиданием} \mathbb{E}\left(\xi | \eta\right)$, если 
+\[
+    \mathbb{E} \left[\xi f\left(\eta\right)\right] = \mathbb{E} \left[\mathbb{E} \left(\xi | \eta\right) f\left(\eta\right)\right]
+\]
+для любой ограниченной $f$. Любые две случаные величины, удовлетворяющие этому условию почти наверное совпадают (лемма 3).
+\end{definition}
+Из этого определения следует, что $\mathbb{E}\left(\xi | \eta\right)$  есть наименее отличающаяся от $\xi$ случайная величина вида $F\left(\eta\right)$, то есть проекция $\xi$ на $\eta$.
+
+\begin{advice}
+Предположим, что распределение случайной величины $\left(\xi, \eta\right)$ задано совместной плотностью $\rho_{\xi \eta}\left(x, y\right)$. Тогда
+\[
+    \mathbb{E} \left(g\left(\xi, \eta\right) | \eta = y \right) = \int_{-\infty}^{+\infty} g\left(x, y\right)\frac{\rho_{\xi \eta}\left(x, y\right)}{\rho_{\eta}\left(y\right)} dx
+\]
+\end{advice}
+
+\begin{proof}
+Имеет место цепочка равенств:
+\[
+    \mathbb{E} \left[g\left(\xi, \eta\right) f\left(\eta\right)\right] = \int_{-\infty}^{+\infty} \int_{-\infty}^{+\infty} g\left(x, y\right) f\left(y\right) \rho_{\xi \eta}\left(x, y\right) dx dy  = \]
+    \[
+    = \int_{-\infty}^{+\infty} f\left(y\right) \underbrace{\int_{-\infty}^{+\infty}g\left(x, y\right)\frac{\rho_{\xi \eta}\left(x, y\right)}{\rho_{\eta}\left(y\right)}}_{= F\left(y\right)} \rho_{\eta}\left(y\right) dy = \mathbb{E} \left[F\left(\eta\right) f\left(\eta\right)\right]
+\]
+Следовательно $F\left(\eta\right) = \mathbb{E} \left(\xi | \eta\right)$ по определению.
+\end{proof}
+\end{document}

@@ -1,0 +1,91 @@
+\input{../../settings}
+
+\begin{document}
+
+\lhead{Иванов Семен} 
+\rhead{БПМИ-183} 
+\cfoot{\thepage\ of \pageref{LastPage}}
+
+\section{Листок 3. Задача 8c1}
+\begin{itemize}
+\item Применим метод Грама-Шмидта к подпространству $\left(X_1, X_2\right)$ со скалярным произведением $\left(X, Y\right) = E XY$:
+\[
+    b_1 = X_1
+\]
+\[
+    b_2 = X_2 - pr_{b_1} X_2 = X_2 - \frac{\left(X_2, X_1\right)}{\left(X_1, X_1\right)}X_1 = X_2 - \frac{\text{cov}\left(X_2, X_1\right)}{\text{cov}\left(X_1, X_1\right)} X_1 = -\frac 1 2 X_1 + X_2
+\]
+Теперь отнормируем вектора:
+\[
+    Y_1 = \frac{b_1}{\sqrt{\left(b_1, b_1\right)} }= \frac{b_1}{2} = \frac{X_1}{\sqrt{2}}
+\]
+\[
+    Y_2 = \frac{b_2}{\sqrt{\left(b_2, b_2\right)}} = \frac{b_2}{\sqrt{\frac 1 4 \cdot 2 + 1 - 2 \cdot \frac 1 2 \cdot 1}} = \sqrt{2}b_2 = -\frac{X_1}{\sqrt{2}} + \sqrt{2} X_2
+\]
+
+\item Теперь имеем:
+\[
+    \begin{pmatrix}
+    \frac {1} {\sqrt {2}} & 0 \\
+    -\frac {1} {\sqrt{2}} & \sqrt {2}
+    \end{pmatrix}
+    \begin{pmatrix}
+    X_1 \\
+    X_2
+    \end{pmatrix} = 
+    \begin{pmatrix}
+    Y_1 \\
+    Y_2
+    \end{pmatrix}
+\]
+\[
+    \begin{pmatrix}
+    X_1 \\
+    X_2
+    \end{pmatrix} = 
+    \begin{pmatrix}
+    \sqrt 2 & 0 \\
+    1 & \frac{ 1}{ \sqrt{2}}
+    \end{pmatrix}
+    \begin{pmatrix}
+    Y_1 \\
+    Y_2
+    \end{pmatrix}
+\]
+
+\item $Y_1, Y_2 \sim N\left(0, 1\right)$ по теореме с лекции.
+\end{itemize}
+
+\section{Листок 3. Задача 11a}
+\begin{itemize}
+\item Так как величины независимы:
+\[
+    \rho_{\xi, \eta}\left(x, y\right) = \rho_{\xi}\left(x\right) \rho_{\eta}\left(y\right) = \frac 1 {8 \pi} e ^ {-\frac{x ^ 2 + y ^ 2}{8}}
+\]
+\item Распишем искомую веротяность, как интеграл плотности по нужной области $G$ (разности окружности радиуса 3 и 2) и сделаем тригонометрическую замену ($x = r \cos \varphi$, $y = r \sin \varphi$):
+\[
+    P\left(4 \leq \xi ^ 2 + \eta ^ 2 \leq 9\right) = \int_{G} \rho_{\xi, \eta}\left(x, y\right) dxdy = \int_{0}^{2 \pi} \int_{2}^{3} \frac 1{8 \pi} e ^ {-\frac{r ^ 2}{8}} dr d \varphi = 2 \pi \cdot \frac 1 {8\pi} \int_{2}^{3} r e ^ {-\frac{r ^ 2}{8}}dr = 
+\]
+\[
+    =  \frac{1}{8} \int_{2}^{3} e ^ {-\frac{r ^ 2}{8}} d\left(r ^ 2\right) = \frac1 8 \cdot \left(-8\right) \left(e ^ {-\frac 9 8} - e ^ {- \frac 1 2}\right) =  \left(e ^ {- \frac 1 2} - e ^ {-\frac 9 8}\right)
+\]
+
+\end{itemize}
+
+\section{Задача 13}
+
+\begin{itemize}
+\item Выпишем интеграл матожидания и посчитаем его:
+\[
+    \mathbb{E} \xi ^ 4 = \frac {1}{\sqrt{2 \pi}} \int_{-\infty}^{+\infty} x ^ 4 e ^ {-\frac{x ^ 2}{2}} dx = 
+    -\frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{+\infty} x ^ 3 d \left(e ^ {-\frac{x ^ 2}{2}}\right) = 
+    -\frac{1}{\sqrt{2 \pi}} \left(x ^ 3 e ^ {-\frac{x ^ 2}{2}}\right)\Big|_{-\infty}^{+\infty} + \frac{3}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} x ^ 2 e ^ {-\frac{x ^ 2}{2}} dx = 
+\]
+\[
+    = 0 - \frac{3}{\sqrt{2 \pi}} \int_{-\infty}^{+\infty} x d\left(e ^ {-\frac{x ^ 2}{2}}\right) = 
+    -\frac{3}{\sqrt{2 \pi}} \left(x e ^ {-\frac{x ^ 2}{2}}\right)\Big|_{-\infty}^{+\infty} + \frac{3}{\sqrt{2 \pi}} \int_{-\infty}^{+\infty} e ^ {-\frac{x ^ 2}{2}} dx =
+    0 + 3 \cdot \underbrace{\frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{+\infty} e ^ {-\frac{x ^ 2}{2}}dx}_{= \Phi\left(+\infty\right) - \Phi\left(- \infty\right) = 1 - 0} = 3 
+\]
+\end{itemize}
+
+\end{document}
