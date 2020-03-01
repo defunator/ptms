@@ -261,7 +261,7 @@ $$\varphi_{\xi}\left(t\right) =  \mathbb{E}  e ^ {it \xi} =  \mathbb{E}  \left(\
 $$ \varphi_\xi'\left(t\right) = - t \varphi_{\xi}\left(t\right)$$
 $$\frac{\varphi_\xi'\left(t\right)}{\varphi_\xi\left(t\right)} = -t$$
 Интегрируем обе части:
-$$ \int \frac{\varphi_\xi\left(t\right)}{\varphi_\xi\left(t\right)} = \ln \abs{\varphi_\xi\left(t\right)} + C = \int -t dt = -\frac{t ^ 2}{2}$$
+$$ \int \frac{ d\left(\varphi_\xi\left(t\right)\right)}{\varphi_\xi\left(t\right)} = \ln \abs{\varphi_\xi\left(t\right)} + C = \int -t dt = -\frac{t ^ 2}{2}$$
 $$\varphi_\xi\left(t\right) = C' e ^ {-\frac{t ^ 2}{2}}$$
 $$\varphi_\xi\left(0\right) = 1 = C' \Rightarrow C' = 1$$
 (Ответ никак нулевым быть не может, поэтому, когда мы поделили на хар функцию ничего плохого не произошло)
@@ -269,7 +269,7 @@ $$\varphi_\xi\left(0\right) = 1 = C' \Rightarrow C' = 1$$
 \begin{advice}
 Пусть случайная величина $\xi$ обладает конечным $k$-тым моментом, то есть $ \mathbb{E}  \abs{\xi} ^ k < \infty$. Тогда $\varphi$ имеет непрерывную $k$-тую производную и
 $
-    \varphi^{(k)}\left(t\right) = i ^ k  \mathbb{E}  \xi ^ k
+    \varphi^{(k)}\left(0\right) = i ^ k  \mathbb{E}  \xi ^ k
 $
 \end{advice}
 \begin{proof}
@@ -284,7 +284,7 @@ $
 \[
     \varphi'\left(t\right) = \lim_{\Delta t \to 0} \frac{\varphi\left(t + \Delta t\right) - \varphi\left(t\right)}{\Delta t} = \lim_{\Delta t\to 0}  \mathbb{E}  e ^ {i t \xi} \cdot \frac{e ^ {i \Delta t \xi} - 1}{\Delta t} = i  \mathbb{E}  e ^ {it \xi} \xi
 \]
-Теперь очевидна непрерывность первой производной и $\varphi'\left(t\right) = i  \mathbb{E}  \xi$, для производных высших порядков аналогично
+Теперь очевидна непрерывность первой производной и $\varphi'\left(0\right) = i  \mathbb{E}  \xi$, для производных высших порядков аналогично
 
 \end{proof}
 
@@ -910,7 +910,7 @@ $\text{cov}\left(\eta, \eta\right) = E$, так как это ортонорми
 \[
     \Lambda\left(w\right) = \sum_{i = 1}^{N} \text{Ind}_{B_i}\left(w\right) \mathbb{E} \left(\xi | B_i\right)
 \]
-Если $w \in B_i$, то эта случайная величина выдает среднее значение $\xi$ при условии, что произошло событие $B_i$. Величину $\Lambda\left(w\right)$ называют $\textit{условным математическим ожиданием относительно разбиения} \mathcal{B}$ и обозначают через $\mathbb{E} \left(\xi | \mathcal{B}\right)$.
+Если $w \in B_i$, то эта случайная величина выдает среднее значение $\xi$ при условии, что произошло событие $B_i$. Величину $\Lambda\left(w\right)$ называют $\textit{условным математическим ожиданием относительно разбиения}$ $ \mathcal{B}$ и обозначают через $\mathbb{E} \left(\xi | \mathcal{B}\right)$.
 \end{definition}
 Случайную величину
 \[
