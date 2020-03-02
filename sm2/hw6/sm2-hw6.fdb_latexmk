@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1583062695 "sm2-hw6.tex" "sm2-hw6.pdf" "sm2-hw6" 1583062696
+["pdflatex"] 1583150632 "sm2-hw6.tex" "sm2-hw6.pdf" "sm2-hw6" 1583150633
   "../../settings.tex" 1582403162 1409 667c7a93bebc85fa71dd33bf2cffa8a3 ""
   "/Users/defunator/Library/texlive/2019/texmf-var/fonts/tfm/lh/lh-t2a/labx1728.tfm" 1579620847 3312 d199be9bd555944e2403193d58a0256a ""
   "/Users/defunator/Library/texlive/2019/texmf-var/fonts/tfm/lh/lh-t2a/larm0600.tfm" 1579628599 3248 7c0b9d76a2cd84ed06764a4c6eea5de4 ""
@@ -162,11 +162,11 @@
   "/usr/local/texlive/2019/texmf-var/web2c/pdftex/pdflatex.fmt" 1579619895 4259636 5066ad5629af2866de79bbc3532ea9e3 ""
   "/usr/local/texlive/2019/texmf.cnf" 1557341546 577 d150fef99ac436ad1156e86b0892f6ef ""
   "img1.png" 1582404897 40767 a16479984c4c418ac2ff3986226b92db ""
-  "sm2-hw6.aux" 1583062696 1842 8fbaee4f3a45daefbfd17cf246af2ca9 "pdflatex"
-  "sm2-hw6.out" 1583062696 727 c69a63382e9fe998416abc2cc6353b09 "pdflatex"
-  "sm2-hw6.tex" 1583062694 7803 21479bff7f192e306d776896ed3600d8 ""
+  "sm2-hw6.aux" 1583150633 2195 8d078056920c7af1a8a69f127165f0cb "pdflatex"
+  "sm2-hw6.out" 1583150633 977 83c8507d3403b745c8501291ddc61ee9 "pdflatex"
+  "sm2-hw6.tex" 1583150632 8366 bb3eb212a147791e5a1d59d7be5d72e1 ""
   (generated)
-  "sm2-hw6.pdf"
   "sm2-hw6.out"
   "sm2-hw6.log"
   "sm2-hw6.aux"
+  "sm2-hw6.pdf"

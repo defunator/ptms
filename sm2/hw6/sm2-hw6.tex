@@ -83,7 +83,7 @@
 \section{Листок 3. Задача 8b*}
 
 \begin{itemize}
-\item Из прошлого номера мы выразили случайный вектор $\left(\xi, \eta\right)$ через независимые стандартные случайные величины $e_1$ и $e_2$ ($a, c > 0$ по понятным причинам):
+\item Из прошлого номера мы выразили случайный вектор $\left(\xi, \eta\right)$ через независимые стандартные случайные величины $e_1$ и $e_2$ ($a, c > 0$ по понятным причинам $ -$ потому что в прошлом номере там корни):
 \[
     \begin{pmatrix}
     \xi \\ \eta
@@ -140,13 +140,13 @@
     = \sum_{k = s}^{\infty} \frac{\lambda ^ k e ^ {-\lambda}}{k!} P\left(\text{Ind}_{\eta = s} = 1 | \xi = k\right) = \sum_{k = s}^{\infty} \frac{\lambda ^ k e ^ {-\lambda}}{k!} {{k}\choose{s}} p ^ s \left(1 - p\right) ^ {k - s} = p ^ s e ^ {-\lambda} \sum_{k = s}^{\infty} \frac{\lambda ^ k k! \left(1 - p\right) ^ {k - s}}{k! s! \left(k - s\right)!} = 
 \]
 \[
-    = \frac{\lambda^ s p ^s e ^ {-\lambda}}{s!} \sum_{k = s}^{\infty} \frac{\left(1 - p\right) ^ {k - s}}{\left(k - s\right)!} = \frac{\lambda^ s p ^s e ^ {-\lambda}}{s!} \sum_{k = 0}^{\infty} \frac{\left(1 - p\right) ^ {k}}{k!} = \frac{\lambda^ s p ^s e ^ {-\lambda p}}{s!} \sum_{k = 0}^{\infty} \frac{\left(1 - p\right) ^ {k} e ^ {-\lambda\left(1 - p\right)}}{k!}
+    = \frac{\lambda^ s p ^s e ^ {-\lambda}}{s!} \sum_{k = s}^{\infty} \frac{\lambda ^ {k - s}\left(1 - p\right) ^ {k - s}}{\left(k - s\right)!} = \frac{\lambda^ s p ^s e ^ {-\lambda}}{s!} \sum_{k = 0}^{\infty} \frac{\lambda ^ k \left(1 - p\right) ^ {k}}{k!} = \frac{\lambda^ s p ^s e ^ {-\lambda p}}{s!} \sum_{k = 0}^{\infty} \frac{\left(\lambda \left(1 - p\right)\right) ^ {k} e ^ {-\lambda\left(1 - p\right)}}{k!}
 \]
 Заметим, что
 \[
-    \sum_{k = 0}^{\infty} \frac{\left(1 - p\right) ^ {k} e ^ {-\lambda\left(1 - p\right)}}{k!} =1
+    \sum_{k = 0}^{\infty} \frac{\left(\lambda \left(1 - p\right)\right) ^ {k} e ^ {-\lambda\left(1 - p\right)}}{k!} =1
 \]
-так как это сумма вероятностей $P\left(\zeta = k\right)$, где $\zeta \sim Poiss\left(1 - p\right)$. Таким образом, получаем 
+так как это сумма вероятностей $P\left(\zeta = k\right)$, где $\zeta \sim Poiss\left(\lambda\left(1 - p\right)\right)$. Таким образом, получаем 
 \[
     P\left(\eta = s\right) = \frac{\left(\lambda p\right) ^s e ^ {-\lambda p}}{s!},
 \]
@@ -188,4 +188,18 @@
     \end{cases}
 \]
 \end{itemize}
+
+\section{Листок 3. Задача 8с(ромбик)}
+Матрица не неотрицательно определенная, поэтому задача в данных определениях не решается:
+\[
+    \begin{pmatrix}
+    1 & -1
+    \end{pmatrix} 
+    \begin{pmatrix}
+    4 & 3 \\ 3 & 1
+    \end{pmatrix} 
+    \begin{pmatrix}
+    1 \\ -1
+    \end{pmatrix} = -1 < 0
+\]
 \end{document}
