@@ -933,7 +933,7 @@ $\text{cov}\left(\eta, \eta\right) = E$, так как это ортонорми
 \begin{example}
 Рассмотрим важный пример, когда $\mathcal{B} = \left\{ B, \overline{B}\right\}$. Тогда 
 \[
-    P\left(A | \mathcal{B}\right) = \text{Ind}_{B} P\left(A | B\right) + \text{Ind}_{\overline{B}}P\left(A | \overline{B}\right)
+    P\left(A | \mathcal{B}\right) = \text{Ind}_{B}\left(w\right) P\left(A | B\right) + \text{Ind}_{\overline{B}}\left(w\right) P\left(A | \overline{B}\right)
 \]
 Если $w \in B$, то $P\left(A | \mathcal{B}\right)\left(w\right) = P\left(A | B\right)$
 \end{example}
@@ -1002,7 +1002,7 @@ $\mathbb{E}\left(\eta \xi | \mathcal{B}\right) = \eta \mathbb{E}\left(\xi | \mat
 \end{lemma}
 
 \begin{proof}
-По $(5)$ и $(4)$ из теоремы 11:
+По $(5)$ и $(3)$ из теоремы 11:
 \[
     \mathbb{E}\left[f\left(\eta\right) \mathbb{E}\left(\xi | \eta\right)\right] =
     \mathbb{E} \left[\mathbb{E}\left(f\left(\eta\right) \xi | \eta\right)\right] = \mathbb{E}\left(f\left(\eta\right) \xi\right)
@@ -1039,7 +1039,7 @@ $\mathbb{E}\left(\eta \xi | \mathcal{B}\right) = \eta \mathbb{E}\left(\xi | \mat
     \mathbb{E} \left(\xi - \zeta\right) ^2 = \mathbb{E} \left[\left(\xi - \mathbb{E}\left(\xi | \eta\right)\right) + \left(\mathbb{E}\left(\xi | \eta\right) - \zeta\right)\right] ^ 2
     = \]
     \[
-    \mathbb{E}\left[\xi - \mathbb{E}\left(\xi | \eta\right)\right] ^ 2 + 2 \mathbb{E} \left[\left(\xi - \mathbb{E}\left(\xi | \eta\right)\right)\left(\mathbb{E} \left(\xi | \eta\right) - \zeta\right)\right] + \mathbb{E} \left[\mathbb{E}\left(\xi | \eta\right) - \zeta\right] ^ 2 \geq \mathbb{E} \left[\xi - \mathbb{E}\left[\xi | \eta\right)\right] ^ 2
+    \mathbb{E}\left[\xi - \mathbb{E}\left(\xi | \eta\right)\right] ^ 2 + 2 \underbrace{\mathbb{E} \left[\left(\xi - \mathbb{E}\left(\xi | \eta\right)\right)\left(\mathbb{E} \left(\xi | \eta\right) - \zeta\right)\right]}_{= 0} + \mathbb{E} \left[\mathbb{E}\left(\xi | \eta\right) - \zeta\right] ^ 2 \geq \mathbb{E} \left[\xi - \mathbb{E}\left(\xi | \eta\right)\right] ^ 2
 \]
 Последнее неравенство достигается взятием $\zeta = \mathbb{E}\left(\xi | \eta\right)$
 \end{proof}
@@ -1049,7 +1049,7 @@ $\mathbb{E}\left(\eta \xi | \mathcal{B}\right) = \eta \mathbb{E}\left(\xi | \mat
 \section{Условные математические ожидания: общий случай}
 
 \begin{definition}
-$\xi, \eta \ -$ случаные величины. $\mathbb{E} \abs{\xi} < \infty$. Тогда случайная величина вида $F\left(\eta\right)$ называется $\textit{условным математическим ожиданием} \mathbb{E}\left(\xi | \eta\right)$, если 
+$\xi, \eta \ -$ случаные величины. $\mathbb{E} \abs{\xi} < \infty$. Тогда случайная величина вида $F\left(\eta\right)$ называется $\textit{условным математическим ожиданием} $ $\mathbb{E}\left(\xi | \eta\right)$, если 
 \[
     \mathbb{E} \left[\xi f\left(\eta\right)\right] = \mathbb{E} \left[\mathbb{E} \left(\xi | \eta\right) f\left(\eta\right)\right]
 \]
