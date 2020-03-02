@@ -255,6 +255,7 @@ INPUT /usr/local/texlive/2019/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7
 INPUT /Users/defunator/Library/texlive/2019/texmf-var/fonts/tfm/lh/lh-t2a/lati1200.tfm
 INPUT /Users/defunator/Library/texlive/2019/texmf-var/fonts/tfm/lh/lh-t2a/larm0800.tfm
 INPUT /Users/defunator/Library/texlive/2019/texmf-var/fonts/tfm/lh/lh-t2a/larm0600.tfm
+INPUT /Users/defunator/Library/texlive/2019/texmf-var/fonts/tfm/lh/lh-t2a/lasl1200.tfm
 INPUT /Users/defunator/Library/texlive/2019/texmf-var/fonts/tfm/lh/lh-t2a/lati0800.tfm
 INPUT /Users/defunator/Library/texlive/2019/texmf-var/fonts/tfm/lh/lh-t2a/lati0600.tfm
 INPUT /usr/local/texlive/2019/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm

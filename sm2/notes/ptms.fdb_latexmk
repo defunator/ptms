@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1583172182 "ptms.tex" "ptms.pdf" "ptms" 1583172184
+["pdflatex"] 1583172289 "ptms.tex" "ptms.pdf" "ptms" 1583172298
   "../../settings.tex" 1582403162 1409 667c7a93bebc85fa71dd33bf2cffa8a3 ""
   "/Users/defunator/Library/texlive/2019/texmf-var/fonts/tfm/lh/lh-t2a/labx1200.tfm" 1579620853 3308 eee81981029f67083258db36df06e523 ""
   "/Users/defunator/Library/texlive/2019/texmf-var/fonts/tfm/lh/lh-t2a/labx1728.tfm" 1579620847 3312 d199be9bd555944e2403193d58a0256a ""
@@ -9,6 +9,7 @@
   "/Users/defunator/Library/texlive/2019/texmf-var/fonts/tfm/lh/lh-t2a/larm1440.tfm" 1579623511 3256 3daaa33cf35cf3f354983aa3214ecd7f ""
   "/Users/defunator/Library/texlive/2019/texmf-var/fonts/tfm/lh/lh-t2a/larm1728.tfm" 1579620842 3252 92d08740ce00199d6cf9ff4aaada81d1 ""
   "/Users/defunator/Library/texlive/2019/texmf-var/fonts/tfm/lh/lh-t2a/larm2074.tfm" 1579623506 3264 03c2b9e4787a40d3b9c197c38b93b558 ""
+  "/Users/defunator/Library/texlive/2019/texmf-var/fonts/tfm/lh/lh-t2a/lasl1200.tfm" 1583172296 3472 6d14f8899639fa703bd66d6b31a67f8b ""
   "/Users/defunator/Library/texlive/2019/texmf-var/fonts/tfm/lh/lh-t2a/lati0600.tfm" 1579698672 3528 d301f5141277b5cf2d3e1e47a41a7d24 ""
   "/Users/defunator/Library/texlive/2019/texmf-var/fonts/tfm/lh/lh-t2a/lati0800.tfm" 1579698666 3528 34d5b03fb0a23b3c8d81225e326c0140 ""
   "/Users/defunator/Library/texlive/2019/texmf-var/fonts/tfm/lh/lh-t2a/lati1200.tfm" 1579624321 3512 f3a56cfe95a159371df20f73d1eb107d ""
@@ -176,13 +177,13 @@
   "/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1557342064 3277517 23507ed665b4dd9046f0f2a94bbef2be ""
   "/usr/local/texlive/2019/texmf-var/web2c/pdftex/pdflatex.fmt" 1579619895 4259636 5066ad5629af2866de79bbc3532ea9e3 ""
   "/usr/local/texlive/2019/texmf.cnf" 1557341546 577 d150fef99ac436ad1156e86b0892f6ef ""
-  "ptms.aux" 1583172184 5068 9b09f48ff225344e6a2f8d9d09e5f304 "pdflatex"
-  "ptms.out" 1583172184 2615 34c22f91b6a79ffb4ff7c6d932174274 "pdflatex"
-  "ptms.tex" 1583171828 74988 74f92e92bb1f719761f1cc0d6475b221 ""
-  "ptms.toc" 1583172184 3968 5e14ebf3f333e2bc773dd973e7e5d63f "pdflatex"
+  "ptms.aux" 1583172297 5068 9b09f48ff225344e6a2f8d9d09e5f304 "pdflatex"
+  "ptms.out" 1583172297 2615 34c22f91b6a79ffb4ff7c6d932174274 "pdflatex"
+  "ptms.tex" 1583172289 74974 0a42ec86a7fd9bb2f86475e97bfcaa86 ""
+  "ptms.toc" 1583172297 3968 5e14ebf3f333e2bc773dd973e7e5d63f "pdflatex"
   (generated)
-  "ptms.pdf"
-  "ptms.aux"
   "ptms.out"
   "ptms.log"
+  "ptms.pdf"
+  "ptms.aux"
   "ptms.toc"
