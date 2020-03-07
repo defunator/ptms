@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1583604295 "ptms.tex" "ptms.pdf" "ptms" 1583604297
+["pdflatex"] 1583604930 "ptms.tex" "ptms.pdf" "ptms" 1583604932
   "../../settings.tex" 1583604165 1483 cac58cd42f9db0bcf7be2e9eeb53d986 ""
   "/Users/defunator/Library/texlive/2019/texmf-var/fonts/tfm/lh/lh-t2a/labx1200.tfm" 1579620853 3308 eee81981029f67083258db36df06e523 ""
   "/Users/defunator/Library/texlive/2019/texmf-var/fonts/tfm/lh/lh-t2a/labx1728.tfm" 1579620847 3312 d199be9bd555944e2403193d58a0256a ""
@@ -179,13 +179,13 @@
   "/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1557342064 3277517 23507ed665b4dd9046f0f2a94bbef2be ""
   "/usr/local/texlive/2019/texmf-var/web2c/pdftex/pdflatex.fmt" 1579619895 4259636 5066ad5629af2866de79bbc3532ea9e3 ""
   "/usr/local/texlive/2019/texmf.cnf" 1557341546 577 d150fef99ac436ad1156e86b0892f6ef ""
-  "ptms.aux" 1583604296 5068 e36614668e07263978fa738a6f73d780 "pdflatex"
-  "ptms.out" 1583604296 2615 34c22f91b6a79ffb4ff7c6d932174274 "pdflatex"
-  "ptms.tex" 1583604292 84263 d6faedb3b85cc2bca3496b80836be918 ""
-  "ptms.toc" 1583604296 3968 c1feef78f5d0da66cfbb7a047dd7bc20 "pdflatex"
+  "ptms.aux" 1583604932 5068 e36614668e07263978fa738a6f73d780 "pdflatex"
+  "ptms.out" 1583604932 2615 34c22f91b6a79ffb4ff7c6d932174274 "pdflatex"
+  "ptms.tex" 1583604930 84283 ed2c5e643af321843c03d9ae60032381 ""
+  "ptms.toc" 1583604932 3968 c1feef78f5d0da66cfbb7a047dd7bc20 "pdflatex"
   (generated)
+  "ptms.log"
+  "ptms.aux"
+  "ptms.out"
   "ptms.pdf"
   "ptms.toc"
-  "ptms.aux"
-  "ptms.log"
-  "ptms.out"
