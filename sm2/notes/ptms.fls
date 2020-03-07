@@ -256,6 +256,7 @@ INPUT /Users/defunator/Library/texlive/2019/texmf-var/fonts/tfm/lh/lh-t2a/lati12
 INPUT /Users/defunator/Library/texlive/2019/texmf-var/fonts/tfm/lh/lh-t2a/larm0800.tfm
 INPUT /Users/defunator/Library/texlive/2019/texmf-var/fonts/tfm/lh/lh-t2a/larm0600.tfm
 INPUT /Users/defunator/Library/texlive/2019/texmf-var/fonts/tfm/lh/lh-t2a/lasl1200.tfm
+INPUT /usr/local/texlive/2019/texmf-dist/fonts/tfm/public/cm/cmsl12.tfm
 INPUT /Users/defunator/Library/texlive/2019/texmf-var/fonts/tfm/lh/lh-t2a/lati0800.tfm
 INPUT /Users/defunator/Library/texlive/2019/texmf-var/fonts/tfm/lh/lh-t2a/lati0600.tfm
 INPUT /usr/local/texlive/2019/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
@@ -284,5 +285,6 @@ INPUT /usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pf
 INPUT /usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb
 INPUT /usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb
 INPUT /usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfrm2074.pfb
+INPUT /usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfsl1200.pfb
 INPUT /usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfti0800.pfb
 INPUT /usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb

@@ -2,10 +2,8 @@
 
 
 \title{Теория вероятности и математическая статистика, 2 курс, 2 семестр}
-\author{@defunator}
 \begin{document}
 
-\rhead{БПМИ-183} 
 \cfoot{\thepage\ of \pageref{LastPage}}
 \maketitle
 
@@ -635,9 +633,21 @@ $\Leftarrow$\\
     \[
         = \left(\varphi_{\xi^{1} - \mu}\left(\frac{t}{\sqrt{n}}\right)\right)^n
     \]
-Разложим в ряд тейлора:
+    \begin{reminder}
+    Пусть $F: \mathbb{R}^n \to \mathbb{R}^m$\\
+    $x = (x_1, x_2, \cdots x_n) \in \mathbb{R}^n$ и $a = (a_1, a_2, \cdots a_n) \in \mathbb{R}^n$. Тогда ряд Тейлора функции $F$ в точке $a$ это
+    \[
+        F(x) = F(a) + \sum\limits_{i = 1}^{n}\dfrac{dF(a)}{dx_i}(x_i-a_i) + \dfrac{1}{2}\sum\limits_{i,j=1}^{n}\dfrac{d^2F(a)}{dx_i dx_j}(x_i-a_i)(x_j-a_j)
+    \]
+    \[
+        + \cdots + \dfrac{1}{k!}\sum\limits_{i_1, \cdots, i_k = 1}^{n} \dfrac{d^kF(a)}{dx_{i_1}\cdots dx_{i_k}}(x_{i_1}-a_{i_1})\cdots(x_{i_k}-a_{i_k}) + R_k(x-a,a)
+    \]
+    \end{reminder}
+    \begin{flushleft}
+    Разложим в ряд Тейлора:
+    \end{flushleft}
 \[
-    \left(\varphi_{\xi^{1} - \mu}\left(\frac{t}{\sqrt{n}}\right)\right)^n = \left(1 + \bigtriangledown \varphi_{\xi^{1} - \mu}(0) \cdot \frac{t}{\sqrt{n}} + \frac{1}{2}\cdot D^2\varphi_{\xi^{1} - \mu}(0) \left<\frac{t}{\sqrt{n}}, \frac{t}{\sqrt{n}}\right>  + o\left(\frac1n\right)\right)^n
+    \left(\varphi_{\xi^{1} - \mu}\left(\frac{t}{\sqrt{n}}\right)\right)^n = \left(1 + \left\langle \bigtriangledown \varphi_{\xi^{1} - \mu}(0), \frac{t}{\sqrt{n}} \right\rangle + \frac{1}{2}\cdot D^2\varphi_{\xi^{1} - \mu}(0) \left<\frac{t}{\sqrt{n}}, \frac{t}{\sqrt{n}}\right>  + o\left(\frac1n\right)\right)^n
 \]
 Рассмотрим на 2-мерном случае (на других аналогично):
 \[
@@ -1060,7 +1070,7 @@ $\xi, \eta \ -$ случаные величины. $\mathbb{E} \abs{\xi} < \inft
 \begin{advice}
 Предположим, что распределение случайной величины $\left(\xi, \eta\right)$ задано совместной плотностью $\rho_{\xi \eta}\left(x, y\right)$. Тогда
 \[
-    \mathbb{E} \left(g\left(\xi, \eta\right) | \eta = y \right) = \int_{-\infty}^{+\infty} g\left(x, y\right)\frac{\rho_{\xi \eta}\left(x, y\right)}{\rho_{\eta}\left(y\right)} dx
+    \mathbb{E} \left[g\left(\xi, \eta\right) | \eta = y \right] = \int_{-\infty}^{+\infty} g\left(x, y\right)\frac{\rho_{\xi \eta}\left(x, y\right)}{\rho_{\eta}\left(y\right)} dx
 \]
 \end{advice} 
 
@@ -1073,4 +1083,146 @@ $\xi, \eta \ -$ случаные величины. $\mathbb{E} \abs{\xi} < \inft
 \]
 Следовательно $F\left(\eta\right) = \mathbb{E} \left(\xi | \eta\right)$ по определению.
 \end{proof}
+
+\begin{definition}
+$\textit{Условной плотностью}$ случайной величины $\xi$ при условии $\eta = y_0$ называется следующая величина
+\[
+    \rho_{\xi|\eta}\left(x | y_0\right) = \frac{\rho_{\xi,\eta}\left(x, y_0\right)}{\rho_{\eta}\left(y_0\right)}
+\]
+\end{definition}
+
+Теперь докажем теорему 11, только для непрерывного случая 
+\begin{theorem}
+Имеют место следующие свойства условного математического ожидания:
+\begin{enumerate}[label=(\arabic*)]
+\item (линейность) $\mathbb{E}\left(\alpha \xi + \beta \eta | \zeta\right) = \alpha \mathbb{E}\left(\xi | \zeta\right) + \beta \mathbb{E}\left(\eta | \zeta\right)$
+\item (монотонность) из $\xi \leq \eta$ следует $\mathbb{E}\left(\xi | \zeta\right) \leq \mathbb{E}\left(\eta | \zeta\right)$
+\item (аналог формулы полной вероятности) $\mathbb{E}\left(\mathbb{E}\left(\xi | \eta\right)\right) = \mathbb{E}\xi$
+\item (независимость) если случаные величины $\xi$ и $\eta$, то $\mathbb{E}\left(\xi | \eta\right) = \mathbb{E} \xi$
+\item для всякой случайной величины $\zeta = g\left(\eta\right)$ верно равенство
+$\mathbb{E}\left(\zeta \xi | \eta\right) = \zeta \mathbb{E}\left(\xi | \eta\right)$
+
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Докажем $\left(1\right)$. По определению для любой ограниченной $f$ имеем:
+\[
+    \mathbb{E} \left[f\left(\zeta\right) \mathbb{E}(\alpha \xi + \beta \eta | \zeta)\right] = \mathbb{E}\left[f\left(\zeta\right) \left(\alpha \xi + \beta \eta\right)\right] = \alpha \mathbb{E}\left[f\left(\zeta\right) \xi\right] + \beta \mathbb{E}\left[f\left(\zeta\right) \eta\right] =
+\]
+\[
+    =\mathbb{E}\left[f\left(\zeta\right)\left(\alpha \mathbb{E}\left(\xi | \zeta\right) + \beta \mathbb{E}\left(\eta | \zeta\right)\right)\right]
+\]
+Теперь взяв $f\left(\zeta\right) = \mathbb{E}\left(\alpha \xi + \beta \eta | \zeta\right) - \left(\alpha \mathbb{E}\left(\xi | \zeta\right) + \beta \mathbb{E}\left(\eta | \zeta\right)\right)$, получим нужное равенство почти наверное. \\
+Во втором, если перенести все вправо, то по сути надо доказать
+\[
+    \xi \geq 0 \Rightarrow \mathbb{E}\left(\xi | \eta\right) \geq 0
+\]
+Возьмем функцию
+\[
+    f\left(\eta\right) = 1 - \text{sgn}\left(\mathbb{E}\left(\xi | \eta\right)\right) \geq 0
+\]
+Тогда по определению
+\[
+    \mathbb{E}\left[f\left(\eta\right) \mathbb{E}\left(\xi | \eta\right)\right] = \mathbb{E}\left[f\left(\eta\right) \xi\right] \geq 0
+\]
+В то же время 
+\[
+    \mathbb{E}\left[f\left(\eta\right) \mathbb{E}\left(\xi | \eta\right)\right] =
+    \mathbb{E}\left[\mathbb{E}\left(\xi | \eta\right) - \abs{\mathbb{E}\left(\xi | \eta\right)}\right] \leq 0
+\]
+Следовательно 
+\[
+    \mathbb{E}\left(\xi | \eta\right) = \abs{\mathbb{E}\left(\xi | \eta\right)}
+\]
+почти наверное, следовательно она почти наверное $\geq 0$. \\
+В $\left(3\right)$ возьмем  $f\left(\eta\right) \equiv 1$ и запишем определение. \\
+$\left(4\right)$:
+\[
+    \mathbb{E}\left[f\left(\eta\right) \xi\right] = \mathbb{E}f\left(\eta\right) \mathbb{E} \xi = \mathbb{E}\left[f\left(\eta\right) \mathbb{E}\xi\right] \Rightarrow \mathbb{E}\left(\xi | \eta\right) = \mathbb{E}\xi
+\]
+$\left(5\right)$:
+\[
+    \mathbb{E}\left[f\left(\eta\right) \xi \zeta\right] = \mathbb{E} \left[f\left(\eta\right) \mathbb{E}\left(\xi \zeta | \eta\right)\right]
+\]
+С другой стороны:
+\[
+    \mathbb{E}\left[f\left(\eta\right) \xi \zeta\right] = \mathbb{E}\left[f\left(\eta\right) g\left(\eta\right) \zeta\right] = \mathbb{E}\left[f\left(\eta\right)g\left(\eta\right) \mathbb{E}\left(\xi | \eta\right)\right]
+\]
+\[
+    \Rightarrow \mathbb{E}\left(g\left(\eta\right) \xi | \eta\right) = g\left(\eta\right)\mathbb{E}\left(\xi | \eta\right)
+\]
+почти наверное
+
+\end{proof}
+
+\begin{theorem} (Аналог формулы Байеса) \\
+\[
+    \mathbb{E}\left(g\left(\eta\right) | \xi = x\right) = \frac{\mathbb{E}\left[g\left(\eta\right) \rho_{\xi | \eta}\left(x, \eta\right)\right]}{\mathbb{E} \rho_{\xi | \eta}\left(x, \eta\right)}
+\]
+для любой ограниченной $g$
+\end{theorem}
+\begin{proof}
+Для любой ограниченной $f$:
+\[
+    \mathbb{E}\left[f\left(\xi\right)g\left(\eta\right)\right] = \mathbb{E}\left[g\left(\eta\right)\mathbb{E}\left(f\left(\xi\right) | \eta\right)\right] = \mathbb{E}\int_{-\infty}^{+\infty} f\left(x\right) \rho_{\xi | \eta}\left(x, \eta\right)g\left(\eta\right) dx = \int_{-\infty}^{+\infty} f\left(x\right)\mathbb{E} \left[\rho_{\xi | \eta}\left(x, \eta\right)g\left(\eta\right)\right] dx
+\]
+С другой стороны
+\[
+    \mathbb{E}\left[f\left(\xi\right)g\left(\eta\right)\right] = \mathbb{E}\left[f\left(\xi\right) \mathbb{E}\left(g\left(\eta\right) | \xi\right)\right] = \int_{-\infty}^{+\infty} f\left(x\right) \rho_{\xi}\left(x\right) \mathbb{E}\left[g\left(\eta\right) | \xi = x\right] dx
+\]
+(опять подставляя вместо $f$ разность этих величин) получаем равенство почти наверное:
+ \[
+    \mathbb{E} \left[\rho_{\xi | \eta}\left(x, \eta\right)g\left(\eta\right)\right] = \rho_{\xi}\left(x\right) \mathbb{E}\left[g\left(\eta\right) | \xi = x\right]
+ \]
+ Подставим $g \equiv 1$:
+ \[
+    \mathbb{E} \left[\rho_{\xi | \eta}\left(x, \eta\right)\right] = \rho_{\xi}\left(x\right)
+ \]
+ В итоге получаем:
+ \[
+     \mathbb{E}\left[g\left(\eta\right) \rho_{\xi | \eta}\left(x, \eta\right)\right] = 
+     \mathbb{E} \left[\rho_{\xi | \eta}\left(x, \eta\right)\right]\mathbb{E}\left[g\left(\eta\right) | \xi = x\right]
+ \]
+\end{proof}
+
+\begin{example}
+Пусть $\left(\xi, \eta\right) \ - $ нормальный вектор. Посчитаем $E\left[\xi | \eta\right]$ (помним, что это как проекция $\xi$ на $\eta$). Центрируем случайные величны
+\[
+    X := \xi - \mathbb{E} \xi
+\]
+\[
+    Y := \eta - \mathbb{E} \eta
+\]
+Найдем ортогональную $Z$ проекцию $X$ на $Y$ (должно быть $X = Z + \mathbb{E}\left[\xi | \eta\right]$):
+\[
+    Z = X - \frac{\text{cov}\left(X, Y\right)}{\text{cov}\left(Y, Y\right)}Y = 
+    X - \frac{\text{cov}\left(\xi, \eta\right)}{\mathbb{D}\eta}Y
+\]
+Выразим $\xi$:
+\[
+    \xi = \mathbb{E} \xi - \frac{\text{cov}\left(\xi, \eta\right)}{\mathbb{D}\eta}\left(\eta - \mathbb{E} \eta\right) + Z
+\]
+Теперь будем считать условное матожидание (условно от константы или $f\left(\eta\right)$ она сама, условное от независимой $-$ его ожидание):
+\[
+    \mathbb{E}\left[\xi | \eta\right] = \mathbb{E}\xi - \frac{\text{cov}\left(\xi, \eta\right)}{\mathbb{D}\eta}\left(\eta - \mathbb{E} \eta\right) + \mathbb{E} Z = \mathbb{E}\xi - \frac{\text{cov}\left(\xi, \eta\right)}{\mathbb{D}\eta}\left(\eta - \mathbb{E} \eta\right)
+\]
+Так как $\left(Y, Z\right) \ -$ нормальный вектор и $\text{cov}\left(Y, Z\right) = 0$, то $Y$ и $Z$ независимые случайные величины. \\
+Теперь найдем условную плотность:
+\[
+    \mathbb{E}\left[f\left(X\right) | Y = y\right] = \mathbb{E} \left[f\left(Z + \frac{\text{cov}\left(\xi, \eta\right)}{\mathbb{D}\eta}Y\right) | Y = y\right] = \int_{-\infty}^{+\infty} f\left(z + \frac{\text{cov}\left(\xi, \eta\right)}{\mathbb{D}\eta}y\right) \frac{\rho_{Z, Y}\left(z, y\right)}{\rho_{Y}\left(y\right)} dz = 
+\]
+Совместная плотность раскладывается в произведение:
+\[
+    = \int_{-\infty}^{+\infty} f\left(z + \frac{\text{cov}\left(\xi, \eta\right)}{\mathbb{D}\eta}y\right) \rho_{Z}\left(z\right) dz = 
+\]
+Делаем замену $u = z + \frac{\text{cov}\left(\xi, \eta\right)}{\mathbb{D}\eta}y$:
+\[
+    = \int_{-\infty}^{+\infty} f\left(u\right) \rho_Z\left(u - \frac{\text{cov}\left(\xi, \eta\right)}{\mathbb{D}\eta} y\right) du
+\]
+В итоге получаем
+\[
+    \rho_{X|Y}\left(x, y\right) = \frac{1}{\sigma \sqrt{2\pi}} e ^ {-\frac{\left(x - \mu\right)}{2 \sigma ^ 2}} = \rho_{Z}\left(z \right)
+\]
+\end{example}
 \end{document}
