@@ -1,0 +1,35 @@
+\input{../../settings}
+
+\begin{document}
+\lhead{Иванов Семен} 
+\rhead{БПМИ-183} 
+\cfoot{\thepage\ of \pageref{LastPage}}
+
+\section*{Листок 1. Задача 9.}
+\begin{itemize}
+    \item Пусть $\xi_{i} \ -$ равномерное распределенная случайная величина, отвечающая за время приема $i$-того пациента. Тогда $E \xi_{i} = \frac{1 + 4}{2} = 2.5$, $D \xi_{i} = \frac{\left(4 - 1 \right) ^ 2}{12} = \frac{9}{12}$.
+    \item Теперь введем случайную величину, отвечающую за суммарное время приема:\\ $\eta = \xi_{1} + \xi_{2} + \xi_{3} + \xi_{4}$. $E\eta = 4 \cdot 2.5 = 10$. Так как $\xi_{i}$ не зависят друг от друга, можем просто найти дисперсию $D \eta = 4 \cdot \frac{9}{12} = 3$. 
+    \item Теперь применим неравенство Чебышева к $\eta$: \\ $P\left(\left| \eta - 10\right| \geq 2\right) = P\left(\eta \geq 12\right) \, + \, P\left(\eta \leq 8\right) \leq \frac{D \eta}{2 ^ 2} = \frac{3}{4}$
+    \item Допустим, у нас есть две плотности $\rho_{1}$ и $\rho_{2}$, которые симметричны относительно некторой точки $m$ (не ограничивая общности, будем считать, что $m = 0$), тогда по формуле свертки посчитаем плотность суммы этих случайных величин: $\rho\left(t\right) = \int_{- \infty}^{+ \infty} \rho_{1}\left(x\right) \rho_{2}\left(t - x\right) dx = \int_{- \infty}^{+ \infty} \rho_{1}\left(-x\right) \rho_{2}\left((-t) - (-x)\right)dx = \rho\left(-t \right)$. То есть плотность суммы этих случайных величин тоже симметрична относительно $m$. Таким образом плотность $\xi_{1} + \xi_{2} + \xi_{3} + \xi_{4}$ симметрична относительно 10. То есть $P\left(\eta \leq 8\right) = P\left(\eta \geq 12\right)$
+    \item Получаем $P\left(\eta \geq 12 \right) \leq \frac{1}{2} \cdot P\left(\left| \eta - 10\right| \geq 2\right) \leq \frac{3}{8}$.
+\end{itemize}
+\section*{Листок 1. Задача 10.}
+\begin{itemize}
+    \item Найдем распределение $F_{m_{n}}(t) = P\left(m_{n} < t\right) = 1 - P\left(m_{n} > t\right) = \begin{cases} 0 & t < 0 \\
+    1 - \left(1 - t\right) ^ n & 0 \leq t \leq 1 \\
+    1 & 1 < t
+    \end{cases}$
+    \item $m_{n} \geq 0$, $m_{n + 1} \leq m_{n}$ $\Rightarrow$ $\exists \lim_{n \to \infty} m_{n} = m$.
+    \item Надо доказать, что $P(m = 0) = 1 = F_m(0)$.
+    \item Рассмотрим систему вложенных множеств $A_n = \left[0, \frac{1}{n}\right]$, $\ A = \bigcap_{n = 1}^{\infty} A_{n} = \{0\}$. Из непрерывности веротяностной меры знаем, что: \\ $P\left(m \in A\right) = P(m = 0) = \lim_{n \to \infty} P\left(m \in A_{n}\right) = \lim_{n \to \infty} P\left(0 \leq m \leq \frac{1}{n}\right)$
+    \item $\lim_{n \to \infty} P\left(0 \leq m \leq \frac{1}{n}\right) = \lim_{n \to \infty} F_{m}\left(\frac{1}{n}\right) =\lim_{n \to \infty} \lim_{k \to \infty} F_{m_{k}}\left(\frac{1}{n}\right) = \lim_{n \to \infty} \lim_{k \to \infty} \left(1 - \left(1 - \frac{1}{n}\right) ^ k\right) = $\\$=\lim_{n \to \infty} 1 = 1 = P\left(m = 0\right)$. \qed{}
+\end{itemize}
+\section*{Листок 1. Задача 11.}
+\begin{itemize}
+    \item Рассмотрим сходимость $\ln \eta_{n} = \ln \sqrt[n]{\xi_{1} \cdots \xi_{n}} = \frac{1}{n} \cdot \left(\ln \xi_{1} + \cdots + \ln \xi_{n}\right)$.
+    \item $\ln \xi_1, \ln \xi_{2}, \cdots \ -$ последовательность одинаково распределенных, попарно независимых случайных величин с конечным вторым моментом:
+    \\$E \ln ^ 4 \xi_{1} = \int_{0}^{1} \ln ^ 4 x dx < \infty$ (так как $\int_{0}^{1} \ln x dx $ сходится, и там $\ln x < 0$ везде)
+    \item Применяя закон больших чисел, получаем, что \\$ \lim_{n \to \infty}\frac{1}{n} \cdot \left(\ln \xi_{1} + \cdot + \ln \xi_{n}\right) = E \ln \xi_{1} = \int_{0}^{1} 1 \cdot \ln x dx = -1$
+    \item То есть $\lim_{n \to \infty} \ln \eta_n = -1$. Следовательно $\lim_{n \to \infty} \eta_{n} = \frac{1}{e}$
+\end{itemize}
+\end{document}

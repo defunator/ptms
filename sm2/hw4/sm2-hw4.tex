@@ -1,0 +1,82 @@
+\input{../../settings}
+
+\begin{document}
+
+\lhead{Иванов Семен} 
+\rhead{БПМИ-183} 
+\cfoot{\thepage\ of \pageref{LastPage}}
+
+
+\section{Листок 3. Задача 9}
+\begin{itemize}
+\item $2\xi_1 \sim N\left(0, 4\right)$, $-3\xi_2 \sim N\left(3, 9\right)$, $\xi_3 \sim N\left(0, 4\right)$, $-\xi_4 \sim N\left(-1, 4\right)$
+\item Сумма независимых случайных величин с нормальным распределением $-$ случайная величина с нормальным распределением: $\xi = 2 \xi_1 - 3 \xi_2 + \xi_3 - \xi_4 \sim N(2, 21)$
+\item Пусть $\eta \sim N\left(0, 1\right)$, тогда $\eta \sqrt{21} + 2 = \xi$. Получаем:
+\[
+    P\left(\abs{\xi} < 13\right) = F_{\xi}\left(13\right) - F_{\xi}\left(-13\right) = \Phi\left(\frac{13 - 2}{\sqrt{21}}\right) - \Phi\left(\frac{-13-2}{\sqrt{21}}\right) = \Phi\left(\frac{11}{\sqrt{21}}\right) - \Phi\left(\frac{-15}{\sqrt{21}}\right)
+\]
+\end{itemize}
+
+\section{Листок 3. Задача 10}
+\begin{itemize}
+    \item Так как величины независимые: 
+\[
+    \rho_{\xi, \eta}\left(x, y\right) = \rho_{\xi}\left(x\right) \rho_{\eta}\left(y\right) = \frac{1}{2 \pi} e ^ {-\frac{x ^ 2 + y ^ 2}{2}}
+\]
+\item Найдем плотность $\frac{\xi}{\eta}$ (так как $F\left(-\infty\right) = 0$ и $F\left(+\infty\right) = 1$, то есть на краях они константы, то мы спокойно можем брать производные от вторых интегралов):
+\[
+    \rho_{\frac{\xi}{\eta}}(t) = \left(F_\frac{\xi}{\eta}\left(t\right)\right)'_{t} = \left(\int_{0}^{+\infty} \int_{-\infty}^{tx} \rho_{\xi, \eta}\left(x, y\right) dy\ dx\right)'_{t} + \left(\int_{-\infty}^{0} \int_{tx}^{+\infty} \rho_{\xi, \eta}\left(x, y\right) dy\ dx\right)'_{t} = 
+\]
+\[
+    = \int_{0}^{+\infty} x \rho_{\xi, \eta}\left(x, tx\right) dx - \int_{-\infty}^{0} x \rho_{\xi, \eta}\left(x, tx\right)dx = 
+    -\frac{1}{2 \pi\left(t ^ 2 + 1\right)}\int^{+\infty}_{0} e ^ {-\frac{\left(t ^ 2 + 1\right)x ^ 2}{2}}d\left(-\frac{\left(t ^ 2 + 1\right) x ^ 2}{2}\right) + 
+\]
+\[
+    + \frac{1}{2 \pi \left(t ^ 2 + 1\right)} \int_{-\infty}^{0} e ^ {-\frac{\left(t ^ 2 + 1\right) x ^ 2}{2}} d\left(-\frac{\left(t ^ 2 + 1\right) x ^ 2}{2}\right) = \frac{1}{\pi \left(t ^ 2 + 1\right)}
+\]
+
+\end{itemize}
+
+\section{Листок 3. Задача 4с}
+\begin{itemize}
+\item Пусть $X = \frac{\xi + \zeta \eta}{\sqrt{1 + \zeta ^ 2}}$
+\item Вычислим $\varphi_{X}\left(t\right)$:
+\[
+    \varphi_{X}\left(t\right) = \mathbb{E} e ^ {itX} = 
+\]
+Распишем по определению(через интеграл) для $\zeta$ (так как все величины независимые, то их совместная плотность это произведение всех плотностей, то есть все честно):
+\[
+    = \int_{-\infty}^{+\infty} \frac1{\sqrt{2\pi}} e ^ {-\frac {x ^ 2}{2}} \mathbb{E} e ^ {it \left(\frac{1}{\sqrt{1 + x ^ 2}}\xi + \frac{x}{\sqrt{1 + x ^ 2}} \eta\right)} dx
+\]
+\item Контстанты $\frac{1}{\sqrt{1 + x ^ 2}}$ и $\frac{x}{\sqrt{1 + x ^ 2}}$ можно воспринимать как синус и косинус, тогда воспользовавшись номером 4а, получаем
+\[
+    \mathbb{E} e ^ {it \left(\frac{1}{\sqrt{1 + x ^ 2}}\xi + \frac{x}{\sqrt{1 + x ^ 2}} \eta\right)} = e ^ {-\frac{t ^ 2}2}
+\]
+\item В итоге получаем
+\[
+    \varphi_{X}\left(t\right) = \int_{-\infty}^{+\infty} \frac1{\sqrt{2\pi}} e ^ {-\frac {x ^ 2}{2}} e ^ {-\frac{t ^ 2}{2}}dx = 
+    e ^ {-\frac{t ^ 2}{2}} \int_{-\infty}^{+\infty} \frac1{\sqrt{2\pi}} e ^ {-\frac {x ^ 2}{2}} dx = e ^ {-\frac{t ^ 2}{2}} \cdot 1 = e ^ {-\frac{t ^ 2}{2}}
+\]
+\item Получили харфункцию $N\left(0, 1\right)$. $\Rightarrow X \sim N\left(0, 1\right)$
+
+\end{itemize}
+\qed
+
+\section{Листок 3. Задача 11b}
+
+\begin{itemize}
+\item $\xi + \eta \sim -\xi - \eta \sim \xi - \eta \sim -\xi + \eta \sim N\left(0, 8\right)$
+\item Раскроем модули по формуле полной вероятности:
+\[
+    P\left(2 \leq \abs{\xi} + \abs{\eta} \leq 3\right) = P ^ 2 \left(\xi < 0\right) P\left(2 \leq -\xi - \eta \leq 3\right) + 
+    \]
+    \[ + P ^ 2\left(\xi \geq 0\right) P\left(2 \leq \xi + \eta \leq 3\right) + 2 P\left(\xi < 0\right) P\left(\xi \geq 0\right) P\left(2 \leq \xi - \eta \leq 3\right)
+\]
+\item Пользуясь функцией распределения стандартного распределения, раскроем все вероятности ($P\left(\xi < 0\right) = P\left(\xi \geq 0\right) = \frac12$, так как $F_{\xi}\left(t\right) = 
+\Phi\left(\frac t 2\right)$):
+\[
+    P\left(2 \leq \abs{\xi} + \abs{\eta} \leq 3\right) = \frac 1 4 \left(\Phi\left(\frac{3 - 0}{2\sqrt{2}}\right) - \Phi\left(\frac{2 - 0}{2\sqrt{2}}\right)\right) + \frac 1 4 \left(\Phi\left(\frac{3 - 0}{2\sqrt{2}}\right) - \Phi\left(\frac{2 - 0}{2\sqrt{2}}\right)\right) + \]\[+ \frac 1 2 \left(\Phi\left(\frac{3 - 0}{2\sqrt{2}}\right) - \Phi\left(\frac{2 - 0}{2\sqrt{2}}\right)\right)= 
+ \Phi\left(\frac{3}{2\sqrt{2}}\right) - \Phi\left(\frac{2}{2\sqrt{2}}\right)
+\]
+\end{itemize}
+\end{document}
