@@ -1,6 +1,5 @@
 \input{../../settings}
 
-
 \title{Теория вероятности и математическая статистика, 2 курс, 2 семестр}
 \begin{document}
 
@@ -42,7 +41,7 @@ $\lim_{n \to \infty}  \mathbb{E}  g\left(\xi_{n}\right) =  \mathbb{E}  g\left(\x
 \begin{proof}
 $\Rightarrow$ \\
 
-Пусть $t \ -$ точка непрерывности $F_{\xi}\left(t\right)$. Заметим, что $F_{\xi}\left(t\right) = P\left(\xi_{x} \in (-\infty, t]\right)=$\\$ = \mathbb{E}  \text{Ind}_{(-\infty, t]}\left(\xi\right)$. \\
+Пусть $t \ -$ точка непрерывности $F_{\xi}\left(t\right)$. Заметим, что $F_{\xi}\left(t\right) = P\left(\xi \in (-\infty, t]\right)=$\\$ = \mathbb{E}  \text{Ind}_{(-\infty, t]}\left(\xi\right)$. \\
 В силу:\\
 (1) $\mathbb{E} \text{Ind}_{(a_i, b_i]}(\xi_n) = F_{\xi_n}(b_i) - F_{\xi_n}(a_i) \xrightarrow{n \xrightarrow{} \infty} F_{\xi}(b_i) - F_{\xi}(a_i) =\mathbb{E} \text{Ind}_{(a_i, b_i]}(\xi)$\\
 (2) Линейность предела (с какими-то коэффициентами $c_i$)\\
@@ -93,7 +92,7 @@ $\Leftarrow$ \\
 Взяв матожидания ($x = \xi_{n}$) от второго и третьего неравенств, получим: $$ \mathbb{E}  g_{-\delta}\left(\xi_{n}\right) \leq F_{\xi_{n}}\left(t\right) \leq  \mathbb{E}  g_{+ \delta}\left(\xi_{n}\right)$$
 Теперь устремим $n \to \infty$: 
 \[
-     \mathbb{E}  g_{-\delta}\left(\xi\right) \leq \inf \lim_{n \to \infty} F_{\xi_{n}}\left(x\right) \leq \sup \lim_{n \to \infty} F_{\xi_{n}}\left(x\right) \leq  \mathbb{E}  g_{+ \delta}\left(x\right)
+     \mathbb{E}  g_{-\delta}\left(\xi\right) \leq \inf \lim_{n \to \infty} F_{\xi_{n}}\left(x\right) \leq \sup \lim_{n \to \infty} F_{\xi_{n}}\left(x\right) \leq  \mathbb{E}  g_{+ \delta}\left(\xi \right)
 \]
 Рассмотрим первое и последнее неравенство той цепочки($x = \xi$ и возьмем то него матожидание), получим: 
 \[
