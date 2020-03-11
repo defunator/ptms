@@ -1209,7 +1209,7 @@ $\left(5\right)$:
 \[
     \mathbb{E}\left[\xi | \eta\right] = \mathbb{E}\xi - \frac{\text{cov}\left(\xi, \eta\right)}{\mathbb{D}\eta}\left(\eta - \mathbb{E} \eta\right) + \mathbb{E} Z = \mathbb{E}\xi - \frac{\text{cov}\left(\xi, \eta\right)}{\mathbb{D}\eta}\left(\eta - \mathbb{E} \eta\right)
 \]
-Так как $\left(Y, Z\right) \ -$ нормальный вектор и $\text{cov}\left(Y, Z\right) = 0$, то $Y$ и $Z$ независимые случайные величины. $Z \sim N\left(0, \frac{\mathbb{D} \xi \mathbb{D} \eta - \left[\text{cov}\left(\xi, \eta\right)\right]}{\mathbb{D} \eta}\right)$, так как это линейная комбинация случайных величин нормального вектора. \\
+Так как $\left(Y, Z\right) \ -$ нормальный вектор и $\text{cov}\left(Y, Z\right) = 0$, то $Y$ и $Z$ независимые случайные величины. $Z \sim N\left(0, \frac{\mathbb{D} \xi \mathbb{D} \eta - \left[\text{cov}\left(\xi, \eta\right)\right] ^ 2}{\mathbb{D} \eta}\right)$, так как это линейная комбинация случайных величин нормального вектора. \\
 Теперь найдем условную плотность:
 \[
     \mathbb{E}\left[f\left(X\right) | Y = y\right] = \mathbb{E} \left[f\left(Z + \frac{\text{cov}\left(\xi, \eta\right)}{\mathbb{D}\eta}Y\right) | Y = y\right] = \int_{-\infty}^{+\infty} f\left(z + \frac{\text{cov}\left(\xi, \eta\right)}{\mathbb{D}\eta}y\right) \frac{\rho_{Z, Y}\left(z, y\right)}{\rho_{Y}\left(y\right)} dz = 
@@ -1230,7 +1230,7 @@ $\left(5\right)$:
     \mu  = \frac{\text{cov}\left(\xi, \eta\right)}{\mathbb{D}\eta} y
 \]
 \[
-    \sigma = \frac{\mathbb{D} \xi \mathbb{D} \eta - \left[\text{cov}\left(\xi, \eta\right)\right]}{\mathbb{D} \eta}
+    \sigma = \frac{\mathbb{D} \xi \mathbb{D} \eta - \left[\text{cov}\left(\xi, \eta\right)\right] ^ 2}{\mathbb{D} \eta}
 \]
 \end{example}
 \end{document}
