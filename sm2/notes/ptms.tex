@@ -136,7 +136,8 @@ $\xi_{n} \xrightarrow{\text{p}} \xi $ $\Rightarrow$ для $\forall g \ -$ не�
 \end{advice}
 \begin{proof}
 Знаем для любой случайной величины $\forall \varepsilon > 0 \exists A$: $P\left(\abs{\xi} > \frac{A}{2}\right) < \varepsilon$.
-$\exists N \forall n > N$: $P\left(\abs{\xi_{n}} > A\right) \leq P\left(\abs{\xi - \xi_{n}} + \abs{\xi} > A\right) \leq P\left(\abs{\xi - \xi_{n}} > \frac{A}{2}\right) + P\left(\abs{\xi} > \frac{A}{2}\right) < \varepsilon$.
+$\exists N \forall n > N$: 
+$$P\left(\abs{\xi_{n}} > A\right) \leq P\left(\abs{\xi - \xi_{n}} + \abs{\xi} > A\right) \leq P\left(\abs{\xi - \xi_{n}} > \frac{A}{2} \vee \abs{\xi} > \frac{A}{2}\right) \leq P\left(\abs{\xi - \xi_{n}} > \frac{A}{2}\right) + P\left(\abs{\xi} > \frac{A}{2}\right) < \varepsilon$$.
 Теперь возьмем $g$, она равномерно непрерывна на $\left[-A, A\right]$:
 \[
     \forall \varepsilon > 0 \exists \delta > 0: \ \abs{x - y} < \delta \Rightarrow \abs{g\left(x\right) - g\left(y\right)} < \varepsilon \ \forall x, y \in \left[-A, A\right]
@@ -1208,7 +1209,7 @@ $\left(5\right)$:
 \[
     \mathbb{E}\left[\xi | \eta\right] = \mathbb{E}\xi - \frac{\text{cov}\left(\xi, \eta\right)}{\mathbb{D}\eta}\left(\eta - \mathbb{E} \eta\right) + \mathbb{E} Z = \mathbb{E}\xi - \frac{\text{cov}\left(\xi, \eta\right)}{\mathbb{D}\eta}\left(\eta - \mathbb{E} \eta\right)
 \]
-Так как $\left(Y, Z\right) \ -$ нормальный вектор и $\text{cov}\left(Y, Z\right) = 0$, то $Y$ и $Z$ независимые случайные величины. \\
+Так как $\left(Y, Z\right) \ -$ нормальный вектор и $\text{cov}\left(Y, Z\right) = 0$, то $Y$ и $Z$ независимые случайные величины. $Z \sim N\left(0, \frac{\mathbb{D} \xi \mathbb{D} \eta - \left[\text{cov}\left(\xi, \eta\right)\right]}{\mathbb{D} \eta}\right)$, так как это линейная комбинация случайных величин нормального вектора. \\
 Теперь найдем условную плотность:
 \[
     \mathbb{E}\left[f\left(X\right) | Y = y\right] = \mathbb{E} \left[f\left(Z + \frac{\text{cov}\left(\xi, \eta\right)}{\mathbb{D}\eta}Y\right) | Y = y\right] = \int_{-\infty}^{+\infty} f\left(z + \frac{\text{cov}\left(\xi, \eta\right)}{\mathbb{D}\eta}y\right) \frac{\rho_{Z, Y}\left(z, y\right)}{\rho_{Y}\left(y\right)} dz = 
@@ -1224,6 +1225,12 @@ $\left(5\right)$:
 В итоге получаем
 \[
     \rho_{X|Y}\left(x, y\right) = \frac{1}{\sigma \sqrt{2\pi}} e ^ {-\frac{\left(x - \mu\right)}{2 \sigma ^ 2}} = \rho_{Z}\left(z \right)
+\], где
+\[
+    \mu  = \frac{\text{cov}\left(\xi, \eta\right)}{\mathbb{D}\eta} y
+\]
+\[
+    \sigma = \frac{\mathbb{D} \xi \mathbb{D} \eta - \left[\text{cov}\left(\xi, \eta\right)\right]}{\mathbb{D} \eta}
 \]
 \end{example}
 \end{document}
