@@ -1,8 +1,8 @@
 .DS_Store
-.*.aux
-.*.fdb*
-.*.fls
-.*.log
-.*.synctex.gz
-.*.toc
-.*.out
+**/*.aux
+**/*.fdb*
+**/*.fls
+**/*.log
+**/*.synctex.gz
+**/*.toc
+**/*.out
