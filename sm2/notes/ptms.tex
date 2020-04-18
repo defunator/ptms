@@ -1232,4 +1232,382 @@ $\left(5\right)$:
     \sigma = \frac{\mathbb{D} \xi \mathbb{D} \eta - \left[\text{cov}\left(\xi, \eta\right)\right] ^ 2}{\mathbb{D} \eta}
 \]
 \end{example}
+
+\clearpage
+
+\begin{center}
+\section*{Статистика}
+\end{center}
+\section{Оценки параметров и их свойства}
+
+Пусть есть $X$ случайная величина. Мы знаем распределение случайной величины $F_{\theta}\left(t\right)$ с точностью до параметра $\theta \in \Theta$. Задача статистики заключается в том, чтобы оценить параметр $\theta$.
+\begin{definition}
+Вектор $\left(X_1, \cdots, X_n\right)$ с независимыми компонентами, где все случайные величины $X_i \sim X$, называется \textit{выборкой}. В теории вероятности выборка $-$ набор случайных величин, в статистике выборка $-$ величины, полученные в ходе эксперимента над этими случайными величинами (\textit{простая выборка}, $\left(x_1, \cdots, x_n\right) = \left(X_1\left(w\right), \cdots, X_n\left(w\right)\right)$).
+\end{definition}
+
+\begin{definition}
+Случайные величины вида $T_N\left(X_1, \cdots, X_n\right)$ называются \textit{статистиками}. Если статистика оценивает $\theta$, то она называется оценкой. Обозначение: $\widehat{\theta}_n\left(X_1, \cdots, X_n\right)$ 
+\end{definition}
+
+Сформулируем свойства хороших оценок:
+\begin{enumerate}
+\item \textbf{Несмещенность}. $\mathbb{E} \widehat{\theta}\left(X_1, \cdots, X_n\right) = \theta$. Заметим, что матожидание здесь мы считаем по распределению $F_{\theta}$, то есть хочется, чтобы оценка в среднем была верна.
+\begin{example}
+Пусть $\mathbb{E} X_i = \mu$, $\mu \ - $ единственный параметр. Возьмем оценку $\overline{X}$. Она будет несмещенной: $\mathbb{E} \overline{X} = \mu$. А если, например, параметризована дисперсия $\sigma ^ 2$ и в качестве оценки берем смещенную выборочную дисперсию, то $\mathbb{E}s_n ^ 2 = \frac{n}{n - 1} \sigma ^ 2 \neq \sigma^2$, получили смещенную оценку.
+\end{example}
+\begin{example}
+Пусть $X \sim Bern\left(p\right)$. Тогда для нахождения несмещенной статистики, надо чтобы выполнялось равенство
+\[
+    \mathbb{E} T\left(X_1, \cdots, X_n\right) = \sum_{k = 0}^{n} \left[p ^ k \left(1 - p\right) ^ {n - k} \sum_{k \ \text{успехов}}T\left(\varepsilon_1, \cdots, \varepsilon_n\right)\right] = \theta.
+\]
+Если мы опеределим $\theta = \frac 1 p$, то несмещенных статистик не существует. Несмещенность должна выполняться $\forall \theta$, но, если $p \to 0$, то левая часть будет стремиться к некоторой константе, а правая $\theta \to +\infty$.
+\end{example}
+\begin{example}
+Теперь приведем пример бессмыленной несмещенной оценки. Пусть $N = 1$, $X \sim Pois\left(\theta\right)$, где $0 < \theta < 1$. Тогда
+\[
+    \mathbb{E} T\left(X_1\right) = e ^ {-\theta} \sum_{k = 0}^{+\infty}\frac{T\left(k\right) \theta ^ k}{k!} = \theta
+\]\[
+    \sum_{k = 0}^{+\infty}\frac{T\left(k\right) \theta ^ k}{k!} = \theta e ^ {\theta} = \sum_{k=0}^{+\infty} \frac{\theta ^ {k + 1}}{k!}
+\]
+Приравнивая соответственные члены, получаем, что $T\left(k\right) = k$, то есть $T\left(X_1\right) = X_1$. Наша оценка никак не пересекается с множеством параметров, она бессмысленна.
+\end{example}
+
+\item \textbf{Состоятельность}. Оценка называется состоятельной, если $\widehat{\theta}_n\left(X_1, \cdots, X_n\right) \xrightarrow{P} \theta$. Это значит, на больших объемах данных мы получаем более точную оценку (ЗБЧ).
+\begin{statement}
+Если $\widehat{\theta}_n \ - $ несмещенная оценка $\theta$ и $\mathbb{D} \widehat{\theta}_n \to 0 $, то $\widehat{\theta}_n \ - $ состоятельная.
+\end{statement}
+\begin{proof}
+Запишем неравенство Чебышева:
+\[
+    P\left(\abs{\widehat{\theta} - \theta} \geq \varepsilon\right) \leq \frac{\mathbb{D} \widehat{\theta}_n}{\varepsilon}
+\]
+Все ясно.
+\end{proof}
+Записанное неравенство наталкивает на мысль, что при маленькой дисперсии, наши оценки будут более вероятно слабо разбросаны вокруг $\theta$.
+\item \textbf{Оптимальность}. Несмещенная оценка $\widehat{\theta}_n$ называется оптимальной, если $\mathbb{D} \widehat{\theta}_n \leq \mathbb{D} \theta^*_{n}$, $\forall$ несмещенных оценок $\theta^*_n$
+\begin{statement}
+Не существует в общем случае самой оптимальной оценки в множестве всех оценок.
+\end{statement}
+\begin{proof}
+Допустим, такая оценка существует, что
+\[
+    \mathbb{E}\left[\widehat{\theta}_n - \theta\right] \leq \mathbb{E}\left[\theta^*_n - \theta\right]
+\]
+для $\forall$  $\theta \in \Theta$. Но если мы возьмем $\theta^*_n \equiv A$, то получим, что $\widehat{\theta}_n = A$ почти наверное по распределению $F_A$. Теперь возьмем $\theta^*_n = B \neq A$ и получим, что $\widehat{\theta}_n = B$ почти наверное по распределению $F_B$. Получили противоречие (противоречие получаем из-за оговорки в общем случае, что $\exists C: P_A\left(C\right), \ P_B\left(C\right) > 0$)
+\end{proof}
+\item \textbf{Сильная состоятельность}. $\lim_{n \to +\infty} \widehat{\theta}_n\left(X_1, \cdots, X_n\right) = \theta$ почти наверное на распределении $F_\theta$
+\item \textbf{Асимптотическая нормальность}. Оценка называется асимптотически нормальной, если 
+\[
+    \sqrt{n}\left(\widehat{\theta}_n\left(X_1, \cdots, X_n\right) - \theta\right) \xrightarrow{d} N\left(0, \sigma\left(\theta\right)\right)
+\]
+Это условие влечет состоятельность и позволяет оценивать вероятности событий \\ $\alpha < \widehat{\theta}_n\left(X_1, \cdots, X_n\right) < \beta$ через нормальные распределения.
+\begin{advice}
+Если оценка асимптотически номальная, то она состоятельна.
+\end{advice}
+\begin{proof}
+ $\widehat{\theta}_n\left(X_1, \cdots, X_n\right) - \theta \xrightarrow{d} 0$, $\theta \xrightarrow{P} \theta$ \\ $\Rightarrow$ $\widehat{\theta}_n\left(X_1, \cdots, X_n\right) \xrightarrow{P} \theta$
+\end{proof}
+\end{enumerate}
+\begin{advice}
+Если эффективная оценка существует, то она единственна.
+\end{advice}
+\begin{proof}
+Пусть $\theta^*_1$ и $\theta^*_2$ две эффективные оценки. Тогда оценка $\frac{\theta^*_1 + \theta^*_2}{2}$ также является несмещенной. Кроме того,
+\[
+    \mathbb{D}\frac{\theta^*_1 + \theta^*_2}{2} =\theta^*_1\mathbb{D} \theta^*_1 = \mathbb{D} \theta^*_1 = a = \frac 1 4 a ^ 2 + \frac 1 2 \text{cov}\left(\theta^*_1, \theta^*_2\right) + \frac 1 4 a ^ 2 \geq a ^ 2
+\]
+то есть $\text{cov}\left(\theta^*_1, \theta^*_2\right) \geq a ^ 2$. Тогда получим
+\[
+    \mathbb{D}\left[\theta^*_1 - \theta^*_2\right] = 2 a ^ 2 - 2 \text{cov}\left(\theta^*_1, \theta^*_2\right) \leq 0
+\]
+Иначе говоря, $\theta^*_1 = \theta^*_2$ п.н.
+\end{proof}
+\section{Метод моментов}
+У нас есть некоторая простая выборка $\left(x_1, \cdots, x_n\right)$, взятая из распределения $F_\theta$, мы хотим по ней получить состоятельную оценку для $\theta$.
+\par
+Пусть $g \ -$ непрерывная функция (методом моментов он называется, потому что обычно в качестве $g$ берется степенная функция), что $\mathbb{E}_\theta \abs{g\left(X\right)} < \infty$. Тогда введем функцию $f\left(\theta\right) := \mathbb{E}_\theta g\left(X\right)$. Матожидание является функцией от $\theta$, потому что неизвестно нам только распределение, которое зависит от $\theta$. Теперь допустим, что $\exists f^{-1}$ на $\Theta$. Тогда легко найти $\theta$:
+\[
+    \theta = f ^ {-1}\left(f\left(\theta\right)\right) = f ^ {-1}\left(\mathbb{E}_\theta g\left(X\right)\right)
+\]
+\par Но так как распределения мы не знаем, у нас есть только простая выборка из него, то поступаем так. Знаем, что по ЗБЧ
+\[
+    \frac{g\left(X_1\right) + \cdots + g\left(X_n\right)}{n} \xrightarrow{p} \mathbb{E}_{\theta}g\left(X\right) = f\left(\theta\right)
+\]
+Тогда по теоремам непрерывности (предложение 1):
+\[
+    f ^ {-1}\left(\frac{g\left(X_1\right) + \cdots + g\left(X_n\right)}{n}\right) \xrightarrow{p} \theta
+\]
+Тогда
+\[\widehat{\theta}_n\left(X_1, \cdots, X_n\right) = f ^ {-1}\left(\frac{g\left(x_1\right) + \cdots + g\left(x_n\right)}{n}\right)\]
+\begin{enumerate}
+\item Оценка получилась состоятельная.
+\item Покажем асимптотическую нормальность оценки. По ЦПТ знаем, что
+\[
+    \xi_n = \sqrt{n}\left(\frac{g\left(X_1\right) + \cdots + g\left(X_n\right)}{n} - \mathbb{E}_\theta g\left(X\right)\right) \xrightarrow{p} \xi \sim N\left(0, \mathbb{D}_\theta g\left(X\right)\right)
+\]
+Обозначим 
+\[
+    a = \mathbb{E}_\theta g\left(X\right), \ \sigma ^ 2 = \mathbb{D}_\theta g\left(X\right)
+\]
+Тогда, предполагая, что $g ^ {-1}$ непрерывно дифференцируема, по теореме непрерывности (предложение 6), получаем:
+\[
+    \sqrt{n}\left(\widehat{\theta}_n\left(X_1, \cdots, X_n\right) - \theta\right) = \sqrt{n} \left(g ^ {-1}\left(a + \frac{\sigma}{\sqrt{n}} \xi_n\right) - g ^ {-1}\left(a\right)\right) \xrightarrow{d} \xi\left(h ^ {-1}\right)'\left(a\right) 
+\]
+ То есть, если $\left(h ^ {-1}\right)'\left(a\right)  \neq 0$, то оценка $\widehat{\theta}_n\left(X_1, \cdots, X_n\right)$ асимптотически нормальна с коэффициентом $\sigma\left(\theta\right) = \left(h'\left(a\right)\right) ^ 2 \sigma ^ 2$
+ \end{enumerate}
+ \begin{example}
+ Возьмем выборку $\left(X_1, \cdots, X_n\right)$ из равномерного распределения $U_{\left[0, \theta\right]}$, где $\theta > 0$. Найдем оценку по методу моментов при $f\left(x\right) = x$:
+ \[
+    \mathbb{E}_\theta f\left(X\right) = \frac{\theta}{2} \Rightarrow \theta = 2 \mathbb{E}_\theta f\left(X\right)
+ \]
+Получаем оценку
+\[
+    \widehat{\theta}_n = 2 \overline{X}
+ \]
+ \end{example}
+\section{Информация Фишера и неравенство Рао-Крамера}
+\begin{definition}
+\textit{Несмещенной оценкой нуля} называется такая статистика, $U\left(X_1, \cdots, X_n\right)$, для которой верно $\mathbb{E}_\theta U = 0$, $\forall \theta$ (можно опять провести аналогии со скалярным произведением)
+\end{definition}
+\begin{statement}
+$\widehat{\theta} \ - $ оптимальная (минимальная по дисперсии) $\Leftrightarrow$
+$\mathbb{E}\left[\widehat{\theta} U\right] = 0$ $\forall U \ - $ несмещеннных оценок нуля.
+\end{statement}
+\begin{proof}
+$\Rightarrow$
+\\
+Заметим, что $\forall \lambda$ верно $\mathbb{E}\left(\widehat{\theta} + \lambda U\right) = \widehat{\theta}$ и из оптимальности $\mathbb{D} \widehat{\theta} \leq \mathbb{D}\left(\widehat{\theta} + \lambda U\right)$. Раскрыв дисперсию, получим
+\[
+    \mathbb{D} \widehat{\theta} \leq \mathbb{D} \widehat{\theta} + \lambda ^ 2 \mathbb{D} U + 2 \lambda\text{cov}\left(\widehat{\theta}, U\right)
+\]\[
+    2\lambda\text{cov}\left(\widehat{\theta}, U\right) + \lambda ^ 2 \mathbb{D} U \geq 0
+\]
+Это верно только, когда $\text{cov}\left(\widehat{\theta}, U\right) = 0$ (потому что иначе есть $\lambda$, в которых неравенство не выполняется). Осталось записать
+\[
+    \text{cov}\left(\widehat{\theta}, U\right) = \mathbb{E} \left[\left(\widehat{\theta} - \theta\right) U\right] = \mathbb{E} \left[\widehat{\theta} U\right] = 0
+\]
+$\Leftarrow$ \\
+Возьмем другую несмещенную оценку $\tilde{\theta}$. Рассмотрим ее дисперсию:
+\[
+    \mathbb{D} \tilde{\theta} = \mathbb{E}\left(\tilde{\theta} - \theta\right) ^ 2 = \mathbb{E} \left(\left(\tilde{\theta} - \widehat{\theta}\right) + \left(\widehat{\theta} - \theta\right)\right) ^ 2 = \mathbb{E}\left(\tilde{\theta} - \widehat{\theta}\right)^  2 + 2 \mathbb{E} \left[\left(\tilde{\theta} - \widehat{\theta}\right)\left(\widehat{\theta} - \theta\right)\right] + \mathbb{E}\left(\widehat{\theta} - \theta\right) ^ 2
+\]
+Заметим, что 
+\[
+    \mathbb{E} \left[\left(\tilde{\theta} - \widehat{\theta}\right)\left(\widehat{\theta} - \theta\right)\right] = \mathbb{E} \left[\left(\tilde{\theta} - \widehat{\theta}\right) \widehat{\theta}\right] = 0
+\]
+Последнее равенство вытекает, из условия, если взять $U = \tilde{\theta} - \widehat{\theta}$. Тогда получаем, что 
+\[
+    \mathbb{D}\tilde{\theta} = \mathbb{D} \widehat{\theta} + \mathbb{D} \left(\tilde{\theta} - \widehat{\theta}\right) \geq \mathbb{D} \widehat{\theta}
+\]
+То есть $\widehat{\theta}$ оптимальна.
+
+\end{proof}
+
+\begin{example}
+Пусть $X \sim Bern\left(\theta\right)$. Рассмотрим оценку $\overline{X}$. Она несмещенная и по ЗБЧ состоятельная.  Докажем оптимальность. По доказанному утверждению, нужно убедиться, что $\mathbb{E} \overline{X} U = 0$ $\forall U \ -$ несмещенных оценок нуля. Запишем $\forall \theta$
+\[
+    0 =\mathbb{E} U\left(X_1, \cdots, X_n\right) = \sum_{\varepsilon_i \in \left\{0, 1\right\} } U\left(\varepsilon_1, \cdots, \varepsilon_n\right) \theta ^ {\sum \varepsilon_i} \left(1 - \theta\right) ^ {n - \sum \varepsilon_i} = 
+\]
+Сгруппируем
+\[
+    = \sum_{k = 0}^{n}  \left[\theta ^ {k} \left(1 - \theta\right) ^ {n - k} \sum_{\varepsilon_i: \sum \varepsilon = k} U\left(\varepsilon_1, \cdots, \varepsilon_n\right)\right] = \sum_{k = 0}^{n}  \theta ^ {k} \left(1 - \theta\right) ^ {n - k} Q_k = \frac 1 {\theta ^ n} \sum_{k = 0}^{n}  \left(\frac{\theta}{1 - \theta}\right) ^ k Q_k = 0
+\]
+При $\theta \in \left(0, 1\right)$, $\frac{\theta}{1 - \theta} \in \left(0, +\infty\right) \ - $ на этом промежутке многочлен равен нулю, тогда получается, что $Q_k = 0$. Теперь можем проверить $\overline{X}$ на оптимальность:
+\[
+    \mathbb{E} \overline{X} U = \sum_{k = 0}^{n} \left[\frac{k}{n} \sum_{\varepsilon_i: \sum \varepsilon = k} U\left(\varepsilon_1, \cdots, \varepsilon_n\right) \theta ^ {k} \left(1 - \theta\right) ^ {n - k}\right] = \sum_{k = 0}^{n} \frac k n Q_k \theta ^ {k} \left(1 - \theta\right) ^ {n - k} = 0
+\]
+Получили оптимальность $\overline{X}$. 
+\end{example}
+В методе максимального правдоподобия мы более подробно разберем понятие информации, а пока обойдемся сухими определениями.
+\begin{definition}
+Пусть $X = \left(X_1, \cdots, X_n\right)$ простая выборка из распределения с плотностью $\rho_\theta$, тогда функция $p\left(x, \theta\right) = \rho_{\theta}\left(x_1\right) \cdots \rho_\theta\left(x_n\right)$ называется \textit{функцией правдоподобия}, однако с произведением работать неудобно, поэтому прологарифмируем: $L\left(x, \theta\right) = \sum_{j = 1}^n \ln \rho_\theta\left(x_j\right)$
+\end{definition}
+\begin{definition}
+Величина $I\left(\theta\right) = \mathbb{E}_\theta \left[\frac{\partial L}{\partial \theta}\right] ^ 2$ называется \textit{информацией Фишера}.
+\end{definition}
+В дальнейших рассуждениях предполагается выполнение условий регулярности для функции правдоподобия, что она непрерывна и дифференцируема по $\theta$ и что операции дифференцирования и интегрирования перестановочны ($\int f' dx = \left(\int f dx\right)'$)
+\begin{advice}(аддитивность информации Фишера) Верно равенство
+\[
+    I\left(\theta\right) = n i\left(\theta\right),
+\]
+где $i\left(\theta\right) \ - $ информация Фишера для выборки из одного элемента.
+\end{advice}
+\begin{proof}
+Заметим, что 
+\[
+    \mathbb{E} \frac{\partial L}{\partial \theta} = \mathbb{E}\left[\sum_{j = 1}^{n} \frac{\rho'_\theta\left(x_j\right)}{\rho_\theta\left(x_j\right)}\right] = \sum_{j =1}^{n} \int \frac{\rho'_\theta\left(x_j\right)}{\rho_\theta\left(x_j\right)} \rho_\theta\left(x_j\right) dx = 
+    \sum_{j = 1}^{n} \left(\int_{-\infty}^{+\infty} \rho_\theta\left(x_j\right) dx\right)' = \sum_{j = 1}^{n} \left(1\right)' = 0
+\]
+Поэтому 
+\[
+    I\left(\theta\right) = \mathbb{E} \left[\frac{\partial L}{\partial \theta}\right] ^ 2 = \mathbb{D} \left[\frac{\partial L}{\partial \theta}\right] = \mathbb{D} \left[\sum_{j = 1}^{n} \frac{\rho'_\theta\left(x_j\right)}{\rho_\theta\left(x_j\right)}\right] = \sum_{j = 1}^n \mathbb{D} \left[\frac{\rho'_\theta\left(x_j\right)}{\rho_\theta\left(x_j\right)}\right] = \sum_{j = 1}^n i\left(\theta\right) = ni\left(\theta\right)
+\]
+\end{proof}
+
+Рассмотрим неравенство, позволяющее оценивать оптимальные оценки.
+\begin{theorem} (неравенство Рао-Крамера) Выполняются условия регулярности и $I\left(\theta\right) > 0$ (если $= 0$, то это значит, что мы от эксперимента не получаем никакой информации и все бессмысленно). Пусть $\theta_n\left(X\right) \ - $ произвольная несмещенная оценка статистика $\tau\left(\theta\right)$. Тогда верно
+\[
+    \mathbb{D} \theta_n\left(X\right) \geq \frac{\left(\tau'\left(\theta\right)\right) ^ 2}{I\left(\theta\right)}
+\]
+\end{theorem}
+\begin{proof}
+Из несмещенности знаем 
+\[
+    \mathbb{E} \theta_n\left(X\right) = \int \theta_n\left(x_1, \cdots, x_n\right) p\left(x_1, \cdots, x_n, \theta\right) dx_1 \cdots d x_n = \tau\left(\theta\right) = A
+\]
+Также знаем
+\[
+    \int p\left(x_1, \cdots, x_n, \theta\right) dx_1 \cdots d x_n = 1 = B
+\]
+Рассмотрим выражение $A'_\theta - \theta B'_\theta$ ($= \tau'\left(\theta\right)$ по понятным причинам):
+\[
+    \tau'\left(\theta\right) = \int \left(\theta_n\left(x\right) - \theta\right) p'\left(x, \theta\right) dx = \int \left(\theta_n\left(x\right) - \theta\right) \frac{p'\left(x, \theta\right)}{p\left(x, \theta\right)} p\left(x, \theta\right) dx = \mathbb{E} \left[\left(\theta_n - \theta\right) \frac{\partial L}{\partial \theta}\right]
+\]
+Из неравенства Коши-Буняковского получим: 
+\[
+    \tau'\left(\theta\right) = \mathbb{E} \left[\left(\theta_n - \theta\right) \frac{\partial L}{\partial \theta}\right] \leq \sqrt{\mathbb{D} \theta_n} \sqrt{\mathbb{E} \left[\frac{\partial L}{\partial \theta}\right] ^ 2}
+\]\[
+    \left(\tau'\left(\theta\right)\right) ^ 2 \leq I\left(\theta\right)\mathbb{D} \theta_n 
+\]
+\end{proof}
+
+\begin{remark}
+Можно переписать неравенство в виде
+\[
+    \mathbb{D} \theta_n \leq \frac{\left(\tau'\left(\theta\right)\right) ^ 2}{n i\left(\theta\right)}
+\]
+То есть как бы мы не старались, точность оценки будет порядка $\frac 1 n$.
+\end{remark}
+
+\clearpage
+\section*{Метод максимального правдоподобия}
+Во-первых рассмотрим пример, объясняющий понятие информации.
+\begin{example}
+Пусть есть монетка $M$ с $P\left(M = 0\right) = q$, $P\left(M = 1\right) = p$. Подбрасывается монетка, и, в зависимости от исхода, генерируется случайное событие из распределение $\rho_0$ или $\rho_1$. Таким образом, получили случайную величину $\xi$. Изначально шансы, что случайная величина была взята из первого распределения против нулевого $\frac p q$. Несложно вычилисть шансы после одной генерации случайного события. Воспользовавшись аналогом формулы Байеса, получим
+\[
+    P\left(M = 1 | \xi = x\right) = \frac{\rho_1\left(x\right)p}{\rho_1\left(x\right)p + \rho_0\left(x\right)q}, \; P\left(M = 0 | \xi = x\right) = \frac{\rho_0\left(x\right)q}{\rho_1\left(x\right)p + \rho_0\left(x\right)q}
+\] 
+То есть теперь шансы $\frac{\rho_1\left(x\right) p}{\rho_0\left(x\right) q}$. Они изменились. Пусть \textit{информация} $-$ это то, как изменились шансы. Как можно измерить информацию, полученную в ходе эксперимента? Например, возьмем разницу $\ln$ от шансов:
+\[
+    \ln \frac{\rho_1\left(x\right) p}{\rho_0\left(x\right) q} - \ln \frac p q= \ln \frac{\rho_1\left(x\right)}{\rho_0\left(x\right)}
+\]
+Ну и чтобы для каждой величины не вычислять выражение, усредним по распределению $\rho_1$ (можно было и по $\rho_0$ усреднять) и будем называть это выражение информацией: 
+\[
+    \tilde{I} = \int \ln \frac{\rho_1\left(x\right)}{\rho_0\left(x\right)} \rho_1\left(x\right) dx = \int \ln \rho_1\left(x\right) \rho_1\left(x\right) dx - \int \ln \rho_0\left(x\right) \rho_1\left(x\right) dx
+\]
+\end{example}
+\begin{statement} (неравенство информации)
+Пусть $\rho_0, \rho_1 \ - $ вероятностные плотности. Тогда 
+\[
+    \int \ln \rho_1\left(x\right) \rho_1\left(x\right) dx \geq \int \ln \rho_0\left(x\right) \rho_1\left(x\right) dx,
+\]
+то есть $\tilde{I} \geq 0$. Причем равенство выполняется $\Leftrightarrow$ $\rho_0 \equiv \rho_1$
+\end{statement}
+\begin{proof}
+Хотим доказать
+\[
+    \int \ln \frac{\rho_0\left(x\right)}{\rho_1\left(x\right)} \rho_1\left(x\right) dx \leq 0 
+\]
+Знаем, что $\ln x \leq x - 1$. Тогда 
+\[
+    \ln \frac{\rho_0\left(x\right)}{\rho_1\left(x\right)} \rho_1\left(x\right) \leq \rho_0\left(x\right) - \rho_1\left(x\right)
+\]
+Подставляя в интеграл, получим, что 
+\[
+    \int \ln \frac{\rho_0\left(x\right)}{\rho_1\left(x\right)} \rho_1\left(x\right) dx \leq 1 - 1 = 0
+\]
+Теперь посмотрим, когда выполняется равенство. Оно выполнятется, когда $\ln x = x - 1$, то есть 
+\[
+    \int \left(\frac{\rho_0\left(x\right)}{\rho_1\left(x\right)} - 1 + \ln \frac{\rho_0\left(x\right)}{\rho_1\left(x\right)}\right) \rho_1\left(x\right) dx = 0
+\]
+Тогда 
+\[
+    \frac{\rho_0\left(x\right)}{\rho_1\left(x\right)} - 1 + \ln \frac{\rho_0\left(x\right)}{\rho_1\left(x\right)} = 0
+\]
+почти наверное (так как это выражение $\geq 0$), то есть $\rho_0 = \rho_1$ почти наверное.
+\end{proof}
+То есть, если $\tilde{I} = 0$, то от новой информации ничего не меняется, она бессмысленна. Также добавим, что $\tilde{I}$ в реальности оценивает расстояние между распределениями, это называется энтропией распределения $\rho_1$ относительно $\rho_0$.
+\par 
+Применим полученные знания для построения оценки. Пусть $X = \left(X_1, \cdots, X_n\right) \ - $ выборка из распределения с параметром $\theta = \theta_1$. Рассмотрим функцию $W\left(\theta\right) = \mathbb{E}_{\theta_1} \ln \rho_\theta\left(X_1\right)$, ее называют истинным правдоподобием. Заметим из неравенства информации, что максимум истинного правдоподобия достигается только на $\theta = \theta_1$. Само матожидание вычислять мы не умеем, но по ЗБЧ значем, что 
+\[
+    \frac 1 n L\left(X, \theta\right) = \frac 1 n \sum \ln \rho_\theta\left(x_j\right) \xrightarrow{P} W\left(\theta\right)
+\]
+Тогда \textit{оценкой максимального правдоподобия} называется оценка $\widehat{\theta} = \text{argmax}_\theta L\left(X, \theta\right)$. Если посмотреть, что мы максимизируем функцию $L$, и вспомнить, что это по сути функция правдоподобия, то выходит, что мы максимизируем вероятность получения выборки $X$ из распределения с параметром $\widehat{\theta}$. Еще заметим, что $W\left(\theta_1\right) - W\left(\theta\right)$ это величина из примера с монетой, то есть количество информации, которое дало одно наблюдение.
+
+\begin{statement} (состоятельность оценки методом максимального правдоподобия) Дана выборка $X = \left(X_1, \cdots, X_n\right)$. Пусть $\theta \in \left(\alpha, \beta\right)$ и на этом промежутеке у функции $L\left(X_1, \cdots, X_n, \theta\right)$ $\exists! \widehat{\theta}_n \ - $ точка локального максимума, тогда $\widehat{\theta}_n \xrightarrow{P} \theta_1$, то есть оценка состоятельна.
+
+\end{statement}
+\begin{proof}
+По ЗБЧ $\frac 1 n L\left(X, \theta\right) \xrightarrow{P} W\left(\theta\right)$. Хотим $\forall \delta > 0$: $\lim_{n \to \infty} P\left(\abs{\widehat{\theta}_n - \theta} \geq \delta\right) = 0$. Из информационного неравенства заметим, что $W\left(\theta_1 - \delta\right) < W\left(\theta_1\right) > W\left(\theta_1 + \delta\right)$. Знаем, что $\frac 1 n L\left(X, \theta_1 - \delta\right), $ \\ $ \frac 1 n L\left(X, \theta_1\right), \ \frac 1 n L\left(X, \theta_1 + \delta\right)$ сходятся по вероятности соответственно к $W\left(\theta_1 - \delta\right), \ W\left(\theta_1\right), \ W\left(\theta_1 + \delta\right)$. Докажем, что сохраняются те же знаки неравенства. 
+\par Пусть $\varepsilon = W\left(\theta_1\right) - W\left(\theta_1 - \delta\right) > 0$. Знаем, что 
+\[
+    P\left(\abs{\frac 1 n L\left(X, \theta_1 - \delta\right) - W\left(\theta_1 - \delta\right)} \geq \frac \varepsilon {10}\right) \xrightarrow{n \to \infty} 0
+\]\[
+    P\left(\abs{\frac 1 n L\left(X, \theta_1\right) - W\left(\theta_1\right)} \geq \frac {\varepsilon }{10}\right) \xrightarrow{n \to \infty} 0
+    
+\]
+Тогда 
+\[
+    P\left(\frac 1 n L\left(X, \theta_1 - \delta\right) \geq \frac 1 n L\left(X, \theta_1\right)\right) \leq \]\[ \leq P\left(\left\{\abs{\frac 1 n L\left(X, \theta_1 - \delta\right) - W\left(\theta_1 - \delta\right)} \geq \frac \varepsilon {10}\right\} \bigcup \left\{\abs{\frac 1 n L\left(X, \theta_1\right) - W\left(\theta_1\right)} \geq \frac \varepsilon {10}\right\}\right) \leq
+\]\[
+    \leq P\left(\abs{\frac 1 n L\left(X, \theta_1 - \delta\right) - W\left(\theta_1 - \delta\right)} \geq \frac \varepsilon {10}\right) + P\left(\abs{\frac 1 n L\left(X, \theta_1\right) - W\left(\theta_1\right)} \geq \frac {\varepsilon }{10}\right) \xrightarrow{n \to \infty} 0 
+\]
+Допустим противное, что в первом неравенстве может стоять $< \frac \varepsilon {10}$ в обоих случаях. Тогда выходит
+\[
+    \varepsilon = W\left(\theta_1\right) - W\left(\theta_1 - \delta\right) \leq
+    \frac 1 n L\left(X, \theta_1\right) + \frac \varepsilon {10} - W\left(\theta_1 - \delta\right) \leq \frac 1 n L\left(X, \theta_1\right) + \frac \varepsilon {10} - \frac 1 n L\left(X, \theta_1 - \delta\right) + \frac \varepsilon {10} \leq \frac \varepsilon 5
+\]
+Получили противоречие, то есть все ок. То есть вышло, что $\frac 1 n L\left(X, \theta_1 - \delta\right) < \frac 1 n L\left(X, \theta_1\right)$ почти наверное. Второе неравенство доказывается аналогично.
+\par Получив желаемые неравенства, делаем вывод, что внутри отрезка $\left[\theta_1 - \delta, \theta_1 + \delta\right]$ есть локальный максимум, то есть $\abs{\widehat{\theta}_n - \theta_1} < \delta$ (строгое неравенство, потому что мы доказывали строгие неравенства для $L$)
+
+\end{proof}
+
+\begin{remark}
+Теперь обсудим, откуда возникает информация Фишера. У нас есть функция истинного правдоподобия $W\left(\theta\right)$. Разложим ее по Тейлору в точке $\theta_1$ (предполагаем, что зависимость он $\theta$ позволяет дифференцировать под знаком интеграла). $W'\left(\theta\right) = \int \frac{\rho_\theta'\left(x\right)}{\rho_\theta\left(x\right)} \rho_{\theta_1}\left(x\right) dx$, соответственно $W'\left(\theta_1\right) = 0$. $W''\left(\theta\right) = \int \frac{\rho_\theta''\left(x\right)}{\rho_\theta\left(x\right)} \rho_{\theta_1}\left(x\right) dx - \int \left(\frac{\rho_\theta'\left(x\right)}{\rho_\theta\left(x\right)}\right) ^ 2 \rho_{\theta_1}\left(x\right) dx$, соответственно $W''\left(\theta_1\right) = 0 - \int \left(\frac{\partial \ln \rho_\theta\left(x\right)}{\partial \theta}\right) ^ 2 \rho_{\theta_1}\left(x\right) dx = -I\left(\theta_1\right)$. В итоге получаем: \[
+    W\left(\theta\right) \approx W\left(\theta_1\right) - \frac 1 2 I\left(\theta_1\right) \left(\theta - \theta_1\right) ^ 2
+\]
+То есть она выражает скорость изменения информации в окрестности максимума $\theta_1$.
+
+\end{remark}
+\begin{remark}
+Теперь вспомним неравенство Рао-Крамера. Равенство в неравенстве Коши-Буняковского выполняется только в случае пропорциональности $\theta_n\left(X\right) - \tau\left(\theta\right)$ и $\frac{\partial L}{\partial \theta}$. То есть, когда 
+\[
+    \theta_n\left(X\right) - \tau\left(\theta\right) = C\left(\theta\right)\frac{\partial L}{\partial \theta}
+\]
+Это знание в некоторых случаях помогает находить эффективные оценки
+\end{remark}
+\begin{remark}
+Также отметим, что если существует несмещенная оценка $\theta_n\left(X\right)$ параметра $\theta$, на которой достигается равенство в Рао-Крамере, то это обязательно оценка максимального правдоподобия. Действительно, верно равенство 
+\[
+    \theta_n\left(X\right) - \tau\left(\theta\right) = C\left(\theta\right)\frac{\partial L}{\partial \theta}
+\]
+Подставив вместо $\theta$ оценку максимального правдоподобия, получим
+\[
+    \theta_n\left(X\right) - \widehat{\theta}_n\left(X\right) = 0
+\]
+То есть они равны.
+\end{remark}
+\begin{remark}
+И, наконец, сделаем небольшое замечание о том, откуда берется асмптотическа нормальность оценки максимального правдоподобия. Разложим $\frac{\partial L}{\partial \theta}\left(X, \theta\right)$ по Тейлору в $\theta_1$ (примерно, без о малых):
+\[
+    \frac{\partial L}{\partial \theta}\left(X, \theta\right) \approx \frac{\partial L}{\partial \theta}\left(X, \theta_1\right) + \frac{\partial ^ 2 L}{\partial \theta ^ 2}\left(X, \theta\right)\left(\theta - \theta_1\right)
+\]
+Если мы подставим $\theta = \widehat{\theta}_n\left(X\right) \ - $ оценку максимального правдоподобия, то $\frac{\partial L}{\partial \theta}\left(X, \widehat{\theta}_n\left(X\right)\right) = 0$ просто из определения оценки максимального правдоподобия. Тогда получаем:
+\[
+    \widehat{\theta}_n - \theta_1 = -\frac{\frac{\partial L}{\partial \theta}}{\frac{\partial ^ 2 L}{\partial \theta ^ 2}}
+\]
+Домножим на $\sqrt{n}$, чтобы стало как в ЦПТ. Берем $\frac{\partial L}{\partial \theta} = \frac 1 n \sum_{j = 1}^{n} \frac{\partial}{\partial \theta} \ln \rho_{\theta_1}\left(x_j\right)$. Помним, что \\ $\mathbb{E} \frac{\partial}{\partial \theta} \ln \rho_{\theta_1}\left(x_j\right) = 0 = \mu$. Теперь дисперсия: 
+\[\sigma ^ 2 = \mathbb{D} \frac{\partial}{\partial \theta} \ln \rho_{\theta_1}\left(x_j\right) = \mathbb{E} \left[\frac{\partial}{\partial \theta} \ln \rho_{\theta_1}\left(x_j\right)\right] ^ 2 = I\left(\theta_1\right)
+\]
+Тогда из ЦПТ получаем
+\[
+    \frac{\partial L}{\partial \theta} \xrightarrow{P} N\left(0, I\left(\theta_1\right)\right)
+\]
+Теперь разберемся с 
+\[
+    \frac{\partial ^ 2 L}{\partial \theta ^ 2} = \frac 1 n \sum_{j = 1}^{n} \frac{\partial ^ 2}{\partial \theta ^ 2} \ln \rho_{\theta_1}\left(x_j\right) \xrightarrow{P} -I\left(\theta_1\right)
+\]
+То есть $\mathbb{E}\frac{\partial ^ 2 L}{\partial \theta ^ 2} = -I\left(\theta_1\right)$. В итоге получаем, что $\sqrt{n}\left(\widehat{\theta}_n - \theta_1\right) \xrightarrow{P} N\left(0, \frac 1 {I\left(\theta_1\right)}\right)$
+\end{remark}
+
 \end{document}
