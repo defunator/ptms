@@ -888,7 +888,7 @@ $\text{cov}\left(\eta, \eta\right) = E$, так как это ортонорми
  \]
  Тогда 
  \[
-    \rho\left(t\right) = \left(2 \pi\right) ^ {-\frac{n}{2}} w_n \cdot \frac{1}{2} t ^ {-\frac{1}{2}} t ^ {\frac{n - 1}{2}} e ^ {-\frac{ t} 2} =  \frac{1}{2}  \left(2 \pi\right) ^ {-\frac{n}{2}} w_n  t ^ {\frac{n - 2}{2}} e ^ {-\frac{t ^ 2}{2}} \text{Ind}_{t > 0}
+    \rho\left(t\right) = \left(2 \pi\right) ^ {-\frac{n}{2}} w_n \cdot \frac{1}{2} t ^ {-\frac{1}{2}} t ^ {\frac{n - 1}{2}} e ^ {-\frac{ t} 2} =  \frac{1}{2}  \left(2 \pi\right) ^ {-\frac{n}{2}} w_n  t ^ {\frac{n - 2}{2}} e ^ {-\frac{t}{2}} \text{Ind}_{t > 0}
  \]
 \end{example}
 
@@ -1480,7 +1480,7 @@ $\Leftarrow$ \\
 \end{remark}
 
 \clearpage
-\section*{Метод максимального правдоподобия}
+\section{Метод максимального правдоподобия}
 Во-первых рассмотрим пример, объясняющий понятие информации.
 \begin{example}
 Пусть есть монетка $M$ с $P\left(M = 0\right) = q$, $P\left(M = 1\right) = p$. Подбрасывается монетка, и, в зависимости от исхода, генерируется случайное событие из распределение $\rho_0$ или $\rho_1$. Таким образом, получили случайную величину $\xi$. Изначально шансы, что случайная величина была взята из первого распределения против нулевого $\frac p q$. Несложно вычилисть шансы после одной генерации случайного события. Воспользовавшись аналогом формулы Байеса, получим
@@ -1588,7 +1588,7 @@ $\Leftarrow$ \\
 То есть они равны.
 \end{remark}
 \begin{remark}
-И, наконец, сделаем небольшое замечание о том, откуда берется асмптотическа нормальность оценки максимального правдоподобия. Разложим $\frac{\partial L}{\partial \theta}\left(X, \theta\right)$ по Тейлору в $\theta_1$ (примерно, без о малых):
+И, наконец, сделаем небольшое замечание о том, откуда берется асимптотическая нормальность оценки максимального правдоподобия. Разложим $\frac{\partial L}{\partial \theta}\left(X, \theta\right)$ по Тейлору в $\theta_1$ (примерно, без о малых):
 \[
     \frac{\partial L}{\partial \theta}\left(X, \theta\right) \approx \frac{\partial L}{\partial \theta}\left(X, \theta_1\right) + \frac{\partial ^ 2 L}{\partial \theta ^ 2}\left(X, \theta\right)\left(\theta - \theta_1\right)
 \]
@@ -1609,5 +1609,130 @@ $\Leftarrow$ \\
 \]
 То есть $\mathbb{E}\frac{\partial ^ 2 L}{\partial \theta ^ 2} = -I\left(\theta_1\right)$. В итоге получаем, что $\sqrt{n}\left(\widehat{\theta}_n - \theta_1\right) \xrightarrow{P} N\left(0, \frac 1 {I\left(\theta_1\right)}\right)$
 \end{remark}
+
+\clearpage
+
+\section{Доверительные интервалы}
+
+Ясно, что информации о состоятельности оценки $\widehat{\theta}_n\left(X\right)$ не достаточно для того, чтобы что-то говорить о возможном значении $\theta$. Предположим, что мы знаем ``скорость сходимости'', то есть для фиксированного $\alpha \in \left(0, 1\right)$, для фиксированного $\varepsilon > 0$ мы можем подобрать такой номер $n$, начиная с которого $P_\theta\left(\abs{\widehat{\theta}_n\left(X\right) - \theta} < \varepsilon\right) > 1 - \alpha$. Тогда параметр $\theta$ с большой вероятностью $\theta \in \left(\widehat{\theta}_n\left(X\right) - \varepsilon, \widehat{\theta}_n\left(X\right) + \varepsilon\right)$.
+\begin{definition}
+Обощая данное наблюдение, приходим к следующей конструкции. Пусть заданы две статистики $\theta_1\left(X\right)$ и $\theta_2\left(X\right)$. Случайный интервал $\left(\theta_1\left(X\right), \theta_2\left(X\right)\right)$ называется $\textit{доверительным интервалом}$ с уровнем доверия $1 - \alpha$, если при всех $\theta$ верно
+\[
+    P\left(\theta_1\left(X\right) < \theta < \theta_2\left(X\right)\right) \geq 1 - \alpha
+\]
+Если же задана последовательность пар статистик $\theta_1^n\left(X\right)$ и $\theta_2^n\left(X\right)$, для которой 
+\[
+    \lim_{n \to \infty} \text{inf} P\left(\theta_1^n\left(X\right) < \theta < \theta_2^n\left(X\right)\right) \geq 1 - \alpha
+\]
+то говорят, что задан \textit{асимптотический доверительный интервал} уровня доверия $1 - \alpha$.
+\end{definition}
+
+\begin{example}
+Пусть задана выборка $X_1, \cdots, X_n$ из распределения $N\left(\theta, 1\right)$. Рассмотрим статистику $\overline{X}_n$, тогда $\sqrt{n}\left(\overline{X}_n - \theta\right) \sim N\left(0, 1\right)$. Пусть число $z_\gamma$ выбрано так, что $\Phi\left(z_\gamma\right) = \gamma, \ -$ квантиль нормального распределения. Тогда
+\[
+    P_\theta\left(z_{\alpha/2} < \sqrt{n}\left(\overline{X}_n - \theta\right) < z_{1-\alpha/2}\right) = 1 - \alpha
+\]
+Так как $z_{-\alpha/2} = -z_{1-\alpha/2}$, то перепишем
+\[
+    P_\theta\left(\overline{X}_n - \frac{z_{1-\alpha/2}}{\sqrt{n}} < \theta < \overline{X}_n + \frac{z_{1-\alpha/2}}{\sqrt{n}}\right) = 1 - \alpha
+\]
+Получили доверительный интервал. Заметим, что так как он симметричный, то он минимальный по длине среди всех доверительных интервалов такого же уровня доверия (надо было найти в стандартном распределении интервал, содержащий вероятнось $1 - \alpha$, смотрим на график плотности и все понимаем).
+\end{example}
+
+\par
+Для постороения доверительных интервалов бывает полезным использовать неравенство Чебышева или Чернова (Хефдинга-Чернова). 
+\begin{example}
+Пусть $X_1, \cdots, X_n$ выборка из распределения Бернулли с вероятностью успеха $\theta$. По неравенству Хефдинга-Чернова
+\[
+    P\left(\abs{\overline{X}_n - \theta}\geq t\right) \leq 2e ^ {-\frac{nt^2}{4}}
+\]
+Взяв $t$ так, чтобы $e ^ {-\frac{nt^2}{4}}= \frac{\alpha}2$, получаем доверительный интервал \[\left(\overline{X}_n - \frac{2\sqrt{-\ln\left(\alpha / 2\right)}}{\sqrt{n}}, \overline{X}_n + \frac{2\sqrt{-\ln\left(\alpha / 2\right)}}{\sqrt{n}}\right)
+\]
+
+\end{example}
+\par 
+Рассмотрим общий метод построения доверительных интервалов с помощью центральных статистик.
+\begin{definition}
+Статистика $V\left(X, \theta\right)$ называется $\textit{центральной}$, если ее распределение зависит от $\theta$ при фиксированном $X$ и при фиксированном $X$ эта функция монотонна (по $\theta$).
+\end{definition}
+\par 
+Тогда в силу независимости распределения от параметра $\theta$, подберем такие $v_1$, $v_2$, что 
+\[
+    P_\theta\left(v_1 < V\left(X, \theta\right) < v_2\right) = 1 - \alpha
+\]
+В силу монотонности (берем обратную функцию с сохранением всех неравенств), получаем доверительный интервал
+\[
+    P_\theta\left(V^{-1}\left(v_1\right) < \theta < V^{-1}\left(v_2\right)\right) = 1 - \alpha
+\]
+\begin{example}
+Пусть $X_1, \cdots, X_n \ -$ выборка из $U\left[0, \theta\right]$. Тогда $\theta^{-1} X_j \sim U\left[0, 1\right]$. Рассмотрим статистику $V\left(X, \theta\right) = \theta ^ {-1} X_{\left(n\right)}$, тогда $F_{\theta ^ {-1} X_{\left(n\right)}}\left(t\right) = t ^ {n}$ при $t \in \left[0, 1\right]$ и 
+\[
+    1 - \alpha = P\left(\alpha ^ {1/n} < V\left(X, \theta\right) < 1\right) = P\left(X_{\left(n\right)} < \theta< \alpha^{-1/n} X_{\left(n\right)}  \right)
+\]
+Заметим, что длина доверительного интервала пропорциональна $\alpha ^ {-1/n} - 1 = O\left(\frac 1 n \right)$, то есть с ростом размера выборки, точность интервала также увеличивается.
+\end{example}
+\par В качестве $V$ бывает полезным взять $\sum_{j=1}^n \ln F_{\theta}\left(X_j\right)$.
+\begin{example}
+Рассмотрим типичный пример \textbf{посторения асимптотического доверительного интервала}. Пусть $\theta_n\left(X\right)$ асимптотически нормальная оценка параметра $\theta$ с асимптотической дисперсией $\sigma\left(\theta\right)$, то есть 
+\[
+    \sqrt{n} \frac{\theta_n\left(X\right) - \theta}{\sigma\left(\theta\right)} \xrightarrow{d} N\left(0, 1\right)
+\]
+Тогда аналогично 19 примеру, подбираем границы $z_{1-\alpha/2}$ и $z_{\alpha/2}$ (напомню, что $\Phi\left(z_{1-\alpha/2}\right) = 1 - \alpha/2$)
+\[
+    P\left(z_{\alpha/2} < \sqrt{n} \frac{\theta_n\left(X\right) - \theta}{\sigma\left(\theta\right)} < z_{1-\alpha/2}\right) \xrightarrow{n \to \infty} 1 - \alpha
+\]\[
+    P\left(\theta_n\left(X\right) - \frac{\sigma\left(\theta\right)z_{1-\alpha/2}}{\sqrt{n}} < \theta < \theta_n\left(X\right) + \frac{\sigma\left(\theta\right)z_{1-\alpha/2}}{\sqrt{n}}\right)\xrightarrow{n \to \infty} 1 - \alpha
+\]
+Для получения доверительного интервала осталось только избавиться от $\sigma{\left(\theta\right)}$. Понятно, что ее можно заменить любой состоятельной оценкой (чтобы оставалась сходимость по распределению к $N\left(0, 1\right)$), например, выборочной дисперсией или $\sigma\left(\theta_n\left(X\right)\right)$.
+\end{example}
+
+\par 
+Рассмотрим теперь подробнее построение доверительных интервалов для \textbf{параметров $\mu$ и $\sigma$ нормального распределения $N\left(\mu, \sigma\right)$}.
+
+\par
+\textbf{$\sigma $ известна, оцениваем $\mu$}. $\sigma$ может быть известна, например, если при замерах мы пользуемся прибором с известной точностью. Пусть $X_1, \cdots, X_n \ - $ выборка из $N\left(\mu, \sigma\right)$. Тогда 
+\[
+    \frac{\sqrt{n}\left(\overline{X}_n - \mu\right)}{\sigma} \sim N\left(0, 1\right)
+\]
+Аналогично прошлому примеру, получаем доверительный интервал уровня доверия $1 - \alpha$ вида
+\[
+    \left(\overline{X}_n - \frac{\sigma z_{1-\alpha/2}}{\sqrt{n}}, \overline{X}_n + \frac{\sigma z_{1-\alpha/2}}{\sqrt{n}}\right)
+\]
+\par
+\textbf{$\sigma$ неизвестна, оцениваем $\mu$}. Пусть $X_1, \cdots, X_n \ -$ выборка из $N\left(\mu, \sigma\right)$. Мы знаем (см. пример 10), что выборочное среднее $\overline{X}_n$ и выборочная дисперсия
+\[
+    S_n ^ 2 = \frac1{n - 1} \sum_{j=1}^{n} \left(X_j - \overline{X}_n\right) ^ 2
+\]
+независимы, причем $\left(n - 1\right)\sigma ^ 2 S_n ^ 2$ имеет хи квадрат распределение с $n - 1$ степенью свободы $\chi^2_{n-1}$. Напомним, что
+\[
+    \rho_{\chi^2_{n}}\left(t\right) = C_n t ^ {\frac{n-2}2} e ^ {-\frac{t}2} \text{Ind}_{t > 0}
+\]
+Рассмотрим статистику
+\[
+    T_{n-1}\left(X\right) =\frac{\sqrt{n}\left(\overline{X}_n - \mu\right)}{\sqrt{S_n ^ 2}} = \frac{\sqrt{n}\frac{\left(\overline{X}_n - \mu\right)}{\sigma}}{\sqrt{\sigma ^{-2} S_n ^ 2}} = \frac{Z_n}{\sqrt{R_n}},
+\]
+где $Z_n \sim N\left(0, 1\right)$, $R_n \sim \frac 1 {n-1} \chi^2_{n-1}$ и $Z_n$ и $R_n$независимы. Распределение $T_{n-1}$ имеет плотность 
+\[
+    \rho\left(t\right) = C_n \left(1 + \frac{t^2}{n - 1}\right) ^ {-n/2}
+\]
+и называется распределением Стьюдента с $n - 1$ степенью свободы. Получаем, что доверительный интервал уровня доверия $1 - \alpha$ имеет вид
+\[
+    \left(\overline{X}_n - \frac{\sqrt{S^2_n} t_{1-\alpha/2}}{\sqrt n}, \overline{X}_n + \frac{\sqrt{S^2_n} t_{1-\alpha/2}}{\sqrt n}\right), \ F_{T_{n-1}}\left(t_{1-\alpha/2}\right) = 1-\alpha/2
+\]
+\par
+\textbf{Доверительный интервал для $\sigma$} строится с помощью центральной статистики
+\[
+    \sigma ^ {-2}\left(n - 1\right)S_n ^ 2 \sim \chi_{n-1}^2
+\]
+Пусть $F_{\chi^2}\left(x_{\alpha/2}\right) = \alpha/2$ и $F_{\chi^2}\left(x_{1-\alpha/2}\right) = 1-\alpha/2$. Тогда 
+\[
+    P\left(x_{\alpha/2} < \frac{\left(n-1\right) S^2_n}{\sigma^2} < x_{1-\alpha/2}\right) = 1 - \alpha
+\]
+Доверительный интервал уровня доверия $1 - \alpha$ имеет вид
+\[
+    \left(\sqrt{\frac{\left(n-1\right) S^2_n}{x_{\alpha/2}}}, \sqrt{\frac{\left(n-1\right) S^2_n}{x_{1-\alpha/2}}}\right)
+\]
+
+
 
 \end{document}
