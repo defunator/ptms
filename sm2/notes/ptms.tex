@@ -1824,4 +1824,102 @@ $\Leftarrow$ \\
 \]
 \par 
 Таким образом, если плотности похожи друг на друга, то сумма вероятностей ошибки примерно равна 1, то есть не получится одновременно уменьшить вероятности обеих ошибок. Если же плотности сильно различаются, то сумма вероятностей примерно равна нулю, что естественно. Обычно добиться сильного различия плотностей можно лишь увеличением объема выборки.
+
+\clearpage
+
+\section{$\chi ^ 2$-критерий Пирсона}
+Пусть $X = \left(X_1, \cdots, X_n\right) \ - $ выборка из дискретного распределения, при котором случайная величина принимает значения $a_1, \cdots, a_k$ с вероятностями $p_1, \cdots, p_k$. Пусть основная гипотеза $H_0$ заключается в том, что $p_i = p_{i_0}$ $\forall i \in \left\{1, \cdots, k\right\}$. А альтернативная гипотеза $H_1$ заключается в том, что распределения вероятностей отлично от $\left\{p_{1_0}, \cdots, p_{k_0}\right\}$. Пусть $\nu_i \ - $ количество $a_i$ в $X$.
+
+
+\begin{theorem}
+При выполнении гипотезы $H_0$ случайная величина $\overline{\chi} ^ 2 = \sum_{i= 1}^{k}\left(\frac{\nu_i - np_{i_0}}{\sqrt{n p_{i_0}}}\right) ^ 2$ сходится по распределению к $\chi ^ 2_{k - 1}$.
+\end{theorem}
+\begin{proof}
+
+Заметим, что $\nu_i = \sum_{j = 1}^{n} \text{Ind}_{X_j = a_i}$. Рассмотрим случайный вектор \\
+$
+    \left(\frac{\nu_1 - n p_{1_0}}{\sqrt{n p_{1_0}}}, \cdots, \frac{\nu_k - n p_{k_0}}{\sqrt{n p_{k_0}}}\right).
+$
+По многомерной ЦПТ (теорема 8) данный вектор сходится по распределению к многомерному нормальному вектору $Z = \left(Z_1, \cdots, Z_k\right)$ с нулевым вектором средних и матрицей ковариации $R = \left(r_{ij}\right)$, где
+\[
+    r_{ii} = \text{cov}\left(\frac{\text{Ind}_{X_1 = a_i}}{\sqrt{p_{i_0}}}, \frac{\text{Ind}_{X_1 = a_i}}{\sqrt{p_{i_0}}}\right) = \mathbb{D} \frac{\text{Ind}_{X_1 = a_i}}{\sqrt{p_{i_0}}} = \frac{p_{i_0} \left(1 - p_{i_0}\right)}{p_{i_0}} = 1 - p_{i_0}
+\]\[
+    r_{ij} = \text{cov}\left(\frac{\text{Ind}_{X_1 = a_i}}{\sqrt{p_{i_0}}}, \frac{\text{Ind}_{X_1 = a_j}}{\sqrt{p_{j_0}}}\right) = \frac{1}{\sqrt{p_{i_0}p_{j_0}}} \left(\mathbb{E}\left[\text{Ind}_{X_1 = a_i}\text{Ind}_{X_1 = a_j}\right] - p_{i_0}p_{j_0}\right) = \frac{1}{\sqrt{p_{i_0}p_{j_0}}} \left(0 - p_{i_0}p_{j_0}\right) = -\sqrt{p_{i_0}p_{j_0}}
+\]
+По теореме о наследовании сходимости (предложение 5) случайные величины $\overline{\chi} ^ 2$ сходятся по распределению к $\abs{Z} ^ 2 = Z_1 ^ 2 + \cdots + Z_k ^ 2$. Покажем, что $\abs{Z} ^ 2 \sim \chi ^ 2_{k - 1}$. Заметим, что верно равенство
+\[
+    R = E - \left(\sqrt{p_{1_0}}, \cdots, \sqrt{p_{k_0}}\right) ^ T \left(\sqrt{p_{1_0}}, \cdots, \sqrt{p_{k_0}}\right)
+\]
+Рассмотрим ортогональную матрицу, у которой первая строчка имеет вид $ \left(\sqrt{p_{1_0}}, \cdots, \sqrt{p_{k_0}}\right)$. Тогда ковариационная матрица случайного вектора $V = CZ$ имеет вид:
+\[
+    CRC ^ T = E - C\left(\sqrt{p_{1_0}}, \cdots, \sqrt{p_{k_0}}\right) ^ T \left(\sqrt{p_{1_0}}, \cdots, \sqrt{p_{k_0}}\right) C ^ T = E - e_{11}
+\]
+ где $e_{11} \ -$ матрица, где $1$ стоит в первой ячейки, а все остальное нули (так получается, потому что в $\left(\sqrt{p_{1_0}}, \cdots, \sqrt{p_{k_0}}\right) C ^ T$ при умножении на первый столбец мы получаем 1, так как просуммировали вероятности, а дальше мы вектор умножаем на столбцы, ортогональные ему, получаем $e_{11}$, аналогично в $C\left(\sqrt{p_{1_0}}, \cdots, \sqrt{p_{k_0}}\right) ^ T$). Следовательно $v_1 \equiv 0$ (так как нулевая дисперсия). Так как мы умножили на ортогональную матрицу, то длина вектора сохранилась, отсюда по определению $\chi ^ 2_{k - 1}$ получаем
+ \[
+    \abs{Z} ^ 2 = \abs{V} ^ 2 = v_2 ^ 2 + \cdots + v_k ^ 2 \sim \chi ^2_{k - 1}
+ \]
+\end{proof}
+\par 
+Отсюда можем сформулировать следующий критерий уровня значимости $\alpha$: пусть $x_\alpha$ выбрано так, что $P\left(\chi ^ 2_{k - 1}\geq x_{\alpha}\right) = \alpha$. Тогда по доказанному, в случае справедливости гипотезы $H_0$
+\[
+    P\left(\sum_{i= 1}^{k}\left(\frac{\nu_i - np_{i_0}}{\sqrt{n p_{i_0}}}\right) ^ 2 \geq x_{\alpha}\right) \xrightarrow{n \to \infty} \alpha
+\]
+Если на конкретной реализации выборки мы получаем 
+\[
+    \sum_{i= 1}^{k}\left(\frac{\nu_i - np_{i_0}}{\sqrt{n p_{i_0}}}\right) ^ 2 < x_{\alpha},
+\]
+то $H_0$ принимается, иначе отклоняется.
+
+\clearpage
+
+\section{Эмпирическая функция распределения и теорема Гливенко-Кантелли}
+Пусть $X = \left(X_1, \cdots, X_n\right) \ -$ выборка из распределения с функцией распределения $F$. Рассмотрим на $\mathbb{R}$ равномерное вероятностное распределение, расположенное в точка $X_1, \cdots, X_n$, то есть $P^*\left(B\right) = \frac{\#\left\{X_j \in B\right\}}{n}$. Построена последовательность эмпирических распределений. Для эмпирических распределений справедлива следующая теорема.
+
+\begin{theorem}
+Для произвольного множества $B \in \mathcal{B}\left(\mathbb{R}\right)$, $P_n^*\left(B\right) \xrightarrow{\text{п.н.}} P\left(X_1 \in B\right)$ (то есть эмпирическая вероятность стремится к реальной)
+\end{theorem}
+\begin{proof}
+Заметим, что  $P^*\left(B\right) = \frac 1 n \sum_{j=1}^n \text{Ind}_{X_j \in B}$. По УЗБЧ: $P^*\left(B\right) \xrightarrow{} \mathbb{E} \text{Ind}_{X_1 \in B} = P\left(X_1 \in B\right)$
+\end{proof}
+\begin{definition}
+Случайную величину 
+\[
+    F^*_n\left(t\right)= \frac 1 n \sum_{j=1}^n \text{Ind}_{X_j \in \left(-\infty, t\right]}
+\]
+называют \textit{эмпирической функцией распределения}. Так как
+\[
+    \mathbb{E} F^*_n\left(t\right) = \frac 1 n \sum_{j=1}^n P\left(X_j \leq t\right) = P\left(X_1 \leq t\right) = F\left(t\right),
+\]
+то $F_n^*$ является несмещенной оценкой функции распределения $F$.
+\end{definition}
+
+\begin{theorem} (Теорема Гливенко-Кантелли) \\
+Величина $\sup_{t \in \mathbb{R}} \abs{F_n\left(t\right) - F\left(t\right)} \xrightarrow{\text{п.н.}} 0$ (то есть имеет место равномерная сходимость)
+
+\end{theorem}
+\begin{proof}
+Доказательство проведем только для непрерывной $F$. Зафиксируем $N \in \mathbb{N}$. Пусть точки $t_0, \cdots, t_N$ выбраны так, что $F\left(t_0\right) = 0$, $F\left(t_1\right) = \frac 1 {N}$, $\cdots$, $F\left(t_N\right) = 1$, в частности $t_0 = -\infty$, $t_N = +\infty$. Тогда при $t \in \left[t_k, t_{k + 1}\right)$ выполнено
+\[
+    F^*_n\left(t\right) - F\left(t\right)\leq F^*_n\left(t_{k + 1}\right) - F\left(t_k\right) = F^*_n\left(t_{k + 1}\right) - F\left(t_{k + 1}\right) + \frac 1 N
+\]\[
+    F^*_n\left(t\right) - F\left(t\right) \geq F^*_n\left(t_k\right) - F\left(t_{k + 1}\right) = F^*_n\left(t_k\right) - F\left(t_k\right) - \frac 1 N
+\]
+То есть знаем, что
+\[
+    \abs{F_n^*\left(t\right) - F\left(t\right)} \leq \sup_{k} \abs{F_n^*\left(t_k\right) - F\left(t_k\right)} + \frac 1 N
+\]
+\par
+Теперь заметим, что для каждой точки $t_k$ по УЗБЧ (аналогично предыдущей теореме) $F^*_n\left(t_k\right) \xrightarrow{\text{п.н.}} F\left(t_k\right)$. Введем событие $A_k = \left\{F^*_n\left(t_k\right) \xrightarrow{\text{п.н.}} F\left(t_k\right)\right\}$, ясно, что $P\left(A_k\right) = 1$ для $k \in \left\{1, \cdots, N - 1\right\}$. Рассмотрим событие $A = \bigcap_{k=1}^{N-1} A_k$, тогда справедливо равенство $\overline{A} = \bigcup_{k=1}^{N - 1} \overline{A}_k$. Очевидно, что \\  $P\left(\overline{A}\right) \leq \sum_{k=1}^{N - 1} P\left(\overline{A}_k\right) = 0$, следовательно $P\left(\overline{A}\right) = 0$, а $P\left(A\right) = 1$. Грубо говоря, на множестве исходов из $A$ (которое по сути почти все множество исходов) имеем (для любого $\varepsilon > 0$, начиная с некоторого $N_0$)
+\[
+    \sup_{t \in \mathbb{R}} \abs{F_n^*\left(t\right) - F\left(t\right)} \leq \sup_{k} \abs{F_n^*\left(t_k\right) - F\left(t_k\right)} + \frac 1 N \leq \varepsilon + \frac 1 N
+\]
+Теперь $N \to \infty$ и получаем 
+\[
+    \lim_{n \to \infty} \sup_{t \in \mathbb{R}} \abs{F_n^*\left(t\right) - F\left(t\right)} = 0
+\] 
+с вероятностью $P\left(A\right) = 1$, то есть почти наверное.
+\end{proof}
+
+\par 
+Обычно для построения эмпирической функции распределения используют следующую процедуру. Элементы выборки упорядочивают по возрастанию: $X_{\left(1\right)}, \cdots, X_{\left(n\right)}$. Тогда $F^*_n\left(t\right) = \frac k n$ при $t \in \left[X_{\left(k\right)}, X_{\left(k + 1\right)}\right)$
 \end{document}
