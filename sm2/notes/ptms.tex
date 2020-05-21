@@ -1730,10 +1730,98 @@ $\Leftarrow$ \\
 \]
 Доверительный интервал уровня доверия $1 - \alpha$ имеет вид
 \[
-    \left(\sqrt{\frac{\left(n-1\right) S^2_n}{x_{\alpha/2}}}, \sqrt{\frac{\left(n-1\right) S^2_n}{x_{1-\alpha/2}}}\right)
+    \left(\sqrt{\frac{\left(n-1\right) S^2_n}{x_{1-\alpha/2}}}, \sqrt{\frac{\left(n-1\right) S^2_n}{x_{\alpha/2}}}\right)
 \]
 \clearpage
 
+\section{Проверка гипотез. Критерий Неймана-Пирсона}
 
+Пусть есть выборка $X = \left(X_1, \cdots, X_n\right)$ из параметрического семейства с параметром $\theta$. Какое-либо предположение о параметре $\theta$ называется \textit{статистической гипотезой}. Статистическая гипотеза называется простой, если предположение заключается в том, что $\theta = \theta_0$ (то есть мы по выборке предлагаем конкретную оценку для $\theta$). Наша цель состоит в построении статистического критерия, который по выборке принимает или отклоняет гипотезу $H_0$ (проверка гипотез). Идея построения критерия заключается в том, что получение маловероятных по $H_0$ значений выборки свидетельствуют против нее (например, если все значения выборки получились маловероятными, то, скорее всего, с нашей гипотезой что-то не так). Обычно критерий строится с помощью \textit{критического множетсва} $K \ - $ такое множество в области значений выборки, что при выполнении гипотезы $H_0$ вероятность попадания в это множество мала. Если $X \in K$, то гипотеза $H_0$ отклоняется и принимается в ином случае.
+\par
+Обычно вместе с основной гипотезой $H_0$ задана еще и альтернативная гипотеза $H_1$. При таком подходе можно совершить ошибки двух видов:
+\begin{enumerate}
+    \item \textit{Ошибка первого рода}. Когда мы отклоняем истинную гипотезу $H_0$. Вероятность такой ошибки называется \textit{уровнем значимости критерия};
+    \item \textit{Ошибка второго рода}. Когда мы принимаем ложную гипотезу $H_0$, то есть принимаем $H_0$ при истинности $H_1$;
+\end{enumerate}
+\par
+В случае простых гипотез ($H_0: \theta = \theta_0$ и $H_1: \theta = \theta_1$) вероятность ошибки первого рода $\alpha = P_{\theta_0}\left(X \in K\right)$, а вероятность ошибки второго рода $\beta = P_{\theta_1}\left(X \not\in K\right)$. Величину $1 - \beta$ называют \textit{мощностью критерия} (хочется мощность иметь побольше).
+\par 
+Функцию $W\left(K, \theta\right) = P_\theta\left(X \in K\right)$ называют функцией мощности критерия $K$. Обычно задача ставится следющим образом. При фиксированном уровне значимости $\alpha$ (то есть $W\left(K, \theta\right) \leq \alpha$ для всех $\theta$ удовлетворяющих гипотезе $H_0$) найти критерий наибольшей мощности (то есть $W\left(K, \theta\right) \geq W\left(S, \theta\right)$ для всех $\theta$ удовлетворяющих гипотезе $H_1$, для каждого другого критерия $S$ уровня занчимости $\alpha$). То есть при фиксированном уровне ошибки первого рода минимизируем ошибку второго рода.
 
+\begin{example}
+Пусть $X = \left(X_1, \cdots, X_n\right) \ -$ выборка из $N\left(\mu, \sigma ^ 2\right)$. Предположим, мы хотим проверить гипотезу $H_0$, утверждающую, что $\mu = \mu_0$, против альтернативной гипотезы $H_1$: $\mu = \mu_1$. Ранее мы строили для $\mu$ доверительный интервал уровня $1 - \alpha$:
+\[
+    P_\mu\left(\overline{X}_n - \frac{\sigma z_{1 - \alpha/2}}{\sqrt{n}} \leq \mu \leq \overline{X}_n + \frac{\sigma z_{1 - \alpha/2}}{\sqrt{n}}\right)  = 1 - \alpha
+\]
+Построим критерий на основе доверительного интервала:
+\[
+    K = \left\{X: \overline{X}_n > \mu_0 + \frac{\sigma z_{1 - \alpha/2}}{\sqrt{n}}\right\} \cup \left\{X: \overline{X}_n < \mu_0 - \frac{\sigma z_{1 - \alpha/2}}{\sqrt{n}}\right\}
+\]
+Получаем уровень значимости $\alpha$. Мощность критерия равна $1 - \beta$, где $\beta \ - $ вероятность того, что $\mu_0$ принадлежит указанному доверительному интервалу при условии $\mu = \mu_1$. Вычислим $\beta$:
+\[
+    \beta = P_{\mu_1}\left(\overline{X}_n - \frac{\sigma z_{1 - \alpha/2}}{\sqrt{n}} \leq \mu_0 \leq \overline{X}_n + \frac{\sigma z_{1 - \alpha/2}}{\sqrt{n}}\right) =\]\[= P_{\mu_1}\left(\frac{\sqrt{n}\left(\mu_0 - \mu_1\right)}{\sigma} - z_{1 - \frac \alpha 2} \leq \frac{\sqrt{n}\left(\overline{X}_n - \mu_1\right)}{\sigma} \leq \frac{\sqrt{n}\left(\mu_0 - \mu_1\right)}{\sigma} + z_{1 - \frac \alpha 2}\right) = 
+\]\[
+    = \Phi\left(\frac{\sqrt{n}\left(\mu_0 - \mu_1\right)}{\sigma} + z_{1 - \frac \alpha 2}\right) - \Phi\left(\frac{\sqrt{n}\left(\mu_0 - \mu_1\right)}{\sigma} - z_{1 - \frac \alpha 2}\right)
+\]
+Заметим, что вероятность ошибки второго рода стремится к нулю (мощность критерия к единице) при $n \to \infty$.
+\par 
+Если с ростом объема выборки величина $1 - \beta$ стремится к единице, то критерий называется \textit{состоятельным}.
+\end{example}
+\par
+Пусть $H_0$ состоит в том, что выборка $X = \left(X_1, \cdots, X_n\right)$ имеет плотность распределения $f_0$, а альтернативная гипотеза $H_1$ состоит в том, что выборка имеет плотность распределения $f_1$. Предположим, что $f_0$ и $f_1$ положительны на $\mathbb{R} ^ n$. Рассмотрим набор множеств 
+\[
+    K_t  = \left\{x \in \mathbb{R} ^ n: \frac{f_1\left(x\right)}{f_0\left(x\right)}\geq t\right\}, \ t\geq 0
+\]
+Заметим, что $P_0 \left(X \in K\right) = \int_K f_0$, а $P_1\left(X \in K\right) = \int_K f_1$, то есть мы строим такое критическое множество, чтобы ошибка первого рода была поменьше, а второго побольше. Предположим, что для всякого $\alpha \in \left(0, 1\right)$ существует $t\left(\alpha\right) \geq 0$ такое, что $P_0\left(X \in K_{t\left(\alpha\right)}\right) = \alpha$.
+\begin{theorem} (Неймана-Пирсона) \\
+Наиболее мощный критерий уровня значимости $\alpha$ задается критическим множеством $K = K_{t\left(\alpha\right)}$
+\end{theorem}
+\begin{proof}
+Рассмотрим другой критерий $Q$ уровня значимости $P_0\left(X \in Q\right) \leq \alpha = P\left(X \in K\right)$. Сравним мощности этих критериев:
+\[
+    P_1\left(X \in K\right) - P_1\left(X \in Q\right) = \int_K f_1\left(x\right) dx - \int_Q f_1\left(x\right) dx = \int_{K \backslash Q} f_1\left(x\right) dx - \int_{Q \backslash K} f_1\left(x\right) dx \geq 
+\]
+Так как $t\left(\alpha\right) f_0\left(x\right) \leq f_1\left(x\right)$ для $x \in K_{t\left(\alpha\right)}$, и $t\left(\alpha\right) f_0\left(x\right) \geq f_1\left(x\right)$ для $x \not\in K_{t\left(\alpha\right)}$, то
+\[
+    \geq t\left(\alpha\right)\int_{K \backslash Q} f_1\left(x\right) dx - t\left(\alpha\right)\int_{Q \backslash K} f_1\left(x\right) dx = t\left(\alpha\right) \left(P_0\left(X \in K\right) - P_0\left(X \in Q\right)\right) \geq 0
+\]
+\end{proof}
+
+\begin{example}
+Пусть $X = \left(X_1, \cdots, X_n\right)$ выборка из $N\left(\theta, 1\right)$. Гипотеза $H_0$: $\theta = \theta_0$, альтернатива $H_1$: $\theta > \theta_0$. Построим по теореме Неймана-Пирсона наиболее мощный критерий при уровне значимости $\alpha$. Рассмотрим систему множеств (делим и умножаем стандартные плотности):
+\[
+    K_t = \left\{x: \ \exp\left(-\frac 1 2 \sum_{j = 1}^{n}\left(x_j - \theta\right) ^ 2 + \frac 1 2 \sum_{j = 1}^{n} \left(x_j - \theta_0\right) ^ 2\right) \geq t\right\}
+\]
+Данная система равносильна системе множеств (раскрываем квадраты и сокращаем):
+\[
+    \left\{x: \ \left(\theta - \theta_0\right) \sum_{j = 1}^{n} x_j \geq \tau \right\}
+\]
+Так как $\theta > \theta_0$, получаем равносильное семейство
+\[
+    \left\{x: \ \overline{x}_n \geq c \right\}
+\]
+Находим $c$:
+\[
+    \alpha = P_{\theta_0}\left(\overline{x}_n \geq c\right) = P_{\theta_0}\left(\frac{\sqrt{n} \left(\overline{x}_n - \theta_0\right)}{1} \geq \frac{\sqrt{n}\left(c - \theta_0\right)}{1}\right) = 1 - \Phi\left(\sqrt{n}\left(c - \theta_0\right)\right)
+\]
+То есть берем $c = \theta_0 + \frac{z_{1-\alpha}}{\sqrt{n}}$. Вычисляем мощность:
+\[
+    1 - \beta = P_\theta\left(\overline{x}_n \geq c \right) = 1 - \Phi\left(\sqrt{n}\left(c - \theta\right)\right) = 1 - \Phi\left(z_{1-\alpha} + \sqrt{n}\left(\theta_0 - \theta\right)\right) \xrightarrow{n \to \infty} 1
+\]
+То есть мощность состоятельная.
+\end{example}
+При построении критерия, мы стремимся минимизировать ошибки первого и второго рода. Оценим снизу сумму вероятностей ошибок в случае простых гипотез (выбираем $f_0$ или $f_1$):
+\[
+    \alpha + \beta = P_0\left(X \in K\right) + P_1\left(X \not\in K\right) = \int_K f_0\left(x\right) dx + \int_{\mathbb{R} ^ n \backslash K} f_1\left(x\right) dx = 1 + \int_K \left(f_0\left(x\right) - f_1\left(x\right)\right)dx
+\]
+Если теперь $S = \left\{x: \ f_0\left(x\right) < f_1\left(x\right)\right\}$, то (если все с минусом попереносить, то получим $1 = 1$)
+\[
+    \int_S \left(f_0\left(x\right) - f_1\left(x\right)\right) dx = \int_{\mathbb{R} ^ n \backslash S } \left(f_1\left(x\right) - f_0\left(x\right)\right)dx = -\frac 1 2 \int_{\mathbb{R} ^ n} \abs{f_0\left(x\right) - f_1\left(x\right)} dx
+\]
+Значит, (оставляем все, что идет с минусом)
+\[
+    \alpha + \beta \geq 1 + \int_{K \cap S} \left(f_0\left(x\right) - f_1\left(x\right)\right) dx \geq 1 + \int_{S} \left(f_0\left(x\right) - f_1\left(x\right)\right) dx = 1 - \frac 1 2 \int_{\mathbb{R} ^ n} \abs{f_0\left(x\right) - f_1\left(x\right)} dx
+\]
+\par 
+Таким образом, если плотности похожи друг на друга, то сумма вероятностей ошибки примерно равна 1, то есть не получится одновременно уменьшить вероятности обеих ошибок. Если же плотности сильно различаются, то сумма вероятностей примерно равна нулю, что естественно. Обычно добиться сильного различия плотностей можно лишь увеличением объема выборки.
 \end{document}
