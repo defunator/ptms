@@ -1279,7 +1279,7 @@ $\left(5\right)$:
 \begin{proof}
 Запишем неравенство Чебышева:
 \[
-    P\left(\abs{\widehat{\theta} - \theta} \geq \varepsilon\right) \leq \frac{\mathbb{D} \widehat{\theta}_n}{\varepsilon}
+    P\left(\abs{\widehat{\theta} - \theta} \geq \varepsilon\right) \leq \frac{\mathbb{D} \widehat{\theta}_n}{\varepsilon ^ 2}
 \]
 Все ясно.
 \end{proof}
@@ -1291,9 +1291,9 @@ $\left(5\right)$:
 \begin{proof}
 Допустим, такая оценка существует, что
 \[
-    \mathbb{E}\left[\widehat{\theta}_n - \theta\right] \leq \mathbb{E}\left[\theta^*_n - \theta\right]
+    \mathbb{E}\left[\widehat{\theta}_n - \theta\right] ^ 2 \leq \mathbb{E}\left[\theta^*_n - \theta\right] ^ 2
 \]
-для $\forall$  $\theta \in \Theta$. Но если мы возьмем $\theta^*_n \equiv A$, то получим, что $\widehat{\theta}_n = A$ почти наверное по распределению $F_A$. Теперь возьмем $\theta^*_n = B \neq A$ и получим, что $\widehat{\theta}_n = B$ почти наверное по распределению $F_B$. Получили противоречие (противоречие получаем из-за оговорки в общем случае, что $\exists C: P_A\left(C\right), \ P_B\left(C\right) > 0$)
+для $\forall$  $\theta \in \Theta$. Но если мы возьмем $\theta^*_n \equiv A$, то получим, что $\widehat{\theta}_n = A$ почти наверное по распределению $F_A$. Теперь возьмем $\theta^*_n = B \neq A$ и получим, что $\widehat{\theta}_n = B$ почти наверное по распределению $F_B$. Получили противоречие (противоречие получаем из-за оговорки в общем случае, что $\exists C: P_A\left(C\right), \ P_B\left(C\right) > 0$, то есть что распределения пересекаются, если не пересекаются, то никаких противоречий)
 \end{proof}
 \item \textbf{Сильная состоятельность}. $\lim_{n \to +\infty} \widehat{\theta}_n\left(X_1, \cdots, X_n\right) = \theta$ почти наверное на распределении $F_\theta$
 \item \textbf{Асимптотическая нормальность}. Оценка называется асимптотически нормальной, если 
@@ -1683,6 +1683,7 @@ $\Leftarrow$ \\
 \]\[
     P\left(\theta_n\left(X\right) - \frac{\sigma\left(\theta\right)z_{1-\alpha/2}}{\sqrt{n}} < \theta < \theta_n\left(X\right) + \frac{\sigma\left(\theta\right)z_{1-\alpha/2}}{\sqrt{n}}\right)\xrightarrow{n \to \infty} 1 - \alpha
 \]
+
 Для получения доверительного интервала осталось только избавиться от $\sigma{\left(\theta\right)}$. Понятно, что ее можно заменить любой состоятельной оценкой (чтобы оставалась сходимость по распределению к $N\left(0, 1\right)$), например, выборочной дисперсией или $\sigma\left(\theta_n\left(X\right)\right)$.
 \end{example}
 
