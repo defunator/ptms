@@ -1298,7 +1298,7 @@ $\left(5\right)$:
 \item \textbf{Сильная состоятельность}. $\lim_{n \to +\infty} \widehat{\theta}_n\left(X_1, \cdots, X_n\right) = \theta$ почти наверное на распределении $F_\theta$
 \item \textbf{Асимптотическая нормальность}. Оценка называется асимптотически нормальной, если 
 \[
-    \sqrt{n}\left(\widehat{\theta}_n\left(X_1, \cdots, X_n\right) - \theta\right) \xrightarrow{d} N\left(0, \sigma\left(\theta\right)\right)
+    \sqrt{n}\left(\widehat{\theta}_n\left(X_1, \cdots, X_n\right) - \theta\right) \xrightarrow{d} N\left(0, \sigma^ 2\left(\theta\right)\right)
 \]
 Это условие влечет состоятельность и позволяет оценивать вероятности событий \\ $\alpha < \widehat{\theta}_n\left(X_1, \cdots, X_n\right) < \beta$ через нормальные распределения.
 \begin{advice}
@@ -1353,7 +1353,7 @@ $\left(5\right)$:
 \[
     \sqrt{n}\left(\widehat{\theta}_n\left(X_1, \cdots, X_n\right) - \theta\right) = \sqrt{n} \left(f ^ {-1}\left(a + \frac{\sigma}{\sqrt{n}} \xi_n\right) - f ^ {-1}\left(a\right)\right) \xrightarrow{d} \xi\left(f ^ {-1}\right)'\left(a\right) 
 \]
- То есть, если $\left(f ^ {-1}\right)'\left(a\right)  \neq 0$, то оценка $\widehat{\theta}_n\left(X_1, \cdots, X_n\right)$ асимптотически нормальна с коэффициентом $\sigma\left(\theta\right) = \left(\left(f ^ {-1}\right)'\left(a\right)\right) ^ 2 \sigma ^ 2$
+ То есть, если $\left(f ^ {-1}\right)'\left(a\right)  \neq 0$, то оценка $\widehat{\theta}_n\left(X_1, \cdots, X_n\right)$ асимптотически нормальна с коэффициентом $\sigma ^ 2\left(\theta\right) = \left(\left(f ^ {-1}\right)'\left(a\right)\right) ^ 2 \sigma ^ 2$
  \end{enumerate}
  \begin{example}
  Возьмем выборку $\left(X_1, \cdots, X_n\right)$ из равномерного распределения $U_{\left[0, \theta\right]}$, где $\theta > 0$. Найдем оценку по методу моментов при $f\left(x\right) = x$:
@@ -1673,7 +1673,7 @@ $\Leftarrow$ \\
 \end{example}
 \par В качестве $V$ бывает полезным взять $\sum_{j=1}^n \ln F_{\theta}\left(X_j\right)$.
 \begin{example}
-Рассмотрим типичный пример \textbf{посторения асимптотического доверительного интервала}. Пусть $\theta_n\left(X\right)$ асимптотически нормальная оценка параметра $\theta$ с асимптотической дисперсией $\sigma\left(\theta\right)$, то есть 
+Рассмотрим типичный пример \textbf{посторения асимптотического доверительного интервала}. Пусть $\theta_n\left(X\right)$ асимптотически нормальная оценка параметра $\theta$ с асимптотической дисперсией $\sigma^ 2\left(\theta\right)$, то есть 
 \[
     \sqrt{n} \frac{\theta_n\left(X\right) - \theta}{\sigma\left(\theta\right)} \xrightarrow{d} N\left(0, 1\right)
 \]
@@ -1688,10 +1688,10 @@ $\Leftarrow$ \\
 \end{example}
 
 \par 
-Рассмотрим теперь подробнее построение доверительных интервалов для \textbf{параметров $\mu$ и $\sigma$ нормального распределения $N\left(\mu, \sigma\right)$}.
+Рассмотрим теперь подробнее построение доверительных интервалов для \textbf{параметров $\mu$ и $\sigma$ нормального распределения $N\left(\mu, \sigma ^ 2\right)$}.
 
 \par
-\textbf{$\sigma $ известна, оцениваем $\mu$}. $\sigma$ может быть известна, например, если при замерах мы пользуемся прибором с известной точностью. Пусть $X_1, \cdots, X_n \ - $ выборка из $N\left(\mu, \sigma\right)$. Тогда 
+\textbf{$\sigma $ известна, оцениваем $\mu$}. $\sigma$ может быть известна, например, если при замерах мы пользуемся прибором с известной точностью. Пусть $X_1, \cdots, X_n \ - $ выборка из $N\left(\mu, \sigma ^ 2\right)$. Тогда 
 \[
     \frac{\sqrt{n}\left(\overline{X}_n - \mu\right)}{\sigma} \sim N\left(0, 1\right)
 \]
