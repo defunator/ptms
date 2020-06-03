@@ -1597,17 +1597,17 @@ $\Leftarrow$ \\
     \widehat{\theta}_n - \theta_1 = -\frac{\frac{\partial L}{\partial \theta}}{\frac{\partial ^ 2 L}{\partial \theta ^ 2}}
 \]
 Домножим на $\sqrt{n}$, чтобы стало как в ЦПТ. Берем $\frac 1 n \frac{\partial L}{\partial \theta} = \frac 1 n \sum_{j = 1}^{n} \frac{\partial}{\partial \theta} \ln \rho_{\theta_1}\left(x_j\right)$. Помним, что \\ $\mathbb{E} \frac{\partial}{\partial \theta} \ln \rho_{\theta_1}\left(x_j\right) = 0 = \mu$. Теперь дисперсия: 
-\[\sigma ^ 2 = \mathbb{D} \frac{\partial}{\partial \theta} \ln \rho_{\theta_1}\left(x_j\right) = \mathbb{E} \left[\frac{\partial}{\partial \theta} \ln \rho_{\theta_1}\left(x_j\right)\right] ^ 2 = I\left(\theta_1\right)
+\[\sigma ^ 2 = n\mathbb{D} \left[\frac 1 n \frac{\partial}{\partial \theta} \ln \rho_{\theta_1}\left(x_j\right)\right] = \frac 1 n \mathbb{E} \left[\frac{\partial}{\partial \theta} \ln \rho_{\theta_1}\left(x_j\right)\right] ^ 2 = i\left(\theta_1\right)
 \]
 Тогда из ЦПТ получаем
 \[
-    \sqrt{n} \frac{\partial L}{\partial \theta} \xrightarrow{P} N\left(0, I\left(\theta_1\right)\right)
+    \sqrt{n} \left(\frac 1 n\frac{\partial L}{\partial \theta} - 0\right) \xrightarrow{d} N\left(0, i\left(\theta_1\right)\right)
 \]
 Теперь разберемся с 
 \[
-    \frac{\partial ^ 2 L}{\partial \theta ^ 2} = \frac 1 n \sum_{j = 1}^{n} \frac{\partial ^ 2}{\partial \theta ^ 2} \ln \rho_{\theta_1}\left(x_j\right) \xrightarrow{P} -I\left(\theta_1\right)
+    \frac 1 n \frac{\partial ^ 2 L}{\partial \theta ^ 2} = \frac 1 n \sum_{j = 1}^{n} \frac{\partial ^ 2}{\partial \theta ^ 2} \ln \rho_{\theta_1}\left(x_j\right) \xrightarrow{P} -i\left(\theta_1\right)
 \]
-То есть $\mathbb{E}\frac{\partial ^ 2 L}{\partial \theta ^ 2} = -I\left(\theta_1\right)$. В итоге получаем, что $\sqrt{n}\left(\widehat{\theta}_n - \theta_1\right) \xrightarrow{P} N\left(0, \frac 1 {I\left(\theta_1\right)}\right)$
+В итоге получаем, что $\sqrt{n}\left(\widehat{\theta}_n - \theta_1\right) \xrightarrow{d} N\left(0, \frac 1 {i\left(\theta_1\right)}\right)$
 \end{remark}
 
 \clearpage
