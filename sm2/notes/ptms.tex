@@ -1293,7 +1293,7 @@ $\left(5\right)$:
 \[
     \mathbb{E}\left[\widehat{\theta}_n - \theta\right] ^ 2 \leq \mathbb{E}\left[\theta^*_n - \theta\right] ^ 2
 \]
-для $\forall$  $\theta \in \Theta$. Но если мы возьмем $\theta^*_n \equiv A$, то получим, что $\widehat{\theta}_n = A$ почти наверное по распределению $F_A$. Теперь возьмем $\theta^*_n = B \neq A$ и получим, что $\widehat{\theta}_n = B$ почти наверное по распределению $F_B$. Получили противоречие (противоречие получаем из-за оговорки в общем случае, что $\exists C: P_A\left(C\right), \ P_B\left(C\right) > 0$, то есть что распределения пересекаются, если не пересекаются, то никаких противоречий)
+для $\forall$  $\theta \in \Theta$. Но если у нас, например, $\theta = A$ и мы возьмем $\theta^*_n \equiv A$, то получим, что $\widehat{\theta}_n = A$ почти наверное по распределению $F_A$. Теперь возьмем, допустим, что $\theta = B$ и возьмем $\theta^*_n \equiv B \neq A$ и получим, что $\widehat{\theta}_n = B$ почти наверное по распределению $F_B$. Получили противоречие (противоречие получаем из-за оговорки в общем случае, что $\exists C: P_A\left(C\right), \ P_B\left(C\right) > 0$, то есть что распределения пересекаются, если не пересекаются, то никаких противоречий)
 \end{proof}
 \item \textbf{Сильная состоятельность}. $\lim_{n \to +\infty} \widehat{\theta}_n\left(X_1, \cdots, X_n\right) = \theta$ почти наверное на распределении $F_\theta$
 \item \textbf{Асимптотическая нормальность}. Оценка называется асимптотически нормальной, если 
@@ -1349,11 +1349,11 @@ $\left(5\right)$:
 \[
     a = \mathbb{E}_\theta g\left(X\right), \ \sigma ^ 2 = \mathbb{D}_\theta g\left(X\right)
 \]
-Тогда, предполагая, что $g ^ {-1}$ непрерывно дифференцируема, по теореме непрерывности (предложение 6), получаем:
+Тогда, предполагая, что $f ^ {-1}$ непрерывно дифференцируема, по теореме непрерывности (предложение 6), получаем:
 \[
-    \sqrt{n}\left(\widehat{\theta}_n\left(X_1, \cdots, X_n\right) - \theta\right) = \sqrt{n} \left(g ^ {-1}\left(a + \frac{\sigma}{\sqrt{n}} \xi_n\right) - g ^ {-1}\left(a\right)\right) \xrightarrow{d} \xi\left(h ^ {-1}\right)'\left(a\right) 
+    \sqrt{n}\left(\widehat{\theta}_n\left(X_1, \cdots, X_n\right) - \theta\right) = \sqrt{n} \left(f ^ {-1}\left(a + \frac{\sigma}{\sqrt{n}} \xi_n\right) - f ^ {-1}\left(a\right)\right) \xrightarrow{d} \xi\left(f ^ {-1}\right)'\left(a\right) 
 \]
- То есть, если $\left(h ^ {-1}\right)'\left(a\right)  \neq 0$, то оценка $\widehat{\theta}_n\left(X_1, \cdots, X_n\right)$ асимптотически нормальна с коэффициентом $\sigma\left(\theta\right) = \left(h'\left(a\right)\right) ^ 2 \sigma ^ 2$
+ То есть, если $\left(f ^ {-1}\right)'\left(a\right)  \neq 0$, то оценка $\widehat{\theta}_n\left(X_1, \cdots, X_n\right)$ асимптотически нормальна с коэффициентом $\sigma\left(\theta\right) = \left(f'\left(a\right)\right) ^ 2 \sigma ^ 2$
  \end{enumerate}
  \begin{example}
  Возьмем выборку $\left(X_1, \cdots, X_n\right)$ из равномерного распределения $U_{\left[0, \theta\right]}$, где $\theta > 0$. Найдем оценку по методу моментов при $f\left(x\right) = x$:
@@ -1445,7 +1445,7 @@ $\Leftarrow$ \\
 \end{proof}
 
 Рассмотрим неравенство, позволяющее оценивать оптимальные оценки.
-\begin{theorem} (неравенство Рао-Крамера) Выполняются условия регулярности и $I\left(\theta\right) > 0$ (если $= 0$, то это значит, что мы от эксперимента не получаем никакой информации и все бессмысленно). Пусть $\theta_n\left(X\right) \ - $ произвольная несмещенная оценка статистика $\tau\left(\theta\right)$. Тогда верно
+\begin{theorem} (неравенство Рао-Крамера) Выполняются условия регулярности и $I\left(\theta\right) > 0$ (если $= 0$, то это значит, что мы от эксперимента не получаем никакой информации и все бессмысленно). Пусть $\theta_n\left(X\right) \ - $ произвольная несмещенная оценка статистики $\tau\left(\theta\right)$. Тогда верно
 \[
     \mathbb{D} \theta_n\left(X\right) \geq \frac{\left(\tau'\left(\theta\right)\right) ^ 2}{I\left(\theta\right)}
 \]
