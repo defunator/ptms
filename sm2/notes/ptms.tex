@@ -1590,7 +1590,7 @@ $\Leftarrow$ \\
 \begin{remark}
 И, наконец, сделаем небольшое замечание о том, откуда берется асимптотическая нормальность оценки максимального правдоподобия. Разложим $\frac{\partial L}{\partial \theta}\left(X, \theta\right)$ по Тейлору в $\theta_1$ (примерно, без о малых):
 \[
-    \frac{\partial L}{\partial \theta}\left(X, \theta\right) \approx \frac{\partial L}{\partial \theta}\left(X, \theta_1\right) + \frac{\partial ^ 2 L}{\partial \theta ^ 2}\left(X, \theta\right)\left(\theta - \theta_1\right)
+    \frac{\partial L}{\partial \theta}\left(X, \theta\right) \approx \frac{\partial L}{\partial \theta}\left(X, \theta_1\right) + \frac{\partial ^ 2 L}{\partial \theta ^ 2}\left(X, \theta_1\right)\left(\theta - \theta_1\right)
 \]
 Если мы подставим $\theta = \widehat{\theta}_n\left(X\right) \ - $ оценку максимального правдоподобия, то $\frac{\partial L}{\partial \theta}\left(X, \widehat{\theta}_n\left(X\right)\right) = 0$ просто из определения оценки максимального правдоподобия. Тогда получаем:
 \[
@@ -1632,7 +1632,7 @@ $\Leftarrow$ \\
 \[
     P_\theta\left(z_{\alpha/2} < \sqrt{n}\left(\overline{X}_n - \theta\right) < z_{1-\alpha/2}\right) = 1 - \alpha
 \]
-Так как $z_{-\alpha/2} = -z_{1-\alpha/2}$, то перепишем
+Так как $z_{\alpha/2} = -z_{1-\alpha/2}$, то перепишем
 \[
     P_\theta\left(\overline{X}_n - \frac{z_{1-\alpha/2}}{\sqrt{n}} < \theta < \overline{X}_n + \frac{z_{1-\alpha/2}}{\sqrt{n}}\right) = 1 - \alpha
 \]
