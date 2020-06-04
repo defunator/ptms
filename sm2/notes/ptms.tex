@@ -1351,7 +1351,7 @@ $\left(5\right)$:
 \]
 Тогда, предполагая, что $f ^ {-1}$ непрерывно дифференцируема, по теореме непрерывности (предложение 6), получаем:
 \[
-    \sqrt{n}\left(\widehat{\theta}_n\left(X_1, \cdots, X_n\right) - \theta\right) = \sqrt{n} \left(f ^ {-1}\left(a + \frac{\sigma}{\sqrt{n}} \xi_n\right) - f ^ {-1}\left(a\right)\right) \xrightarrow{d} \xi\left(f ^ {-1}\right)'\left(a\right) 
+    \sqrt{n}\left(\widehat{\theta}_n\left(X_1, \cdots, X_n\right) - \theta\right) = \sqrt{n} \left(f ^ {-1}\left(a + \frac{1}{\sqrt{n}} \xi_n\right) - f ^ {-1}\left(a\right)\right) \xrightarrow{d} \xi\left(f ^ {-1}\right)'\left(a\right) 
 \]
  То есть, если $\left(f ^ {-1}\right)'\left(a\right)  \neq 0$, то оценка $\widehat{\theta}_n\left(X_1, \cdots, X_n\right)$ асимптотически нормальна с коэффициентом $\sigma ^ 2\left(\theta\right) = \left(\left(f ^ {-1}\right)'\left(a\right)\right) ^ 2 \sigma ^ 2$
  \end{enumerate}
@@ -1704,7 +1704,7 @@ $\Leftarrow$ \\
 \[
     S_n ^ 2 = \frac1{n - 1} \sum_{j=1}^{n} \left(X_j - \overline{X}_n\right) ^ 2
 \]
-независимы, причем $\left(n - 1\right)\sigma ^ 2 S_n ^ 2$ имеет хи квадрат распределение с $n - 1$ степенью свободы $\chi^2_{n-1}$. Напомним, что
+независимы, причем $\left(n - 1\right)\sigma ^ {-2} S_n ^ 2$ имеет хи квадрат распределение с $n - 1$ степенью свободы $\chi^2_{n-1}$. Напомним, что
 \[
     \rho_{\chi^2_{n}}\left(t\right) = C_n t ^ {\frac{n-2}2} e ^ {-\frac{t}2} \text{Ind}_{t > 0}
 \]
