@@ -1,2 +1,2 @@
 # ptms
-probability theory and mathematical statistics stuff
+probability theory and mathematical statistics
