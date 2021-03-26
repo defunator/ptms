@@ -1,4 +1,54 @@
-\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{blindtext}
+\usepackage{textcomp}
+\usepackage{pgfplots}
+
+\pgfplotsset{width=10cm,compat=1.9}
+
+
+%Header styles
+\usepackage{fancyhdr}
+\setlength{\headheight}{15pt}
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markright{#1}{}}
+\fancyhf{}
+\fancypagestyle{plain}{ %
+\fancyhf{} % remove everything
+\renewcommand{\headrulewidth}{0pt} % remove lines as well
+\renewcommand{\footrulewidth}{0pt}}
+
+%makes available the commands \proof, \qedsymbol and \theoremstyle
+\usepackage{amsthm}
+
+%Ruler
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+%Commands for naturals, integers, topology, hull, Ball, Disc, Dimension, boundary and a few more
+\newcommand{\E}{{\mathcal{E}}}
+\newcommand{\F}{{\mathcal{F}}}
+\newcommand{\T}{{\mathcal{T}}}
+\newcommand{\Bs}{{\mathcal{B}}}
+\newcommand{\R}{{\mathbb{R}}}
+\newcommand{\Q}{{\mathbb{Q}}}
+\newcommand{\Z}{{\mathbb{Z}}}
+\newcommand{\Nt}{{\mathbb{N}}}
+\newcommand{\B}{{\mathbf{B}}}
+\renewcommand{\S}{{\mathbf{S}}}
+\newcommand{\K}{{\mathfrak{C}}}
+\newcommand{\N}{{\mathfrak{N}}}
+\newcommand{\I}{{\mathbf{I}}}
+\newcommand{\dime}{{\rm dim}\,}
+\newcommand{\est}{{\rm Est}\,}
+\newcommand{\inte}{{\rm int}\,}
+\newcommand{\conv}{{\rm conv}\,}
+\renewcommand{\max}{{\rm sup\,}}
+\newcommand{\diam}{{\rm di\acute{a}m\,}}
+\newcommand{\leyenda}[1]{\caption{{\small \textsf{#1}}}}
+\renewcommand{\inf}{{\rm \acute{i}nf}\,}
+
 \usepackage[margin=1in]{geometry} 
 \usepackage{amsmath}
 \usepackage{tcolorbox}

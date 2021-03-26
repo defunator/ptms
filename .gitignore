@@ -1,5 +1,8 @@
 .DS_Store
 **/*.aux
+**/*.idx
+**/*.ilg
+**/*.ind
 **/*.fdb*
 **/*.fls
 **/*.log
